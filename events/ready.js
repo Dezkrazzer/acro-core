@@ -6,7 +6,7 @@ module.exports = async (client) => {
     client.user.setPresence({
         status: "online"
     });
-    client.user.setActivity(`ATHX Server | Created by: AI#4231`, {
+    client.user.setActivity(`Acro Network | play.acronetwork.my.id`, {
         type: discord.ActivityType.Watching
     });
 

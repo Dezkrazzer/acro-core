@@ -2,10 +2,17 @@ const express = require("express");
 const app = express()
 const client = require("./index.js");
 client.logger = require("./Utils/logger.js");
+const cases = require("./database/Schema/Case")
+
+const data = await cases.find({})
 
 app.get("/", (req, res) => {
     res.sendStatus(200)
     console.log('Server Up!');
+})
+
+app.get("/api/case", (req, res) => {
+    res.send(data)
 })
 
 //app.listen("1039")

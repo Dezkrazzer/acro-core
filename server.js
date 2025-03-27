@@ -32,5 +32,5 @@ app.get("/api/case", async (req, res) => {
 });
 
 app.listen("1039", () => {
-    client.logger.log("> ✅ • You app is listening on port " + listener.address().port, "success");
+    client.logger.log("> ✅ • You app is listening on port 1039", "success");
 });

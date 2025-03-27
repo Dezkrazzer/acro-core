@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express()
-const client = require("./index.js")
-const client.logger = require("./Utils/logger.js")
+const client = require("./index.js");
+client.logger = require("./Utils/logger.js");
 
 app.get("/", (req, res) => {
     res.sendStatus(200)

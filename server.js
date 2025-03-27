@@ -13,15 +13,13 @@ app.get("/", (req, res) => {
 app.get("/api/case", async (req, res) => {
     try {
         const data = await cases.find({});
-        res.json(data); // Gunakan res.json agar data dikirim dalam format JSON
+        res.json(data); 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "Terjadi kesalahan dalam mengambil data" });
+        res.status(500).json({ error: "An error occurred while retrieving data" });
     }
 });
 
-//app.listen("1039")
-
-const listener = app.listen("1039", () => {
+app.listen("1039", () => {
     client.logger.log("> ✅ • You app is listening on port " + listener.address().port, "success");
 });

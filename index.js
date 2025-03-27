@@ -194,5 +194,11 @@ client.on('messageCreate', async (message) => {
 client.login(config.token).catch(() => { client.logger.log('Invaid TOKEN!', "warn") });
 
 const express = require("express");
-const http = require("http");
-const app = express();
+const app = express()
+
+app.get("/", (req, res) => {
+    res.sendStatus(200)
+    console.log('Server Up!');
+})
+
+app.listen(process.env.PORT)

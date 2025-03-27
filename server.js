@@ -4,11 +4,20 @@ const client = require("./index.js");
 client.logger = require("./Utils/logger.js");
 const cases = require("./database/Schema/Case")
 
+app.set("view engine", "ejs");
+app.use(json());
+app.use(urlencoded({ extended: false }));
+app.use(express.static(resolve(__dirname, "views")));
+app.use(express.static(resolve(__dirname, "public")));
 
-app.get("/", (req, res) => {
+/* app.get("/", (req, res) => {
     res.sendStatus(200)
     console.log('Server Up!');
-})
+}) */
+
+app.get("/", (req, res) => {
+    res.render("index", { bot: client, req, res });
+});
 
 app.get("/api/case", async (req, res) => {
     try {

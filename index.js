@@ -192,13 +192,3 @@ client.on('messageCreate', async (message) => {
 // ===== END OF ANTI-BADLINK EVENT ===== //
 
 client.login(config.token).catch(() => { client.logger.log('Invaid TOKEN!', "warn") });
-
-const express = require("express");
-const app = express()
-
-app.get("/", (req, res) => {
-    res.sendStatus(200)
-    console.log('Server Up!');
-})
-
-app.listen("1039")

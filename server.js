@@ -4,19 +4,21 @@ const client = require("./index.js");
 client.logger = require("./Utils/logger.js");
 const cases = require("./database/Schema/Case")
 
-const data = async () => {
-    const data = await cases.find({})
-    return data
-}
 
 app.get("/", (req, res) => {
     res.sendStatus(200)
     console.log('Server Up!');
 })
 
-app.get("/api/case", (req, res) => {
-    res.send(data)
-})
+app.get("/api/case", async (req, res) => {
+    try {
+        const data = await cases.find({});
+        res.json(data); // Gunakan res.json agar data dikirim dalam format JSON
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Terjadi kesalahan dalam mengambil data" });
+    }
+});
 
 //app.listen("1039")
 

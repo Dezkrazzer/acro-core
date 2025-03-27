@@ -3,6 +3,7 @@ const app = express()
 const client = require("./index.js");
 client.logger = require("./Utils/logger.js");
 const cases = require("./database/Schema/Case")
+const { json, urlencoded } = require("body-parser")
 
 app.set("view engine", "ejs");
 app.use(json());

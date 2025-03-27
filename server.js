@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express()
 const client = require("./index.js")
+const client.logger = require("./Utils/logger.js")
 
 app.get("/", (req, res) => {
     res.sendStatus(200)
@@ -11,4 +12,4 @@ app.get("/", (req, res) => {
 
 const listener = app.listen("1039", () => {
     client.logger.log("> ✅ • You app is listening on port " + listener.address().port, "success");
-  });
+});

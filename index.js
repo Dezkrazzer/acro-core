@@ -201,4 +201,4 @@ app.get("/", (req, res) => {
     console.log('Server Up!');
 })
 
-app.listen(process.env.PORT)
+app.listen("1039")

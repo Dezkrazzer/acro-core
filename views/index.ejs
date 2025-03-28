@@ -3,66 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server Minecraft</title>
+    <title>Server Minecraft - Bergabung Sekarang!</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             text-align: center;
             background: url('https://source.unsplash.com/1600x900/?minecraft') no-repeat center center/cover;
             color: white;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
         .overlay {
-            background: rgba(0, 0, 0, 0.7);
-            position: absolute;
+            background: rgba(0, 0, 0, 0.6);
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
         }
         .container {
-            max-width: 800px;
-            margin: 100px auto;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            max-width: 900px;
+            margin: 80px auto;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
             position: relative;
             z-index: 1;
+            animation: fadeIn 1.5s;
         }
         h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 3em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #ff9800, #ff5722);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         p {
-            font-size: 1.2em;
+            font-size: 1.3em;
         }
         .btn {
             display: inline-block;
-            padding: 15px 25px;
+            padding: 15px 30px;
             margin-top: 20px;
-            font-size: 20px;
+            font-size: 22px;
+            font-weight: bold;
             color: white;
-            background: #ff9800;
+            background: linear-gradient(90deg, #ff9800, #ff5722);
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             text-decoration: none;
-            transition: background 0.3s ease;
+            transition: transform 0.3s ease, background 0.3s ease;
         }
         .btn:hover {
-            background: #e68900;
+            background: linear-gradient(90deg, #ff5722, #e64a19);
+            transform: scale(1.1);
         }
         .social-links {
-            margin-top: 20px;
+            margin-top: 25px;
         }
         .social-links a {
-            margin: 0 10px;
+            margin: 0 15px;
             display: inline-block;
             text-decoration: none;
             color: white;
-            font-size: 24px;
+            font-size: 28px;
+            transition: transform 0.3s ease;
+        }
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

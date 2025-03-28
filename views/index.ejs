@@ -1,92 +1,124 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server Minecraft - Bergabung Sekarang!</title>
+    <title>Kaizen Network</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
-            background: url('https://media.discordapp.net/attachments/1256974532397240342/1355196751031832767/image.png?ex=67e80cd3&is=67e6bb53&hm=c63bc5f8f7f5af35fefd75f52789dc4643225f2a7cedb1f47d1ac4ada8849a38&=&format=webp&quality=lossless&width=1550&height=800') no-repeat center center/cover;
-            color: white;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            text-align: center;
         }
-        .container {
-            max-width: 900px;
-            margin: 80px auto;
-            padding: 40px;
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
             background: rgba(0, 0, 0, 0.7);
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-            position: relative;
-            z-index: 1;
-            animation: fadeIn 1.5s;
         }
-        h1 {
-            font-size: 3em;
-            margin-bottom: 15px;
-            background: linear-gradient(90deg, #ff9800, #ff5722);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        p {
-            font-size: 1.3em;
-        }
-        .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            margin-top: 20px;
-            font-size: 22px;
+        .navbar .logo {
+            font-size: 24px;
             font-weight: bold;
-            color: white;
-            background: linear-gradient(90deg, #ff9800, #ff5722);
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: transform 0.3s ease, background 0.3s ease;
         }
-        .btn:hover {
-            background: linear-gradient(90deg, #ff5722, #e64a19);
-            transform: scale(1.1);
+        .navbar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
         }
-        .social-links {
-            margin-top: 25px;
-        }
-        .social-links a {
+        .navbar ul li {
             margin: 0 15px;
-            display: inline-block;
-            text-decoration: none;
-            color: white;
-            font-size: 28px;
-            transition: transform 0.3s ease;
         }
-        .social-links a:hover {
-            transform: scale(1.2);
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .buttons button {
+            background: yellow;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .buttons button:hover {
+            background: orange;
+        }
+        .hero {
+            padding: 100px 20px;
+        }
+        .hero span {
+            color: yellow;
+        }
+        .server-status {
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .cta-buttons button {
+            background: yellow;
+            border: none;
+            padding: 15px 30px;
+            margin: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .cta-buttons button:hover {
+            background: orange;
+        }
+        footer {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .hero {
+            animation: fadeIn 2s ease-in;
         }
     </style>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Acro Network</h1>
-        <p>Bergabunglah dengan komunitas kami dan nikmati pengalaman bermain Minecraft yang seru dan menantang!</p>
-        <p><strong>IP Server:</strong> play.acronetwork.my.id</p>
-        <p><strong>Versi:</strong> 1.20+</p>
-        <a href="#" class="btn">Gabung Sekarang!</a>
-        <div class="social-links">
-            <a href="#"><i class="fab fa-discord"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-            <a href="#"><i class="fab fa-facebook"></i></a>
+    <header>
+        <div class="navbar">
+            <div class="logo">Kaizen Network</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#leaderboard">Leaderboard</a></li>
+                    <li><a href="#vote">Vote</a></li>
+                    <li><a href="#store">Store</a></li>
+                </ul>
+            </nav>
+            <div class="buttons">
+                <button class="play-now">Play Now</button>
+                <button class="language">EN</button>
+            </div>
         </div>
-    </div>
+    </header>
+    
+    <section class="hero">
+        <h1>Welcome to <span>Kaizen Network</span></h1>
+        <p>A world with infinite possibilities!</p>
+        <div class="server-status">
+            <span class="status">🟢 Server is online - 123 Players</span>
+        </div>
+        <div class="cta-buttons">
+            <button class="play-now">Play Now</button>
+            <button class="discord">Join Discord</button>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Kaizen Network. All rights reserved.</p>
+    </footer>
 </body>
 </html>

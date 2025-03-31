@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Floating Navbar</title>
     <style>
         body {
@@ -16,12 +15,14 @@
             position: fixed;
             top: 10px;
             left: 50%;
+            width: 80%;
+            max-width: 1200px;
             transform: translateX(-50%);
             background: #1a1a1a;
             display: flex;
             align-items: center;
-            gap: 30px;
-            padding: 12px 30px;
+            justify-content: space-between;
+            padding: 12px 40px;
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             border: 1px solid #333;
@@ -39,6 +40,10 @@
             color: white;
             font-size: 18px;
             font-weight: bold;
+        }
+        .nav-items {
+            display: flex;
+            gap: 20px;
         }
         .nav-item {
             display: flex;
@@ -59,7 +64,6 @@
             height: 20px;
         }
         .nav-right {
-            margin-left: auto;
             display: flex;
             align-items: center;
             gap: 20px;
@@ -80,7 +84,7 @@
 <body>
     <div class="navbar">
         <div class="nav-logo">
-            <img src="../logo.png" alt="Logo">
+            <img src="https://media.discordapp.net/attachments/1014157862831931412/1356295967393058866/Acro1080.png?ex=67ec0c8d&is=67eabb0d&hm=c197cbd8b9f146da5b16b6c6f60b3d301689037d8adfc3dfb915074f2ddfc61d&=&format=webp&quality=lossless&width=438&height=438" alt="Logo">
             <span>Acro Network</span>
         </div>
         <div class="nav-item" onclick="alert('Home clicked!')">

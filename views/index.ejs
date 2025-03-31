@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Floating Navbar</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         body {
             margin: 0;
@@ -60,10 +59,6 @@
         .nav-item:hover {
             background: #333;
         }
-        .nav-item img {
-            width: 20px;
-            height: 20px;
-        }
         .nav-right {
             display: flex;
             align-items: center;
@@ -80,36 +75,58 @@
         .play-button:hover {
             background: #b89f00;
         }
+        .menu-icon {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .nav-items, .nav-right {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #1a1a1a;
+                width: 90%;
+                padding: 10px;
+                border-radius: 10px;
+            }
+            .nav-items.show, .nav-right.show {
+                display: flex;
+            }
+            .menu-icon {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="navbar">
         <div class="nav-logo">
-            <img src="https://media.discordapp.net/attachments/1014157862831931412/1356295967393058866/Acro1080.png?ex=67ec0c8d&is=67eabb0d&hm=c197cbd8b9f146da5b16b6c6f60b3d301689037d8adfc3dfb915074f2ddfc61d&=&format=webp&quality=lossless&width=930&height=930" alt="Logo">
-            <span>Acro Network</span>
+            <img src="logo.png" alt="Logo">
+            <span>Kaizen Network</span>
         </div>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
         <div class="nav-items">
-            <div class="nav-item" onclick="alert('Home clicked!')">
-                <i class="bi bi-house"></i> Home
-            </div>
-            <div class="nav-item" onclick="alert('Leaderboard clicked!')">
-                <i class="bi bi-trophy"></i> Leaderboard
-            </div>
-            <div class="nav-item" onclick="alert('Vote clicked!')">
-                <i class="bi bi-hand-thumbs-up"></i> Vote
-            </div>
-            <div class="nav-item" onclick="alert('Store clicked!')">
-                <i class="bi bi-cart"></i> Store
-            </div>
+            <div class="nav-item" onclick="alert('Home clicked!')">Home</div>
+            <div class="nav-item" onclick="alert('Leaderboard clicked!')">Leaderboard</div>
+            <div class="nav-item" onclick="alert('Vote clicked!')">Vote</div>
+            <div class="nav-item" onclick="alert('Store clicked!')">Store</div>
         </div>
         <div class="nav-right">
-            <div class="play-button" onclick="alert('Play Now!')">
-                <i class="bi bi-controller"></i> Play Now
-            </div>
-            <div class="nav-item" onclick="alert('Language clicked!')">
-                <i class="bi bi-chat-square-dots-fill"></i> EN
-            </div>
+            <div class="play-button" onclick="alert('Play Now!')">Play Now</div>
+            <div class="nav-item" onclick="alert('Language clicked!')">EN</div>
         </div>
     </div>
+
+    <script>
+        function toggleMenu() {
+            document.querySelector('.nav-items').classList.toggle('show');
+            document.querySelector('.nav-right').classList.toggle('show');
+        }
+    </script>
 </body>
 </html>

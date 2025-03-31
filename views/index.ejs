@@ -3,59 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Floating Navbar</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #111;
         }
         .navbar {
             position: fixed;
-            top: 20px;
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
-            background: white;
-            display: flex;
-            gap: 20px;
-            padding: 10px 20px;
-            border-radius: 50px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .nav-item {
-            width: 40px;
-            height: 40px;
+            background: #1a1a1a;
             display: flex;
             align-items: center;
-            justify-content: center;
-            border-radius: 50%;
+            gap: 30px;
+            padding: 12px 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-logo img {
+            width: 40px;
+            height: 40px;
+        }
+        .nav-logo span {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            font-size: 16px;
             cursor: pointer;
-            transition: transform 0.2s;
+            padding: 8px 12px;
+            border-radius: 10px;
+            transition: background 0.2s;
         }
         .nav-item:hover {
-            transform: scale(1.2);
-            background: #f0f0f0;
+            background: #333;
         }
         .nav-item img {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
+        }
+        .nav-right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .play-button {
+            background: #c2a900;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .play-button:hover {
+            background: #b89f00;
         }
     </style>
 </head>
 <body>
     <div class="navbar">
+        <div class="nav-logo">
+            <img src="logo.png" alt="Logo">
+            <span>Acro Network</span>
+        </div>
         <div class="nav-item" onclick="alert('Home clicked!')">
-            <img src="home-icon.png" alt="Home"> Home
+            <i class="bi bi-house"></i> Home
         </div>
-        <div class="nav-item" onclick="alert('Search clicked!')">
-            <img src="search-icon.png" alt="Search"> Search
+        <div class="nav-item" onclick="alert('Leaderboard clicked!')">
+            <img src="trophy-icon.png" alt="Leaderboard"> Leaderboard
         </div>
-        <div class="nav-item" onclick="alert('Notifications clicked!')">
-            <img src="bell-icon.png" alt="Notifications"> Notifications
+        <div class="nav-item" onclick="alert('Vote clicked!')">
+            <img src="vote-icon.png" alt="Vote"> Vote
         </div>
-        <div class="nav-item" onclick="alert('Profile clicked!')">
-            <img src="user-icon.png" alt="Profile"> Profile
+        <div class="nav-item" onclick="alert('Store clicked!')">
+            <img src="cart-icon.png" alt="Store"> Store
+        </div>
+        <div class="nav-right">
+            <div class="play-button" onclick="alert('Play Now!')">
+                <img src="game-icon.png" alt="Play"> Play Now
+            </div>
+            <div class="nav-item" onclick="alert('Language clicked!')">
+                <img src="flag-icon.png" alt="Language"> EN
+            </div>
         </div>
     </div>
 </body>

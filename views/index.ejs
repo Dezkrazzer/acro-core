@@ -50,8 +50,9 @@
         }
         .nav-menu {
             display: flex;
-            gap: 20px;
             align-items: center;
+            flex-grow: 1;
+            justify-content: center;
         }
         .nav-items {
             display: flex;
@@ -117,8 +118,8 @@
 <body>
     <div class="navbar">
         <div class="nav-logo">
-            <img src="logo.png" alt="Logo">
-            <span>Kaizen Network</span>
+            <img src="https://media.discordapp.net/attachments/1014157862831931412/1356295967393058866/Acro1080.png?ex=67ec0c8d&is=67eabb0d&hm=c197cbd8b9f146da5b16b6c6f60b3d301689037d8adfc3dfb915074f2ddfc61d&=&format=webp&quality=lossless&width=930&height=930" alt="Logo">
+            <span>Acro Network</span>
         </div>
         <div class="menu-icon" onclick="toggleMenu()">☰</div>
         <div class="nav-menu">
@@ -128,10 +129,10 @@
                 <div class="nav-item" onclick="alert('Vote clicked!')"><i class="bi bi-hand-thumbs-up"></i> Vote</div>
                 <div class="nav-item" onclick="alert('Store clicked!')"><i class="bi bi-cart"></i> Store</div>
             </div>
-            <div class="nav-right">
-                <div class="play-button" onclick="alert('Play Now!')"><i class="bi bi-controller"></i> Play Now</div>
-                <div class="nav-item" onclick="alert('Language clicked!')"><i class="bi bi-person-circle"></i> Profile</div>
-            </div>
+        </div>
+        <div class="nav-right">
+            <div class="play-button" onclick="alert('Play Now!')"><i class="bi bi-controller"></i> Play Now</div>
+            <div class="nav-item" onclick="alert('Language clicked!')"><i class="bi bi-person-circle"></i> Profile</div>
         </div>
     </div>
 

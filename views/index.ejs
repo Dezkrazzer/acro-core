@@ -33,7 +33,10 @@
       transform: translateX(-50%);
       width: 90%;
       max-width: 1200px;
-      background: #1a1a1a;
+      background-color: rgba(0, 0, 0, 0.4); /* transparan hitam */
+      backdrop-filter: blur(10px); /* efek blur modern */
+      -webkit-backdrop-filter: blur(10px); /* untuk Safari */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* sedikit bayangan */
       padding: 12px 20px;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);

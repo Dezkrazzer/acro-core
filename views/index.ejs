@@ -1,133 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Floating Navbar</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #111;
-        }
-        .navbar {
-            position: fixed;
-            top: 10px;
-            left: 50%;
-            width: 80%;
-            max-width: 1200px;
-            transform: translateX(-50%);
-            background: #1a1a1a;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 40px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            border: 1px solid #333;
-        }
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .nav-logo img {
-            width: 40px;
-            height: 40px;
-        }
-        .nav-logo span {
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .nav-items {
-            display: flex;
-            gap: 20px;
-        }
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            padding: 8px 12px;
-            border-radius: 10px;
-            transition: background 0.2s;
-        }
-        .nav-item:hover {
-            background: #333;
-        }
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        .play-button {
-            background: #c2a900;
-            padding: 10px 20px;
-            border-radius: 10px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .play-button:hover {
-            background: #b89f00;
-        }
-        .menu-icon {
-            display: none;
-            font-size: 24px;
-            color: white;
-            cursor: pointer;
-        }
-        @media (max-width: 768px) {
-            .nav-items, .nav-right {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: #1a1a1a;
-                width: 90%;
-                padding: 10px;
-                border-radius: 10px;
-            }
-            .nav-items.show, .nav-right.show {
-                display: flex;
-            }
-            .menu-icon {
-                display: block;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Acro Network</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 1200px;
+      background: #1a1a1a;
+      padding: 12px 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      border: 1px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1000;
+      flex-wrap: wrap;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .nav-logo span {
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .nav-items {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-item {
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 10px;
+      transition: background 0.2s;
+    }
+
+    .nav-item:hover {
+      background: #333;
+    }
+
+    .play-button {
+      background: #c2a900;
+      padding: 10px 20px;
+      border-radius: 10px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .play-button:hover {
+      background: #b89f00;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* ========== Mobile Responsive ========== */
+    @media (max-width: 768px) {
+      .menu-icon {
+        display: block;
+      }
+
+      .nav-items,
+      .nav-right {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        background: #1a1a1a;
+        border-radius: 10px;
+        padding: 10px 0;
+        margin-top: 10px;
+      }
+
+      .nav-items.show,
+      .nav-right.show {
+        display: flex;
+      }
+
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-left {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .nav-logo {
+        gap: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="navbar">
-        <div class="nav-logo">
-            <img src="https://media.discordapp.net/attachments/1014157862831931412/1356295967393058866/Acro1080.png?ex=67ec0c8d&is=67eabb0d&hm=c197cbd8b9f146da5b16b6c6f60b3d301689037d8adfc3dfb915074f2ddfc61d&=&format=webp&quality=lossless&width=930&height=930" alt="Logo">
-            <span>Acro Network</span>
-        </div>
-        <div class="menu-icon" onclick="toggleMenu()">☰</div>
-        <div class="nav-items">
-            <div class="nav-item" onclick="alert('Home clicked!')"><i class="bi bi-house"></i> Home</div>
-            <div class="nav-item" onclick="alert('Leaderboard clicked!')"><i class="bi bi-trophy"></i> Leaderboard</div>
-            <div class="nav-item" onclick="alert('Vote clicked!')"><i class="bi bi-hand-thumbs-up"></i> Vote</div>
-            <div class="nav-item" onclick="alert('Store clicked!')"><i class="bi bi-cart"></i> Store</div>
-        </div>
-        <div class="nav-right">
-            <div class="play-button" onclick="alert('Play Now!')"><i class="bi bi-controller"></i> Play Now</div>
-            <div class="nav-item" onclick="alert('Language clicked!')">EN</div>
-        </div>
+
+  <div class="navbar">
+    <div class="nav-left">
+      <div class="nav-logo">
+        <img src="https://media.discordapp.net/attachments/1014157862831931412/1356295967393058866/Acro1080.png?ex=67f5efcd&is=67f49e4d&hm=6e2e124fc4a5a0db177b9a3d8cc53dcc00b8f1bddc275fd739ce4a4898d6b8b4&=&format=webp&quality=lossless&width=930&height=930" alt="Logo" />
+        <span>Acro Network</span>
+      </div>
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
     </div>
 
-    <script>
-        function toggleMenu() {
-            document.querySelector('.nav-items').classList.toggle('show');
-            document.querySelector('.nav-right').classList.toggle('show');
+    <div class="nav-items" id="nav-items">
+      <div class="nav-item" onclick="alert('Home clicked!')"><i class="bi bi-house"></i>Home</div>
+      <div class="nav-item" onclick="alert('Vote clicked!')"><i class="bi bi-calendar-check"></i>Vote</div>
+      <div class="nav-item" onclick="location.href='https://dsc.gg/acronetwork'"><i class="bi bi-discord"></i>Discord</div>
+      <div class="nav-item" onclick="alert('Store clicked!')"><i class="bi bi-shop"></i>Store</div>
+    </div>
+
+    <div class="nav-right" id="nav-right">
+      <div class="play-button" onclick="alert('Play Now!')"><i class="bi bi-controller"></i>Play Now</div>
+      <div class="nav-item" onclick="alert('Profile clicked!')"><i class="bi bi-person-circle"></i></div>
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("nav-items").classList.toggle("show");
+      document.getElementById("nav-right").classList.toggle("show");
+    }
+
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          document.getElementById("nav-items").classList.remove("show");
+          document.getElementById("nav-right").classList.remove("show");
         }
-    </script>
+      });
+    });
+  </script>
 </body>
 </html>

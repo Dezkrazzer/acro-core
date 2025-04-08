@@ -132,6 +132,10 @@
         border-radius: 10px;
         padding: 10px 0;
         margin-top: 10px;
+        background-color: rgba(0, 0, 0, 0.4); /* transparan hitam */
+        backdrop-filter: blur(10px); /* efek blur modern */
+        -webkit-backdrop-filter: blur(10px); /* untuk Safari */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* sedikit bayangan */
       }
 
       .nav-items.show,
@@ -167,10 +171,10 @@
     </div>
 
     <div class="nav-items" id="nav-items">
-      <div class="nav-item" onclick="alert('Home clicked!')"><i class="bi bi-house"></i>  Home</div>
-      <div class="nav-item" onclick="alert('Vote clicked!')"><i class="bi bi-hand-thumbs-up"></i>  Vote</div>
-      <div class="nav-item" onclick="location.href='https://dsc.gg/acronetwork'"><i class="bi bi-discord"></i>  Discord</div>
-      <div class="nav-item" onclick="alert('Store clicked!')"><i class="bi bi-shop"></i>  Store</div>
+      <div class="nav-item" onclick="alert('Home clicked!')"><i class="bi bi-house-door-fill"></i>&nbsp;&nbsp;Home</div>
+      <div class="nav-item" onclick="alert('Vote clicked!')"><i class="bi bi-hand-thumbs-up-fill"></i>&nbsp;&nbsp;Vote</div>
+      <div class="nav-item" onclick="location.href='https://dsc.gg/acronetwork'"><i class="bi bi-discord"></i>&nbsp;&nbsp;Discord</div>
+      <div class="nav-item" onclick="alert('Store clicked!')"><i class="bi bi-cart-dash-fill"></i>&nbsp;&nbsp;Store</div>
     </div>
 
     <div class="nav-right" id="nav-right">

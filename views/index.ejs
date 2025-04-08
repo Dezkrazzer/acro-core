@@ -154,13 +154,13 @@
 
     <div class="nav-items" id="nav-items">
       <div class="nav-item" onclick="alert('Home clicked!')"><i class="bi bi-house"></i> Home</div>
-      <div class="nav-item" onclick="alert('Vote clicked!')"><i class="bi bi-hand-thumbs-up"></i> >Vote</div>
+      <div class="nav-item" onclick="alert('Vote clicked!')"><i class="bi bi-hand-thumbs-up"></i> Vote</div>
       <div class="nav-item" onclick="location.href='https://dsc.gg/acronetwork'"><i class="bi bi-discord"></i> Discord</div>
       <div class="nav-item" onclick="alert('Store clicked!')"><i class="bi bi-shop"></i> Store</div>
     </div>
 
     <div class="nav-right" id="nav-right">
-      <div class="play-button" onclick="alert('Play Now!')"><i class="bi bi-controller"></i> Play Now</div>
+      <div class="play-button" onclick="copyIP()"><i class="bi bi-controller"></i> Play Now</div>
       <div class="nav-item" onclick="alert('Profile clicked!')"><i class="bi bi-person-circle"></i></div>
     </div>
   </div>
@@ -179,6 +179,16 @@
         }
       });
     });
+
+    function copyIP() {
+        const ip = "play.acronetwork.my.id";
+        navigator.clipboard.writeText(ip).then(() => {
+        alert("IP berhasil disalin: " + ip);
+    }).catch(err => {
+        alert("Gagal menyalin IP.");
+        console.error(err);
+    });
+}
   </script>
 </body>
 </html>

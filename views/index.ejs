@@ -212,14 +212,20 @@
 </div>
 
 <style>
-  .info-wrapper {
+.info-wrapper {
   display: flex;
+  justify-content: center; /* Tengahin */
+  align-items: center;
   gap: 20px;
   flex-wrap: wrap;
+  margin-top: 40px;
 }
 
+/* Gunakan warna navbar untuk latar box */
 .info-box {
-  background-color: #1e2430;
+  background-color: rgba(0, 0, 0, 0.4); /* transparan hitam */
+  backdrop-filter: blur(10px); /* efek blur modern */
+  -webkit-backdrop-filter: blur(10px); /* untuk Safari */
   color: white;
   padding: 20px;
   border-radius: 12px;
@@ -231,7 +237,7 @@
 }
 
 .info-icon {
-  background-color: #2c3445;
+  background-color: #1e293b;
   padding: 10px;
   border-radius: 10px;
   display: flex;
@@ -242,7 +248,7 @@
 .info-icon img {
   width: 32px;
   height: 32px;
-  filter: invert(84%) sepia(95%) saturate(280%) hue-rotate(10deg); /* warna kuning */
+  filter: invert(84%) sepia(95%) saturate(280%) hue-rotate(10deg);
 }
 
 .info-text .info-title {

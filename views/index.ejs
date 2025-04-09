@@ -173,5 +173,101 @@
   // Perbarui setiap 30 detik
   setInterval(updatePlayerCount, 30000);
 </script>
+
+
+<!-- INFORMATION SECTION -->
+<div class="info-wrapper">
+  <!-- Discord Members -->
+  <div class="info-box">
+    <div class="info-icon">
+      <i class="bi bi-discord"></i>
+    </div>
+    <div class="info-text">
+      <div class="info-title">Discord Members</div>
+      <div class="info-value" id="discord-members">Loading...</div>
+    </div>
+  </div>
+
+  <!-- Server Version -->
+  <div class="info-box">
+    <div class="info-icon">
+      <i class="bi bi-hdd-stack-fill"></i>
+    </div>
+    <div class="info-text">
+      <div class="info-title">Server Version</div>
+      <div class="info-value">1.20 - 1.21.5</div>
+    </div>
+  </div>
+
+  <!-- Registered Players -->
+  <div class="info-box">
+    <div class="info-icon">
+      <i class="bi bi-people-fill"></i>
+    </div>
+    <div class="info-text">
+      <div class="info-title">Registered Players</div>
+      <div class="info-value">200+</div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .info-wrapper {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.info-box {
+  background-color: #1e2430;
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  width: 280px;
+}
+
+.info-icon {
+  background-color: #2c3445;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-icon img {
+  width: 32px;
+  height: 32px;
+  filter: invert(84%) sepia(95%) saturate(280%) hue-rotate(10deg); /* warna kuning */
+}
+
+.info-text .info-title {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.info-text .info-value {
+  font-size: 22px;
+  font-weight: bold;
+}
+</style>
+
+<script>
+  fetch("https://discord.com/api/guilds/954173179042091028/widget.json")
+    .then(response => response.json())
+    .then(data => {
+      const members = data.presence_count || data.members.length;
+      document.getElementById("discord-members").textContent = `${members} Online`;
+    })
+    .catch(error => {
+      document.getElementById("discord-members").textContent = "Unavailable";
+      console.error("Error fetching Discord members:", error);
+    });
+</script>
+
 </body>
 </html>

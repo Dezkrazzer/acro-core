@@ -161,53 +161,7 @@
 </head>
 <body>
 
-  <div class="navbar">
-    <div class="nav-left">
-      <div class="nav-logo">
-        <img src="https://media.discordapp.net/attachments/1014157862831931412/1356295967393058866/Acro1080.png?ex=67f5efcd&is=67f49e4d&hm=6e2e124fc4a5a0db177b9a3d8cc53dcc00b8f1bddc275fd739ce4a4898d6b8b4&=&format=webp&quality=lossless&width=930&height=930" alt="Logo" />
-        <span>Acro Network</span>
-      </div>
-      <div class="menu-icon" onclick="toggleMenu()">☰</div>
-    </div>
-
-    <div class="nav-items" id="nav-items">
-      <div class="nav-item" onclick="alert('Home clicked!')"><i class="bi bi-house-door-fill"></i>&nbsp;&nbsp;Home</div>
-      <div class="nav-item" onclick="alert('Vote clicked!')"><i class="bi bi-hand-thumbs-up-fill"></i>&nbsp;&nbsp;Vote</div>
-      <div class="nav-item" onclick="location.href='https://dsc.gg/acronetwork'"><i class="bi bi-discord"></i>&nbsp;&nbsp;Discord</div>
-      <div class="nav-item" onclick="alert('Store clicked!')"><i class="bi bi-cart-dash-fill"></i>&nbsp;&nbsp;Store</div>
-    </div>
-
-    <div class="nav-right" id="nav-right">
-      <div class="play-button" onclick="copyIP()"><i class="bi bi-controller"></i>  Play Now</div>
-      <div class="nav-item" onclick="alert('Profile clicked!')"><i class="bi bi-person-circle"></i></div>
-    </div>
-  </div>
-
-  <script>
-    function toggleMenu() {
-      document.getElementById("nav-items").classList.toggle("show");
-      document.getElementById("nav-right").classList.toggle("show");
-    }
-
-    document.querySelectorAll('.nav-item').forEach(item => {
-      item.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
-          document.getElementById("nav-items").classList.remove("show");
-          document.getElementById("nav-right").classList.remove("show");
-        }
-      });
-    });
-
-    function copyIP() {
-        const ip = "play.acronetwork.my.id";
-        navigator.clipboard.writeText(ip).then(() => {
-        alert("IP berhasil disalin: " + ip);
-    }).catch(err => {
-        alert("Gagal menyalin IP.");
-        console.error(err);
-    });
-}
-  </script>
+  <%- include("./layouts/navbar.ejs"); %>
   
   
   

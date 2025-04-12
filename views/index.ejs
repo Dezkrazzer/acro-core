@@ -286,7 +286,9 @@
   <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Survival Mode">
 </div>
 
-    <h3>Survival</h3>
+<h3>
+  <i class="fa-solid fa-pickaxe"></i> Survival
+</h3>
     <p>Main klasik dengan fitur ekonomi & claim tanah!</p>
   </div>
   <div class="server-card">
@@ -294,7 +296,9 @@
   <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Survival Mode">
 </div>
 
-    <h3>Creative</h3>
+<h3>
+  <i class="fa-solid fa-pickaxe"></i> Survival
+</h3>
     <p>Bangun sebebasnya di plot dunia tanpa batas.</p>
   </div>
   <div class="server-card">
@@ -302,14 +306,18 @@
   <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Survival Mode">
 </div>
 
-    <h3>Minigames</h3>
+<h3>
+  <i class="fa-solid fa-pickaxe"></i> Survival
+</h3>
     <p>Bed Wars, Parkour, PvP, dan lainnya seru banget!</p>
   </div>
   <div class="server-card">
     <div class="server-thumbnail">
   <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Survival Mode">
 </div>
-    <h3>Vanilla</h3>
+<h3>
+  <i class="fa-solid fa-pickaxe"></i> Survival
+</h3>
     <p>Pengalaman Minecraft murni, tanpa plugin berat.</p>
   </div>
 </div>
@@ -331,11 +339,10 @@
   backdrop-filter: blur(12px);
   color: white;
   width: 100%;
-  max-width: 480px; /* lebih lebar dari sebelumnya */
-  aspect-ratio: 16 / 7; /* buat bentuk persegi panjang */
+  max-width: 480px;
+  aspect-ratio: 16 / 7;
   padding: 24px 20px;
   border-radius: 18px;
-  text-align: center;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
@@ -350,13 +357,22 @@
 
 .server-card h3 {
   font-size: 22px;
-  margin-top: 12px;
-  margin-bottom: 8px;
+  margin: 10px 0 5px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start; /* rata kiri */
+}
+
+.server-card h3 img {
+  width: 24px;
+  height: 24px;
 }
 
 .server-card p {
   font-size: 14px;
   color: #ccc;
+  text-align: left; /* rata kiri */
 }
 
 .server-thumbnail {

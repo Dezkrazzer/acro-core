@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background: url('https://media.discordapp.net/attachments/1256974532397240342/1355196751031832767/image.png?ex=67f68d53&is=67f53bd3&hm=ccf83360d2a081f79bd52adf095144d835b1250d2ba9cf20754f4d60c25917e8&=&format=webp&quality=lossless&width=688&height=355') no-repeat center center fixed;
+    background: url('../assets/wallpaper.png') no-repeat center center fixed;
     background-size: cover;
     position: relative;
 }

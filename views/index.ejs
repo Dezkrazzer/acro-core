@@ -277,7 +277,7 @@
 </script>
 
 <!-- SERVER MENU SECTION -->
-<h2 class="gamemode-title gradient-gamemode">Server Gamemode</h2>
+<h2 class="gamemode-title gradient-gamemode animated-title">Server Gamemode</h2>
 <p class="gamemode-subtitle">Choose your favorite gamemode and start playing!</p>
 
 <div class="server-menu">
@@ -388,6 +388,23 @@
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+}
+
+@keyframes fadeScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animated-title {
+  animation: fadeScale 0.8s ease-out forwards;
+  opacity: 0;
+  animation-delay: 0.3s;
 }
 
 </style>

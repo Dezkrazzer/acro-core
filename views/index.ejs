@@ -283,11 +283,11 @@
 <div class="server-menu">
   <div class="server-card">
     <div class="server-thumbnail">
-      <img src="survival.jpg" alt="Survival Mix">
+      <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Survival Mix">
     </div>
     <div class="server-content">
       <div class="server-icon">
-        <i class="fas fa-magic"></i>
+        <i class="bi bi-hammer"></i>
       </div>
       <div class="server-texts">
         <h3>Survival Mix</h3>
@@ -298,11 +298,11 @@
 
   <div class="server-card">
     <div class="server-thumbnail">
-      <img src="vanilla.jpg" alt="Vanilla">
+      <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Vanilla">
     </div>
     <div class="server-content">
       <div class="server-icon">
-        <i class="fas fa-tree"></i>
+        <i class="bi bi-tree-fill"></i>
       </div>
       <div class="server-texts">
         <h3>Vanilla</h3>
@@ -313,11 +313,11 @@
 
   <div class="server-card">
     <div class="server-thumbnail">
-      <img src="vanilla.jpg" alt="Vanilla">
+      <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Vanilla">
     </div>
     <div class="server-content">
       <div class="server-icon">
-        <i class="fas fa-tree"></i>
+        <i class="bi bi-bricks"></i>
       </div>
       <div class="server-texts">
         <h3>Creative [Coming Soon]</h3>
@@ -328,11 +328,11 @@
 
   <div class="server-card">
     <div class="server-thumbnail">
-      <img src="vanilla.jpg" alt="Vanilla">
+      <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Vanilla">
     </div>
     <div class="server-content">
       <div class="server-icon">
-        <i class="fas fa-tree"></i>
+        <i class="bi bi-dpad-fill"></i>
       </div>
       <div class="server-texts">
         <h3>Minigames [Coming Soon]</h3>
@@ -348,9 +348,15 @@
 <style>
 .server-menu {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .server-menu {
+    grid-template-columns: 1fr;
+  }
 }
 
 .server-card {

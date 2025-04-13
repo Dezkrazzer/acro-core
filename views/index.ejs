@@ -365,15 +365,18 @@
 .server-card {
   display: flex;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* transparan hitam */
+  backdrop-filter: blur(10px); /* efek blur modern */
+  -webkit-backdrop-filter: blur(10px); /* untuk Safari */
 }
 
 .server-thumbnail {
-  background-color: rgba(0, 0, 0, 0.4); /* kalau kamu pakai background blur */
+  background-color: rgba(0, 0, 0, 0.4); /* transparan hitam */
+  backdrop-filter: blur(10px); /* efek blur modern */
+  -webkit-backdrop-filter: blur(10px); /* untuk Safari */
   border-radius: 12px;
   overflow: hidden;
   padding: 12px; /* ✅ INI yang nambahin jarak dalam semua sisi */

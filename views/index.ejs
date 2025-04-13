@@ -371,6 +371,12 @@
   background-color: rgba(0, 0, 0, 0.4); /* transparan hitam */
   backdrop-filter: blur(10px); /* efek blur modern */
   -webkit-backdrop-filter: blur(10px); /* untuk Safari */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.server-card:hover {
+  transform: translateY(-8px);
 }
 
 .server-thumbnail {

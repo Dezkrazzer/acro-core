@@ -283,73 +283,87 @@
 <div class="server-menu">
   <div class="server-card">
     <div class="server-thumbnail">
-      <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Survival Mode">
+      <img src="thumbnail.jpg">
     </div>
     <div class="server-content">
-      <div class="server-icon"><i class="bi bi-hammer"></i></div>
-      <div>
+      <div class="server-icon">
+        <i class="fas fa-hammer"></i>
+      </div>
+      <div class="server-texts">
         <h3>Survival Mix</h3>
-        <p>This is a regular Survival but with magic like Skills, Custom Enchants, powerful Items and more that can add to the gaming experience.</p>
+        <p>This is a regular Survival but with magic like Skills, Custom Enchants, powerful Items and more that can add to the gaming experience.
+        </p>
       </div>
     </div>
   </div>
 
-  <div class="server-card">
-    <div class="server-thumbnail">
-      <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Vanilla Mode">
-    </div>
-    <div class="server-content">
-      <div class="server-icon"><i class="bi bi-tree-fill"></i></div>
-      <div>
-        <h3>Vanilla</h3>
-        <p>Want to play pure survival? This is the most appropriate mode because there are no plugins that change the gameplay.</p>
+  <div class="server-menu">
+    <div class="server-card">
+      <div class="server-thumbnail">
+        <img src="thumbnail.jpg">
+      </div>
+      <div class="server-content">
+        <div class="server-icon">
+          <i class="fas fa-hammer"></i>
+        </div>
+        <div class="server-texts">
+          <h3>Vanilla</h3>
+          <p>Want to play pure survival? This is the most appropriate mode because there are no plugins that change the gameplay.
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-  <div class="server-card">
-    <div class="server-thumbnail">
-      <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Creative Mode">
-    </div>
-    <div class="server-content">
-      <div class="server-icon"><i class="bi bi-bricks"></i></div>
-      <div>
-        <h3>Creative [COMING SOON]</h3>
-        <p>Test your creativity here! Build freely on your own plot without limits!</p>
+    <div class="server-menu">
+      <div class="server-card">
+        <div class="server-thumbnail">
+          <img src="thumbnail.jpg">
+        </div>
+        <div class="server-content">
+          <div class="server-icon">
+            <i class="fas fa-hammer"></i>
+          </div>
+          <div class="server-texts">
+            <h3>Creative [Coming Soon]</h3>
+            <p>Test your creativity here! Build freely on your own plot without limits!
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="server-card">
-    <div class="server-thumbnail">
-      <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Minigames Mode">
-    </div>
-    <div class="server-content">
-      <div class="server-icon"><i class="bi bi-dpad-fill"></i></div>
-      <div>
-        <h3>Minigames [COMING SOON]</h3>
-        <p>Are you bored with playing Minecraft with the same old modes? We present minigames like Bedwars, PvP, Parkour, and more!</p>
-      </div>
-    </div>
-  </div>
+      <div class="server-menu">
+        <div class="server-card">
+          <div class="server-thumbnail">
+            <img src="thumbnail.jpg">
+          </div>
+          <div class="server-content">
+            <div class="server-icon">
+              <i class="fas fa-hammer"></i>
+            </div>
+            <div class="server-texts">
+              <h3>Minigames [Coming Soon]</h3>
+              <p>Are you bored with playing Minecraft with the same old modes? We present minigames like Bedwars, PvP, Parkour, and more!</p>
+            </div>
+          </div>
+        </div>
+
+  
 
 <style>
 .server-menu {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   gap: 20px;
   padding: 20px;
 }
 
 .server-card {
-  background-color: rgba(30, 41, 59, 0.7); /* semi-transparan dark */
-  border-radius: 12px;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-  color: white;
+  background-color: rgba(30, 41, 59, 0.85);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   transition: transform 0.2s;
 }
 
@@ -357,9 +371,15 @@
   transform: translateY(-4px);
 }
 
+.server-thumbnail {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+}
+
 .server-thumbnail img {
   width: 100%;
-  height: 140px;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -368,6 +388,7 @@
   align-items: flex-start;
   padding: 16px;
   gap: 12px;
+  flex: 1;
 }
 
 .server-icon {
@@ -386,32 +407,22 @@
   font-size: 20px;
 }
 
-.server-content h3 {
-  font-size: 1rem;
-  margin: 0 0 4px 0;
-  line-height: 1.2;
-}
-
-.server-content p {
-  font-size: 0.875rem;
-  margin: 0;
-  line-height: 1.4;
-}
-
-.server-icon {
-  background-color: #1e293b; /* biru tua */
-  border-radius: 12px;
-  width: 42px;
-  height: 42px;
+.server-texts {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  flex-direction: column;
 }
 
-.server-icon i {
+.server-texts h3 {
+  margin: 0 0 4px 0;
+  font-size: 1rem;
   color: white;
-  font-size: 20px;
+}
+
+.server-texts p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #cbd5e1;
+  line-height: 1.4;
 }
 
 .gamemode-subtitle {

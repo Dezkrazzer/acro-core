@@ -283,116 +283,132 @@
 <div class="server-menu">
   <div class="server-card">
     <div class="server-thumbnail">
-      <img src="thumbnail.jpg">
+      <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Survival Mode">
     </div>
     <div class="server-content">
-      <div class="server-icon">
-        <i class="fas fa-hammer"></i>
-      </div>
-      <div class="server-texts">
+      <div class="server-icon"><i class="bi bi-hammer"></i></div>
+      <div>
         <h3>Survival Mix</h3>
-        <p>This is a regular Survival but with magic like Skills, Custom Enchants, powerful Items and more that can add to the gaming experience.
-        </p>
+        <p>This is a regular Survival but with magic like Skills, Custom Enchants, powerful Items and more that can add to the gaming experience.</p>
       </div>
     </div>
   </div>
 
-  <div class="server-menu">
-    <div class="server-card">
-      <div class="server-thumbnail">
-        <img src="thumbnail.jpg">
-      </div>
-      <div class="server-content">
-        <div class="server-icon">
-          <i class="fas fa-hammer"></i>
-        </div>
-        <div class="server-texts">
-          <h3>Vanilla</h3>
-          <p>Want to play pure survival? This is the most appropriate mode because there are no plugins that change the gameplay.
-          </p>
-        </div>
+  <div class="server-card">
+    <div class="server-thumbnail">
+      <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Vanilla Mode">
+    </div>
+    <div class="server-content">
+      <div class="server-icon"><i class="bi bi-tree-fill"></i></div>
+      <div>
+        <h3>Vanilla</h3>
+        <p>Want to play pure survival? This is the most appropriate mode because there are no plugins that change the gameplay.</p>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="server-menu">
-      <div class="server-card">
-        <div class="server-thumbnail">
-          <img src="thumbnail.jpg">
-        </div>
-        <div class="server-content">
-          <div class="server-icon">
-            <i class="fas fa-hammer"></i>
-          </div>
-          <div class="server-texts">
-            <h3>Creative [Coming Soon]</h3>
-            <p>Test your creativity here! Build freely on your own plot without limits!
-            </p>
-          </div>
-        </div>
+  <div class="server-card">
+    <div class="server-thumbnail">
+      <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Creative Mode">
+    </div>
+    <div class="server-content">
+      <div class="server-icon"><i class="bi bi-bricks"></i></div>
+      <div>
+        <h3>Creative [COMING SOON]</h3>
+        <p>Test your creativity here! Build freely on your own plot without limits!</p>
       </div>
+    </div>
+  </div>
 
-      <div class="server-menu">
-        <div class="server-card">
-          <div class="server-thumbnail">
-            <img src="thumbnail.jpg">
-          </div>
-          <div class="server-content">
-            <div class="server-icon">
-              <i class="fas fa-hammer"></i>
-            </div>
-            <div class="server-texts">
-              <h3>Minigames [Coming Soon]</h3>
-              <p>Are you bored with playing Minecraft with the same old modes? We present minigames like Bedwars, PvP, Parkour, and more!</p>
-            </div>
-          </div>
-        </div>
-
-  
+  <div class="server-card">
+    <div class="server-thumbnail">
+      <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Minigames Mode">
+    </div>
+    <div class="server-content">
+      <div class="server-icon"><i class="bi bi-dpad-fill"></i></div>
+      <div>
+        <h3>Minigames [COMING SOON]</h3>
+        <p>Are you bored with playing Minecraft with the same old modes? We present minigames like Bedwars, PvP, Parkour, and more!</p>
+      </div>
+    </div>
+  </div>
 
 <style>
 .server-menu {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
-  padding: 20px;
+  margin: 50px auto;
+  max-width: 1200px;
+  padding: 0 20px;
 }
 
 .server-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  color: white;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 16 / 7;
+  padding: 24px 20px;
+  border-radius: 18px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
-  background-color: rgba(30, 41, 59, 0.85);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  transition: transform 0.2s;
+  justify-content: space-between;
 }
 
 .server-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(255, 200, 0, 0.2);
+}
+
+.server-card h3 {
+  font-size: 22px;
+  margin: 10px 0 5px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start; /* rata kiri */
+}
+
+.server-card h3 img {
+  width: 24px;
+  height: 24px;
+}
+
+.server-card p {
+  font-size: 14px;
+  color: #ccc;
+  text-align: left; /* rata kiri */
 }
 
 .server-thumbnail {
   width: 100%;
   height: 160px;
   overflow: hidden;
+  border-radius: 12px;
+  margin-bottom: 12px;
 }
 
 .server-thumbnail img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
-
 .server-content {
   display: flex;
-  align-items: flex-start;
-  padding: 16px;
-  gap: 12px;
-  flex: 1;
+  align-items: center;
+  gap: 15px;
 }
 
 .server-icon {
-  background-color: #1e293b;
+  background-color: #1e293b; /* biru tua */
   border-radius: 12px;
   width: 42px;
   height: 42px;
@@ -405,24 +421,6 @@
 .server-icon i {
   color: white;
   font-size: 20px;
-}
-
-.server-texts {
-  display: flex;
-  flex-direction: column;
-}
-
-.server-texts h3 {
-  margin: 0 0 4px 0;
-  font-size: 1rem;
-  color: white;
-}
-
-.server-texts p {
-  margin: 0;
-  font-size: 0.875rem;
-  color: #cbd5e1;
-  line-height: 1.4;
 }
 
 .gamemode-subtitle {

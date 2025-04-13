@@ -373,17 +373,17 @@
 }
 
 .server-thumbnail {
-  width: 100%;
-  height: 180px;
-  margin: 20px;
-  background-color: #1e293b;
+  background-color: rgba(0, 0, 0, 0.4); /* kalau kamu pakai background blur */
+  border-radius: 12px;
   overflow: hidden;
+  padding: 12px; /* ✅ INI yang nambahin jarak dalam semua sisi */
+  box-sizing: border-box; /* ✅ penting biar padding gak nambah ke luar */
 }
 
 .server-thumbnail img {
   width: 100%;
-  height: 100%;
-  
+  border-radius: 8px;
+  margin-bottom: 12px;
 }
 
 .server-content {

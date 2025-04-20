@@ -34,14 +34,4 @@
         }
       });
     });
-
-    function copyIP() {
-        const ip = "play.acronetwork.my.id";
-        navigator.clipboard.writeText(ip).then(() => {
-        alert("IP berhasil disalin: " + ip);
-    }).catch(err => {
-        alert("Gagal menyalin IP.");
-        console.error(err);
-    });
-    }
 </script>

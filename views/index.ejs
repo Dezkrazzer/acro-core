@@ -17,7 +17,12 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" type="text/css" href="./public/indexStyle.css">
-</head>
+
+  <!-- CSS Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- JS Swiper -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> 
+  </head>
 
 <body>
 
@@ -478,6 +483,91 @@
 }
 
 </style>
+
+<div class="swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <div class="server-card">
+        <div class="server-thumbnail">
+          <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Vanilla">
+        </div>
+        <div class="server-content">
+          <div class="server-icon">
+            <i class="bi bi-dpad-fill"></i>
+          </div>
+          <div class="server-texts">
+            <h3>Minigames [Coming Soon]</h3>
+            <p>Are you bored with playing Minecraft with the same old modes? We present minigames like Bedwars, PvP, Parkour, and more!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-slide">
+      <div class="server-card">
+        <div class="server-thumbnail">
+          <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Vanilla">
+        </div>
+        <div class="server-content">
+          <div class="server-icon">
+            <i class="bi bi-dpad-fill"></i>
+          </div>
+          <div class="server-texts">
+            <h3>Minigames [Coming Soon]</h3>
+            <p>Are you bored with playing Minecraft with the same old modes? We present minigames like Bedwars, PvP, Parkour, and more!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- dan seterusnya -->
+  </div>
+
+  <!-- Optional tombol navigasi -->
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+
+  <!-- Optional pagination -->
+  <div class="swiper-pagination"></div>
+</div>
+
+<style>
+  .swiper {
+  width: 100%;
+  padding: 40px 0;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+</style>
+
+<script>
+  const swiper = new Swiper('.swiper', {
+    slidesPerView: 1.2, // untuk efek "peek"
+    spaceBetween: 20,
+    loop: true,
+    grabCursor: true,
+    centeredSlides: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 2.5,
+      },
+      1024: {
+        slidesPerView: 3.2,
+      }
+    }
+  });
+</script>
+
 
 </body>
 </html>

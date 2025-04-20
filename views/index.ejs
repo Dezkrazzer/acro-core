@@ -286,163 +286,7 @@
 <p class="gamemode-subtitle animated-text">Choose your favorite gamemode and start playing!</p>
 
 
-<div class="server-menu">
-  <div class="server-card">
-    <div class="server-thumbnail">
-      <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Survival Mix">
-    </div>
-    <div class="server-content">
-      <div class="server-icon">
-        <i class="bi bi-hammer"></i>
-      </div>
-      <div class="server-texts">
-        <h3>Survival Mix</h3>
-        <p>This is a regular Survival but with magic like Skills, Custom Enchants, powerful Items and more that can add to the gaming experience.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="server-card">
-    <div class="server-thumbnail">
-      <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Vanilla">
-    </div>
-    <div class="server-content">
-      <div class="server-icon">
-        <i class="bi bi-tree-fill"></i>
-      </div>
-      <div class="server-texts">
-        <h3>Vanilla</h3>
-        <p>Want to play pure survival? This is the most appropriate mode because there are no plugins that change the gameplay.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="server-card">
-    <div class="server-thumbnail">
-      <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Vanilla">
-    </div>
-    <div class="server-content">
-      <div class="server-icon">
-        <i class="bi bi-bricks"></i>
-      </div>
-      <div class="server-texts">
-        <h3>Creative [Coming Soon]</h3>
-        <p>Test your creativity here! Build freely on your own plot without limits!</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="server-card">
-    <div class="server-thumbnail">
-      <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Vanilla">
-    </div>
-    <div class="server-content">
-      <div class="server-icon">
-        <i class="bi bi-dpad-fill"></i>
-      </div>
-      <div class="server-texts">
-        <h3>Minigames [Coming Soon]</h3>
-        <p>Are you bored with playing Minecraft with the same old modes? We present minigames like Bedwars, PvP, Parkour, and more!</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- dan seterusnya -->
-</div>
-
-
 <style>
-.server-menu {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto; /* center secara horizontal */
-}
-
-@media (max-width: 768px) {
-  .server-menu {
-    grid-template-columns: 1fr;
-  }
-}
-
-.server-card {
-  display: flex;
-  flex-direction: column;
-  border-radius: 16px;
-  overflow: hidden;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* transparan hitam */
-  backdrop-filter: blur(10px); /* efek blur modern */
-  -webkit-backdrop-filter: blur(10px); /* untuk Safari */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.server-card:hover {
-  transform: translateY(-8px);
-}
-
-.server-thumbnail {
-  border-radius: 12px;
-  overflow: hidden;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 30px;
-  box-sizing: border-box; /* ✅ penting biar padding gak nambah ke luar */
-}
-
-.server-thumbnail img {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 0px;
-  object-fit: cover;
-}
-
-.server-content {
-  display: flex;
-  padding: 16px;
-  gap: 12px;
-  flex: 1;
-}
-
-.server-icon {
-  background-color: #0f172a;
-  border-radius: 12px;
-  width: 42px;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.server-icon i {
-  color: white;
-  font-size: 20px;
-}
-
-.server-texts {
-  display: flex;
-  flex-direction: column;
-}
-
-.server-texts h3 {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
-  color: white;
-}
-
-.server-texts p {
-  margin: 4px 0 0;
-  font-size: 0.875rem;
-  color: #cbd5e1;
-  line-height: 1.4;
-}
-
-
 .gamemode-subtitle {
   font-size: 18px;
   color: #dddddd;
@@ -581,23 +425,78 @@
   }
 
   .server-card {
-    background: rgba(0, 0, 0, 0.75);
-    border-radius: 16px;
-    padding: 20px;
-    width: 300px;
-    color: white;
-  }
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* transparan hitam */
+  backdrop-filter: blur(10px); /* efek blur modern */
+  -webkit-backdrop-filter: blur(10px); /* untuk Safari */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-  .server-thumbnail img {
-    width: 100%;
-    border-radius: 12px;
-  }
+.server-card:hover {
+  transform: translateY(-8px);
+}
 
-  .server-icon {
-    font-size: 24px;
-    margin: 10px 0;
-  }
+.server-thumbnail {
+  border-radius: 12px;
+  overflow: hidden;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 30px;
+  box-sizing: border-box; /* ✅ penting biar padding gak nambah ke luar */
+}
 
+.server-thumbnail img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 0px;
+  object-fit: cover;
+}
+.server-content {
+  display: flex;
+  padding: 16px;
+  gap: 12px;
+  flex: 1;
+}
+
+.server-icon {
+  background-color: #0f172a;
+  border-radius: 12px;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.server-icon i {
+  color: white;
+  font-size: 20px;
+}
+
+.server-texts {
+  display: flex;
+  flex-direction: column;
+}
+
+.server-texts h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+}
+
+.server-texts p {
+  margin: 4px 0 0;
+  font-size: 0.875rem;
+  color: #cbd5e1;
+  line-height: 1.4;
+}
   .swiper-button-next,
   .swiper-button-prev {
     color: #00ffff;

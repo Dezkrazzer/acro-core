@@ -484,101 +484,96 @@
 
 </style>
 
-<!-- Swiper Container -->
-<div class="swiper">
-  <div class="swiper-wrapper">
+<!-- Swiper Container (dibungkus supaya bisa di-center) -->
+<div class="swiper-container" style="display: flex; justify-content: center;">
+  <div class="swiper">
+    <div class="swiper-wrapper">
 
-    <!-- Slide 1 -->
-    <div class="swiper-slide">
-      <div class="server-card">
-        <div class="server-thumbnail">
-          <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Vanilla">
-        </div>
-        <div class="server-content">
-          <div class="server-icon"><i class="bi bi-magic"></i></div>
-          <div class="server-texts">
-            <h3>Survival Mix</h3>
-            <p>This is a regular Survival but with magic like Skills, Custom Enchants...</p>
+      <!-- Slide 1 -->
+      <div class="swiper-slide">
+        <div class="server-card">
+          <div class="server-thumbnail">
+            <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Vanilla">
+          </div>
+          <div class="server-content">
+            <div class="server-icon"><i class="bi bi-magic"></i></div>
+            <div class="server-texts">
+              <h3>Survival Mix</h3>
+              <p>This is a regular Survival but with magic like Skills, Custom Enchants...</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Slide 2 -->
-    <div class="swiper-slide">
-      <div class="server-card">
-        <div class="server-thumbnail">
-          <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Vanilla">
-        </div>
-        <div class="server-content">
-          <div class="server-icon"><i class="bi bi-tree"></i></div>
-          <div class="server-texts">
-            <h3>Vanilla</h3>
-            <p>Want to play pure survival? This is the most appropriate mode...</p>
+      <!-- Slide 2 -->
+      <div class="swiper-slide">
+        <div class="server-card">
+          <div class="server-thumbnail">
+            <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Vanilla">
+          </div>
+          <div class="server-content">
+            <div class="server-icon"><i class="bi bi-tree"></i></div>
+            <div class="server-texts">
+              <h3>Vanilla</h3>
+              <p>Want to play pure survival? This is the most appropriate mode...</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Slide 3 -->
-    <div class="swiper-slide">
-      <div class="server-card">
-        <div class="server-thumbnail">
-          <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Creative">
-        </div>
-        <div class="server-content">
-          <div class="server-icon"><i class="bi bi-bricks"></i></div>
-          <div class="server-texts">
-            <h3>Creative [Coming Soon]</h3>
-            <p>Test your creativity here! Build freely on your own plot without limits!</p>
+      <!-- Slide 3 -->
+      <div class="swiper-slide">
+        <div class="server-card">
+          <div class="server-thumbnail">
+            <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Creative">
+          </div>
+          <div class="server-content">
+            <div class="server-icon"><i class="bi bi-bricks"></i></div>
+            <div class="server-texts">
+              <h3>Creative [Coming Soon]</h3>
+              <p>Test your creativity here! Build freely on your own plot without limits!</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Slide 4 -->
-    <div class="swiper-slide">
-      <div class="server-card">
-        <div class="server-thumbnail">
-          <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Minigames">
-        </div>
-        <div class="server-content">
-          <div class="server-icon"><i class="bi bi-controller"></i></div>
-          <div class="server-texts">
-            <h3>Minigames [Coming Soon]</h3>
-            <p>We present minigames like Bedwars, PvP, Parkour, and more!</p>
+      <!-- Slide 4 -->
+      <div class="swiper-slide">
+        <div class="server-card">
+          <div class="server-thumbnail">
+            <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Minigames">
+          </div>
+          <div class="server-content">
+            <div class="server-icon"><i class="bi bi-controller"></i></div>
+            <div class="server-texts">
+              <h3>Minigames [Coming Soon]</h3>
+              <p>We present minigames like Bedwars, PvP, Parkour, and more!</p>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
 
+    <!-- Navigation & Pagination -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-pagination"></div>
   </div>
-
-  <!-- Navigation & Pagination -->
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
-  <div class="swiper-pagination"></div>
 </div>
 
 <style>
-.swiper {
-  width: 100%;
-  padding: 40px 0;
+  .swiper {
+    width: 100%;
+    max-width: 1000px; /* Ubah sesuai kebutuhan */
+    padding: 40px 0;
+  }
 
-  display: flex;
-  justify-content: center;
-}
-
-.swiper-wrapper {
-  max-width: 1000px; /* Atur sesuai kebutuhan */
-  width: 100%;
-}
-
-.swiper-slide {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-}
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
 </style>
 
 <script>

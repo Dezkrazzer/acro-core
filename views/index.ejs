@@ -484,121 +484,137 @@
 
 </style>
 
-<!-- Swiper Container (dibungkus supaya bisa di-center) -->
-<div class="swiper-container" style="display: flex; justify-content: center;">
-  <div class="swiper">
-    <div class="swiper-wrapper">
+<!-- Swiper Container -->
+<div class="swiper mySwiper">
+  <div class="swiper-wrapper">
 
-      <!-- Slide 1 -->
-      <div class="swiper-slide">
-        <div class="server-card">
-          <div class="server-thumbnail">
-            <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Vanilla">
-          </div>
-          <div class="server-content">
-            <div class="server-icon"><i class="bi bi-magic"></i></div>
-            <div class="server-texts">
-              <h3>Survival Mix</h3>
-              <p>This is a regular Survival but with magic like Skills, Custom Enchants...</p>
-            </div>
+    <!-- Slide 1 -->
+    <div class="swiper-slide">
+      <div class="server-card">
+        <div class="server-thumbnail">
+          <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Vanilla">
+        </div>
+        <div class="server-content">
+          <div class="server-icon"><i class="bi bi-tree"></i></div>
+          <div class="server-texts">
+            <h3>Vanilla</h3>
+            <p>Want to play pure survival? This is the most appropriate mode...</p>
           </div>
         </div>
       </div>
-
-      <!-- Slide 2 -->
-      <div class="swiper-slide">
-        <div class="server-card">
-          <div class="server-thumbnail">
-            <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Vanilla">
-          </div>
-          <div class="server-content">
-            <div class="server-icon"><i class="bi bi-tree"></i></div>
-            <div class="server-texts">
-              <h3>Vanilla</h3>
-              <p>Want to play pure survival? This is the most appropriate mode...</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 3 -->
-      <div class="swiper-slide">
-        <div class="server-card">
-          <div class="server-thumbnail">
-            <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Creative">
-          </div>
-          <div class="server-content">
-            <div class="server-icon"><i class="bi bi-bricks"></i></div>
-            <div class="server-texts">
-              <h3>Creative [Coming Soon]</h3>
-              <p>Test your creativity here! Build freely on your own plot without limits!</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 4 -->
-      <div class="swiper-slide">
-        <div class="server-card">
-          <div class="server-thumbnail">
-            <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Minigames">
-          </div>
-          <div class="server-content">
-            <div class="server-icon"><i class="bi bi-controller"></i></div>
-            <div class="server-texts">
-              <h3>Minigames [Coming Soon]</h3>
-              <p>We present minigames like Bedwars, PvP, Parkour, and more!</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
 
-    <!-- Navigation & Pagination -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-pagination"></div>
+    <!-- Slide 2 -->
+    <div class="swiper-slide">
+      <div class="server-card">
+        <div class="server-thumbnail">
+          <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Creative">
+        </div>
+        <div class="server-content">
+          <div class="server-icon"><i class="bi bi-bricks"></i></div>
+          <div class="server-texts">
+            <h3>Creative [Coming Soon]</h3>
+            <p>Build freely on your own plot without limits!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="swiper-slide">
+      <div class="server-card">
+        <div class="server-thumbnail">
+          <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Skyblock">
+        </div>
+        <div class="server-content">
+          <div class="server-icon"><i class="bi bi-cloud"></i></div>
+          <div class="server-texts">
+            <h3>Skyblock</h3>
+            <p>Start from nothing and build your island in the sky!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="swiper-slide">
+      <div class="server-card">
+        <div class="server-thumbnail">
+          <img src="https://staticg.sportskeeda.com/editor/2022/11/6ca1e-16678042889550-1920.jpg" alt="Minigames">
+        </div>
+        <div class="server-content">
+          <div class="server-icon"><i class="bi bi-controller"></i></div>
+          <div class="server-texts">
+            <h3>Minigames</h3>
+            <p>Enjoy fun minigames with your friends!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+  <!-- Navigation Arrows -->
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
 </div>
+
 
 <style>
   .swiper {
     width: 100%;
-    max-width: 1000px; /* Ubah sesuai kebutuhan */
-    padding: 40px 0;
+    max-width: 960px;
+    padding: 60px 0;
   }
 
   .swiper-slide {
+    transition: transform 0.3s ease, opacity 0.3s ease;
     display: flex;
     justify-content: center;
-    align-items: stretch;
+    opacity: 0.5;
+    transform: scale(0.85);
+  }
+
+  .swiper-slide-active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .server-card {
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 16px;
+    padding: 20px;
+    width: 300px;
+    color: white;
+  }
+
+  .server-thumbnail img {
+    width: 100%;
+    border-radius: 12px;
+  }
+
+  .server-icon {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: #00ffff;
   }
 </style>
 
+
 <script>
-  const swiper = new Swiper('.swiper', {
-    slidesPerView: 1.2, // untuk efek "peek"
-    spaceBetween: 20,
-    loop: true,
-    grabCursor: true,
+  const swiper = new Swiper(".mySwiper", {
+    slidesPerView: 'auto',
     centeredSlides: true,
+    loop: true,
+    spaceBetween: 30,
     navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
     },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-    breakpoints: {
-      768: {
-        slidesPerView: 2.5,
-      },
-      1024: {
-        slidesPerView: 3.2,
-      }
-    }
   });
 </script>
 

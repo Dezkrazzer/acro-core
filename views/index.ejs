@@ -571,33 +571,23 @@
 </div>
 
 <style>
-  .other-projects {
-  background-color: #0f2e5a;
-  padding: 50px 20px;
-  color: white;
-  font-family: Arial, sans-serif;
-}
-
-.other-projects h2 {
-  font-size: 24px;
-  margin-bottom: 30px;
-}
-
 .project-cards {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center; /* penting agar card terpusat */
   gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .card {
   background-color: #143d72;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 12px;
+  width: 320px;
   position: relative;
-  flex: 1 1 calc(33.333% - 20px);
-  min-width: 250px;
-  max-width: 400px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: left;
 }
 
 .card-text h3 {
@@ -605,7 +595,7 @@
   font-size: 20px;
 }
 
-.card-text .subtitle {
+.subtitle {
   color: #9ec9f7;
   font-size: 14px;
   margin: 5px 0 10px;
@@ -623,6 +613,7 @@
   width: 50px;
   height: 50px;
   border-radius: 8px;
+  object-fit: cover;
 }
 </style>
 

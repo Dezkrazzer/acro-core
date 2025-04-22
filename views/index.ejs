@@ -581,12 +581,15 @@
 }
 
 .card {
-  background-color: #143d72;
   padding: 20px;
   border-radius: 12px;
   width: 320px;
   position: relative;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.4); /* transparan hitam */
+  backdrop-filter: blur(10px); /* efek blur modern */
+  -webkit-backdrop-filter: blur(10px); /* untuk Safari */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   text-align: left;
 }
 
@@ -614,6 +617,12 @@
   height: 50px;
   border-radius: 8px;
   object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 90%;
+  }
 }
 </style>
 

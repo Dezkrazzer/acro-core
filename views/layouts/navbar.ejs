@@ -201,7 +201,8 @@
 .dropdown-menu {
   position: absolute;
   top: 110%; /* sedikit turun dari button */
-  left: 0;
+  left: 50%; /* Align with the center of the parent */
+  transform: translateX(-50%); /* Center the dropdown menu */
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);

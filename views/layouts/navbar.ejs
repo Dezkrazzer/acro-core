@@ -77,6 +77,10 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.dropdown-menu.show {
+  display: flex;
+}
+
 .dropdown-menu a {
   padding: 10px 20px;
   color: #fff;
@@ -88,8 +92,28 @@
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Show dropdown on hover */
-.nav-item.dropdown:hover .dropdown-menu {
-  display: flex;
-}
 </style>
+
+<script>
+  document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation(); // mencegah bubbling
+      const dropdownMenu = this.nextElementSibling;
+      
+      // Tutup semua dropdown lain
+      document.querySelectorAll('.dropdown-menu').forEach(menu => {
+        if (menu !== dropdownMenu) menu.classList.remove('show');
+      });
+
+      // Toggle dropdown yang diklik
+      dropdownMenu.classList.toggle('show');
+    });
+  });
+
+  // Tutup dropdown jika klik di luar
+  document.addEventListener('click', function () {
+    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+      menu.classList.remove('show');
+    });
+  });
+</script>

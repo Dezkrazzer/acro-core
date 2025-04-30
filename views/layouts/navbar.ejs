@@ -62,19 +62,20 @@
 }
 
 .dropdown-menu {
+  z-index: 9999;
   position: absolute;
-  top: 110%; /* sedikit turun dari button */
+  top: 100%;
   left: 0;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 10px 0;
-  min-width: 180px;
-  display: none;
-  flex-direction: column;
-  z-index: 9999999;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+
+  /* Tambahan ini penting! */
+  transform: translateZ(0); /* force stacking context fix */
 }
 
 .dropdown-menu.show {

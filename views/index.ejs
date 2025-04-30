@@ -40,7 +40,7 @@
     <p class="subtitle">A digital community focused on developing projects on online platforms</p>
   <div class="status-and-play">
     <div class="server-status">
-      🟢&nbsp; <span id="player-count">Loading...</span>
+      <span id="server-emoji">🔃</span>&nbsp; <span id="player-count">Loading...</span>
   </div>
   <div class="play-now-button" onclick="copyIP()">
     <i class="bi bi-controller"></i>&nbsp;Play Now
@@ -190,6 +190,30 @@
 
   // Perbarui setiap 30 detik
   setInterval(updatePlayerCount, 30000);
+</script>
+
+<script>
+  async function fetchServerStatus() {
+    try {
+      const response = await fetch('https://api.mcsrvstat.us/3/play.acronetwork.my.id');
+      const data = await response.json();
+
+      const serverEmoji = document.getElementById('server-emoji');
+
+      if (data.online) {
+        serverEmoji.textContent = '🟢';
+      } else {
+        serverEmoji.textContent = '🔴';
+      }
+    } catch (error) {
+      console.error('Failed to fetch server status:', error);
+      document.getElementById('server-emoji').textContent = '🔴';
+    }
+  }
+
+  fetchServerStatus();
+  // Optional: refresh every 60 seconds
+  setInterval(fetchServerStatus, 60000);
 </script>
 
 

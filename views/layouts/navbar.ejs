@@ -48,41 +48,52 @@
 </script>
 
 <style>
+.nav-item.dropdown {
+  position: relative;
+}
 
 .dropdown-toggle {
-  padding: 10px;
-  user-select: none;
+  padding: 8px 12px;
+  color: #c1c0c0;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.dropdown-toggle:hover {
+  background: #333;
 }
 
 .dropdown-menu {
-  display: none;
   position: absolute;
-  top: 100%;
+  top: 110%; /* sedikit turun dari button */
   left: 0;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 10px 0;
-  min-width: 160px;
+  min-width: 180px;
+  display: none;
+  flex-direction: column;
   z-index: 999;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-menu a {
-  color: white;
+  padding: 10px 20px;
+  color: #fff;
   text-decoration: none;
   display: block;
-  padding: 10px 20px;
-  transition: background 0.2s;
 }
 
 .dropdown-menu a:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Tampilkan menu saat hover */
+/* Show dropdown on hover */
 .nav-item.dropdown:hover .dropdown-menu {
-  display: block;
+  display: flex;
 }
 </style>

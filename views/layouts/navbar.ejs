@@ -201,8 +201,7 @@
 .dropdown-menu {
   position: absolute;
   top: 110%; /* sedikit turun dari button */
-  left: 50%; /* Align with the center of the parent */
-  transform: translateX(-50%); /* Center the dropdown menu */
+  left: 0;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -233,16 +232,25 @@
 </style>
 
 <script>
- document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
   toggle.addEventListener('click', function (e) {
     e.stopPropagation(); // Prevent bubbling
 
     const dropdownMenu = document.querySelector('.dropdown-menu');
     const rect = this.getBoundingClientRect();
 
-    // Position the dropdown menu below the toggle
-    dropdownMenu.style.top = `${rect.bottom + window.scrollY}px`;
-    dropdownMenu.style.left = `${rect.left + window.scrollX}px`;
+    // Adjust position for desktop and mobile
+    if (window.innerWidth <= 768) {
+      // Center the dropdown menu on mobile
+      dropdownMenu.style.top = `${rect.bottom + window.scrollY}px`;
+      dropdownMenu.style.left = `50%`;
+      dropdownMenu.style.transform = `translateX(-50%)`;
+    } else {
+      // Position the dropdown menu below the toggle on desktop
+      dropdownMenu.style.top = `${rect.bottom + window.scrollY}px`;
+      dropdownMenu.style.left = `${rect.left + window.scrollX}px`;
+      dropdownMenu.style.transform = `translateX(0)`;
+    }
 
     // Toggle visibility
     dropdownMenu.classList.toggle('show');

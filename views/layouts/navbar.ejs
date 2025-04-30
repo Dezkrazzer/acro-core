@@ -12,6 +12,17 @@
       <div class="nav-item" onclick="alert('Vote clicked!')"><i class="bi bi-hand-thumbs-up-fill"></i>&nbsp;&nbsp;Vote</div>
       <div class="nav-item" onclick="location.href='https://dsc.gg/acronetwork'"><i class="bi bi-discord"></i>&nbsp;&nbsp;Discord</div>
       <div class="nav-item" onclick="alert('Store clicked!')"><i class="bi bi-cart-dash-fill"></i>&nbsp;&nbsp;Store</div>
+      <div class="nav-item dropdown">
+        <div class="dropdown-toggle">
+          <i class="bi bi-cart-dash-fill"></i>&nbsp;&nbsp;External Link
+        </div>
+        <div class="dropdown-menu">
+          <a href="https://github.com/" target="_blank">GitHub</a>
+          <a href="https://discord.com/" target="_blank">Discord</a>
+          <a href="https://stegripenetwork.my.id" target="_blank">Website</a>
+        </div>
+      </div>
+      
     </div>
 
     <div class="nav-right" id="nav-right">
@@ -35,3 +46,47 @@
       });
     });
 </script>
+
+<style>
+.nav-item.dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown-toggle {
+  padding: 10px;
+  user-select: none;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 8px;
+  padding: 10px 0;
+  min-width: 160px;
+  z-index: 999;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.dropdown-menu a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px 20px;
+  transition: background 0.2s;
+}
+
+.dropdown-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Tampilkan menu saat hover */
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+}
+</style>

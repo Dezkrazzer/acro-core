@@ -12,7 +12,7 @@
       <div class="nav-item" onclick="alert('Vote clicked!')"><i class="bi bi-hand-thumbs-up-fill"></i>&nbsp;&nbsp;Vote</div>
       <div class="nav-item" onclick="location.href='https://dsc.gg/acronetwork'"><i class="bi bi-discord"></i>&nbsp;&nbsp;Discord</div>
       <div class="nav-item" onclick="alert('Store clicked!')"><i class="bi bi-cart-dash-fill"></i>&nbsp;&nbsp;Store</div>
-      <div class="nav-item dropdown">
+      <div class="nav-item dropdown" onclick="toggleDropdown(event)">
         <div class="dropdown-toggle">
           <i class="bi bi-cart-dash-fill"></i>&nbsp;&nbsp;External Link
         </div>
@@ -62,20 +62,19 @@
 }
 
 .dropdown-menu {
-  z-index: 9999;
   position: absolute;
-  top: 100%;
+  top: 110%; /* sedikit turun dari button */
   left: 0;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 10px 0;
-  min-width: 160px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-
-  /* Tambahan ini penting! */
-  transform: translateZ(0); /* force stacking context fix */
+  min-width: 180px;
+  display: none;
+  flex-direction: column;
+  z-index: 9999999;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-menu.show {
@@ -96,25 +95,22 @@
 </style>
 
 <script>
-  document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
-    toggle.addEventListener('click', function (e) {
-      e.stopPropagation(); // mencegah bubbling
-      const dropdownMenu = this.nextElementSibling;
-      
-      // Tutup semua dropdown lain
-      document.querySelectorAll('.dropdown-menu').forEach(menu => {
-        if (menu !== dropdownMenu) menu.classList.remove('show');
-      });
-
-      // Toggle dropdown yang diklik
-      dropdownMenu.classList.toggle('show');
-    });
+function toggleDropdown(e) {
+  e.stopPropagation();
+  document.querySelectorAll('.dropdown-menu').forEach(menu => {
+    if (menu !== e.currentTarget.querySelector('.dropdown-menu')) {
+      menu.style.display = 'none';
+    }
   });
 
-  // Tutup dropdown jika klik di luar
-  document.addEventListener('click', function () {
-    document.querySelectorAll('.dropdown-menu').forEach(menu => {
-      menu.classList.remove('show');
-    });
+  const dropdown = e.currentTarget.querySelector('.dropdown-menu');
+  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+}
+
+// Tutup dropdown saat klik luar
+document.addEventListener('click', () => {
+  document.querySelectorAll('.dropdown-menu').forEach(menu => {
+    menu.style.display = 'none';
   });
+});
 </script>

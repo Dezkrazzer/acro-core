@@ -246,9 +246,11 @@ document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
       dropdownMenu.style.left = `50%`;
       dropdownMenu.style.transform = `translateX(-50%)`;
     } else {
-      // Position the dropdown menu below the toggle on desktop
+      // Center the dropdown menu below the toggle on desktop
+      const dropdownWidth = dropdownMenu.offsetWidth;
+      const toggleCenter = rect.left + rect.width / 2;
       dropdownMenu.style.top = `${rect.bottom + window.scrollY}px`;
-      dropdownMenu.style.left = `${rect.left + window.scrollX}px`;
+      dropdownMenu.style.left = `${toggleCenter - dropdownWidth / 2}px`;
       dropdownMenu.style.transform = `translateX(0)`;
     }
 

@@ -22,7 +22,10 @@
   <!-- CSS Swiper -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <!-- JS Swiper -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
   </head>
 
 <body>
@@ -218,7 +221,7 @@
 
 
 <!-- INFORMATION SECTION -->
-<div class="info-wrapper">
+<div class="info-wrapper" data-aos="fade-up">
   <!-- Discord Members -->
   <div class="info-box">
     <div class="info-icon">
@@ -318,7 +321,7 @@
     });
 </script>
 
-<div class="disbut-wrapper">
+<div class="disbut-wrapper" data-aos="fade-up">
   <a href="https://dsc.gg/acronetwork" class="discord-button" target="_blank">
     <i class="bi bi-discord"></i>
     Join the Discord
@@ -361,8 +364,8 @@
 </style>
 
 <!-- SERVER MENU SECTION -->
-<h2 class="gamemode-title gradient-gamemode animated-text">Server Gamemode</h2>
-<p class="gamemode-subtitle animated-text">Choose your favorite gamemode and start playing!</p>
+<h2 class="gamemode-title gradient-gamemode animated-text" data-aos="fade-up">Server Gamemode</h2>
+<p class="gamemode-subtitle animated-text" data-aos="fade-up">Choose your favorite gamemode and start playing!</p>
 
 
 <style>
@@ -408,7 +411,7 @@
 </style>
 
 <!-- Swiper Container -->
-<div class="swiper mySwiper">
+<div class="swiper mySwiper" data-aos="fade-up">
   <div class="swiper-wrapper">
 
     <!-- Slide 1 -->
@@ -603,10 +606,10 @@
 
 
 <!-- OTHER PROJECT SECTION -->
-<h2 class="gamemode-title gradient-gamemode animated-text">Other Projects</h2>
-<p class="gamemode-subtitle animated-text">We are also developing other projects</p>
+<h2 class="gamemode-title gradient-gamemode animated-text" data-aos="fade-up">Other Projects</h2>
+<p class="gamemode-subtitle animated-text" data-aos="fade-up">We are also developing other projects</p>
 
-<div class="project-cards">
+<div class="project-cards" data-aos="fade-up">
     
   <a href="#" class="card" target="_blank">
     <div class="card-text">
@@ -710,5 +713,13 @@
 <!-- FOOTER SECTION -->
 <%- include("./layouts/footer.ejs"); %>
 
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,  // durasi animasi
+    once: true      // hanya animasi 1x saat masuk viewport
+  });
+</script>
 </body>
 </html>

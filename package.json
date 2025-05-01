@@ -6,10 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node .",
-        "minify-html": "html-minifier --collapse-whitespace --remove-comments --minify-js true --minify-css true -o dist/index.html index.html",
-        "minify-css": "cleancss -o dist/style.min.css style.css",
-        "minify-js": "terser script.js -o dist/script.min.js",
-        "obfuscate-js": "javascript-obfuscator script.js --output dist/script-obf.js"
+        "minify-ejs": "html-minifier --collapse-whitespace --remove-comments --minify-css true --minify-js true -o dist/index.ejs index.ejs"
     },
     "dependencies": {
         "axios": "^1.2.1",

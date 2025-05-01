@@ -28,7 +28,7 @@
 
   </head>
 
-<body>
+<body oncontextmenu="return false" onkeydown="return disableInspect(event)">
 
 <!-- NAVBAR SECTION -->  
 <%- include("./layouts/navbar.ejs"); %>
@@ -720,6 +720,16 @@
     duration: 800,  // durasi animasi
     once: true      // hanya animasi 1x saat masuk viewport
   });
+</script>
+
+<script>
+  function disableInspect(e) {
+    if (e.keyCode == 123 || // F12
+        (e.ctrlKey && e.shiftKey && ['I', 'C', 'J'].includes(e.key.toUpperCase())) ||
+        (e.ctrlKey && e.key.toUpperCase() === 'U')) {
+      return false;
+    }
+  }
 </script>
 </body>
 </html>

@@ -318,6 +318,10 @@
     });
 </script>
 
+<div class="play-now-button" onclick="copyIP()">
+  <i class="bi bi-controller"></i>&nbsp;Join Discord
+</div>
+
 <!-- SERVER MENU SECTION -->
 <h2 class="gamemode-title gradient-gamemode animated-text">Server Gamemode</h2>
 <p class="gamemode-subtitle animated-text">Choose your favorite gamemode and start playing!</p>
@@ -665,121 +669,8 @@
 }
 </style>
 
-<footer class="footer">
-  <div class="footer-content">
-    <div class="footer-section brand">
-      <img src="assets/logo.png" alt="Acro Network Logo" class="logo" />
-      <h2>Acro Network</h2>
-      <div class="socials">
-        <a href="https://dsc.gg/acronetwork" target="_blank"><i class="fab fa-discord"></i></a>
-        <a href="https://tiktok.com/" target="_blank"><i class="fab fa-tiktok"></i></a>
-        <a href="https://instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
-      </div>
-    </div>
-    
-    <div class="footer-section about">
-      <h3>What is Acro Network?</h3>
-      <p>
-        Acro Network is a digital community that focuses on developing projects on online platforms
-        A community for everyone who wants to learn, play games, and have fun with other members.
-      </p>
-    </div>
-
-    <div class="footer-section links">
-      <h3>External Links</h3>
-      <ul>
-        <li><a href="#">Staff</a></li>
-        <li><a href="#">Vote</a></li>
-        <li><a href="#">Store</a></li>
-        <li><a href="https://status.acronetwork.my.id" target="_blank">Status ↗</a></li>
-      </ul>
-    </div>
-  </div>
-  <hr />
-  <div class="footer-bottom">
-    <p>© 2025 Acro Network Development.</p>
-  </div>
-</footer>
-
-<style>
-.footer {
-  color: white;
-  padding: 40px 20px 20px;
-  font-family: 'Segoe UI', sans-serif;
-  margin-top: 80px;
-}
-
-.footer-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 40px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.footer-section {
-  flex: 1;
-  min-width: 220px;
-}
-
-.footer-section h2, .footer-section h3 {
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-
-.footer-section p {
-  font-size: 14px;
-  color: #cbd5e1;
-  line-height: 1.6;
-}
-
-.footer-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-section ul li a {
-  color: #cbd5e1;
-  text-decoration: none;
-  font-size: 14px;
-  line-height: 2;
-}
-
-.footer-section ul li a:hover {
-  text-decoration: underline;
-}
-
-.logo {
-  width: 80px;
-  margin-bottom: 5px;
-}
-
-.socials a {
-  color: white;
-  font-size: 24px;
-  margin-right: 10px;
-  transition: color 0.3s ease;
-}
-
-.socials a:hover {
-  color: #94a3b8;
-}
-
-hr {
-  border: none;
-  border-top: 1px solid #1e293b;
-  margin: 30px 0 10px;
-}
-
-.footer-bottom {
-  text-align: center;
-  font-size: 12px;
-  color: #94a3b8;
-}
-
-</style>
+<!-- FOOTER SECTION -->
+<%- include("./layouts/footer.ejs"); %>
 
 </body>
 </html>

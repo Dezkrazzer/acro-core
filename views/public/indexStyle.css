@@ -134,3 +134,296 @@ body::before {
       padding: 10px 24px;
     }
 }
+
+/* INFORMATION & STATISTIC SECTION*/
+.info-wrapper {
+    display: flex;
+    justify-content: center; /* Tengahin */
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+  
+.info-box {
+    background-color: rgba(0, 0, 0, 0.4); /* transparan hitam */
+    backdrop-filter: blur(10px); /* efek blur modern */
+    -webkit-backdrop-filter: blur(10px); /* untuk Safari */
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    width: 280px;
+}
+  
+.info-icon {
+    background-color: #1e293b;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.info-icon img {
+    width: 32px;
+    height: 32px;
+    filter: invert(84%) sepia(95%) saturate(280%) hue-rotate(10deg);
+}
+  
+.info-text .info-title {
+    font-size: 14px;
+    color: #ccc;
+}
+  
+.info-text .info-value {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* JOIN DISCORD BUTTON */
+.disbut-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding-top: 20px;
+}
+
+.discord-button {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    background-color: #5865F2;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.discord-button:hover {
+    background-color: #4752c4;
+}
+
+.discord-button i {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+/* TITLE SECTION */
+.gamemode-subtitle {
+    font-size: 18px;
+    color: #dddddd;
+    margin-top: -10px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.gamemode-title {
+    text-align: center;
+    font-size: 32px;
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+.gradient-gamemode {
+    font-weight: bold;
+    background: linear-gradient(45deg, #ffffff, #f0f0f0, #e0e0e0);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+  
+  @keyframes fadeScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+.animated-text {
+    animation: fadeScale 0.8s ease-out forwards;
+    opacity: 0;
+    animation-delay: 0.3s;
+}
+
+/* SERVER GAMEMODE SWIPER SECTION */
+.swiper {
+    width: 100%;
+    max-width: 960px;
+    padding: 60px 0;
+}
+
+.swiper-slide {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    display: flex;
+    justify-content: center;
+    opacity: 0.5;
+    transform: scale(0.85);
+}
+
+.swiper-slide-active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.server-card {
+    padding: 10px;
+    width: 500px;
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.4); /* transparan hitam */
+    backdrop-filter: blur(10px); /* efek blur modern */
+    -webkit-backdrop-filter: blur(10px); /* untuk Safari */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.server-card:hover {
+    transform: translateY(-8px);
+}
+
+.server-thumbnail {
+    border-radius: 12px;
+    overflow: hidden;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    box-sizing: border-box; /* ✅ penting biar padding gak nambah ke luar */
+}
+
+.server-thumbnail img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 0px;
+    object-fit: cover;
+}
+
+.server-content {
+    display: flex;
+    padding: 16px;
+    gap: 12px;
+    flex: 1;
+}
+
+.server-icon {
+    background-color: #0f172a;
+    border-radius: 12px;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.server-icon i {
+    color: white;
+    font-size: 20px;
+}
+
+.server-texts {
+    display: flex;
+    flex-direction: column;
+}
+
+.server-texts h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+}
+
+.server-texts p {
+    margin: 4px 0 0;
+    font-size: 0.875rem;
+    color: #cbd5e1;
+    line-height: 1.4;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #ffffff;
+}
+
+/* OTHER PROJECTS SECTION */
+.project-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* penting agar card terpusat */
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+  
+.card {
+    padding: 20px;
+    border-radius: 12px;
+    width: 320px;
+    position: relative;
+    background-color: rgba(120, 120, 120, 0.4); /* transparan hitam */
+    backdrop-filter: blur(10px); /* efek blur modern */
+    -webkit-backdrop-filter: blur(10px); /* untuk Safari */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: left;
+}
+  
+.card:hover {
+    transform: scale(1.03);
+}
+  
+.project-cards a {
+    text-decoration: none;
+    color: inherit;
+}
+  
+.project-cards a h3 {
+    text-decoration: none;
+}
+  
+.card-text h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #9ec9f7;
+}
+  
+.subtitle {
+    color: #9ec9f7;
+    font-size: 14px;
+    margin: 5px 0 10px;
+}
+  
+.card-text p {
+    font-size: 14px;
+    color: #c8e1ff;
+}
+  
+.card-img {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+  
+  @media (max-width: 768px) {
+    .card {
+      width: 90%;
+    }
+  }

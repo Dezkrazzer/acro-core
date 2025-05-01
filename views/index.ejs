@@ -318,14 +318,23 @@
     });
 </script>
 
-<a href="https://dsc.gg/acronetwork" class="discord-button" target="_blank">
-  <i class="bi bi-discord"></i>
-  Join the Discord
-</a>
+<div class="disbut-wrapper">
+  <a href="https://dsc.gg/acronetwork" class="discord-button" target="_blank">
+    <i class="bi bi-discord"></i>
+    Join the Discord
+  </a>
+</div>
 
 <style>
+.disbut-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+}
+
 .discord-button {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       padding: 12px 20px;
       background-color: #5865F2;
@@ -338,16 +347,16 @@
       text-decoration: none;
       transition: background-color 0.2s ease;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
+}
 
-    .discord-button:hover {
+.discord-button:hover {
       background-color: #4752c4;
-    }
+}
 
-    .discord-button i {
+.discord-button i {
       font-size: 20px;
       margin-right: 10px;
-    }
+}
 </style>
 
 <!-- SERVER MENU SECTION -->

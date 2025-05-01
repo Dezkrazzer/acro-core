@@ -5,8 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node .",
-        "minify-ejs": "html-minifier --collapse-whitespace --remove-comments --minify-css true --minify-js true -o dist/index.ejs index.ejs"
+        "start": "node ."
     },
     "dependencies": {
         "axios": "^1.2.1",
@@ -49,9 +48,7 @@
     },
     "homepage": "https://github.com/Munz1211-Project/DISCORD-JS-V14-TEMPLATE#readme",
     "devDependencies": {
-        "clean-css-cli": "^5.6.3",
         "html-minifier": "^4.0.0",
-        "javascript-obfuscator": "^4.1.1",
-        "terser": "^5.39.0"
+        "javascript-obfuscator": "^4.1.1"
     }
 }

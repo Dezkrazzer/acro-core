@@ -5,6 +5,7 @@ client.logger = require("./Utils/logger.js");
 const cases = require("./database/Schema/Case")
 const { json, urlencoded } = require("body-parser")
 const { resolve } = require("path")
+const { minify } = require('html-minifier');
 
 app.set("view engine", "ejs");
 app.use(json());
@@ -17,9 +18,25 @@ app.use(express.static(resolve(__dirname, "public")));
     console.log('Server Up!');
 }) */
 
-app.get("/", (req, res) => {
+/*app.get("/", (req, res) => {
     res.render("index", { bot: client, req, res });
-});
+});*/
+
+app.get('/', (req, res) => {
+    res.render('index', { bot: client, req, res }, (err, html) => {
+      if (err) return res.status(500).send(err.message);
+  
+      const minifiedHtml = minify(html, {
+        collapseWhitespace: true,
+        removeComments: true,
+        minifyJS: true,
+        minifyCSS: true,
+        ignoreCustomFragments: [/<%[\s\S]*?%>/]  // agar tag EJS tidak rusak
+      });
+  
+      res.send(minifiedHtml);
+    });
+  });
 
 app.get("/api/case", async (req, res) => {
     try {

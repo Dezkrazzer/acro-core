@@ -318,9 +318,36 @@
     });
 </script>
 
-<div class="play-now-button" onclick="copyIP()">
-  <i class="bi bi-controller"></i>&nbsp;Join Discord
-</div>
+<a href="https://dsc.gg/acronetwork" class="discord-button" target="_blank">
+  <i class="bi bi-discord"></i>
+  Join the Discord
+</a>
+
+<style>
+  .discord-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 20px;
+    background-color: #5865F2;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .discord-button:hover {
+    background-color: #4752c4;
+  }
+
+  .discord-button i {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+</style>
 
 <!-- SERVER MENU SECTION -->
 <h2 class="gamemode-title gradient-gamemode animated-text">Server Gamemode</h2>

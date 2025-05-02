@@ -264,98 +264,101 @@ body::before {
     width: 100%;
     max-width: 960px;
     padding: 60px 0;
-  }
+}
 
-  .swiper-slide {
+.swiper-slide {
+    width: auto;
     transition: transform 0.3s ease, opacity 0.3s ease;
     display: flex;
     justify-content: center;
     opacity: 0.5;
     transform: scale(0.85);
-  }
+}
 
-  .swiper-slide-active {
+.swiper-slide-active {
     opacity: 1;
     transform: scale(1);
-  }
+}
 
-  .server-card {
-  padding: 10px;
-  width: 500px;
-  height: 100%;
-  border-radius: 16px;
-  overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.4); /* transparan hitam */
-  backdrop-filter: blur(10px); /* efek blur modern */
-  -webkit-backdrop-filter: blur(10px); /* untuk Safari */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.server-card {
+    padding: 10px;
+    width: 500px;
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.4); /* transparan hitam */
+    backdrop-filter: blur(10px); /* efek blur modern */
+    -webkit-backdrop-filter: blur(10px); /* untuk Safari */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .server-card:hover {
-  transform: translateY(-8px);
+    transform: translateY(-8px);
 }
 
 .server-thumbnail {
-  border-radius: 12px;
-  overflow: hidden;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 20px;
-  box-sizing: border-box; /* ✅ penting biar padding gak nambah ke luar */
+    border-radius: 12px;
+    overflow: hidden;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    box-sizing: border-box; /* ✅ penting biar padding gak nambah ke luar */
 }
 
 .server-thumbnail img {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 0px;
-  object-fit: cover;
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 0px;
+    object-fit: cover;
 }
+
 .server-content {
-  display: flex;
-  padding: 16px;
-  gap: 12px;
-  flex: 1;
+    display: flex;
+    padding: 16px;
+    gap: 12px;
+    flex: 1;
 }
 
 .server-icon {
-  background-color: #0f172a;
-  border-radius: 12px;
-  width: 42px;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+    background-color: #0f172a;
+    border-radius: 12px;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
 .server-icon i {
-  color: white;
-  font-size: 20px;
+    color: white;
+    font-size: 20px;
 }
 
 .server-texts {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .server-texts h3 {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
-  color: white;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
 }
 
 .server-texts p {
-  margin: 4px 0 0;
-  font-size: 0.875rem;
-  color: #cbd5e1;
-  line-height: 1.4;
+    margin: 4px 0 0;
+    font-size: 0.875rem;
+    color: #cbd5e1;
+    line-height: 1.4;
 }
-  .swiper-button-next,
-  .swiper-button-prev {
+
+.swiper-button-next,
+.swiper-button-prev {
     color: #ffffff;
-  }
+}
 
 /* OTHER PROJECTS SECTION */
 .project-cards {

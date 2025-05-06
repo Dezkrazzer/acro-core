@@ -257,9 +257,327 @@
   <div class="swiper-pagination"></div>
 </div>
 
+<script>
+  const swiper = new Swiper(".mySwiper", {
+    slidesPerView: 'auto',
+    centeredSlides: true,
+    loop: true,
+    spaceBetween: 30,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    autoplay: {
+      delay: 5000, // 5000ms = 5 detik
+      disableOnInteraction: false // agar tetap autoplay walau user klik panah
+    },
+  });
+</script>
 
+
+<!-- OTHER PROJECT SECTION -->
+<h2 class="gamemode-title gradient-gamemode animated-text" data-aos="fade-up">Other Projects</h2>
+<p class="gamemode-subtitle animated-text" data-aos="fade-up">We are also developing other projects</p>
+
+<div class="project-cards" data-aos="fade-up">
+  <!-- PROJECT 1 -->
+  <a href="#" class="card" target="_blank">
+    <div class="card-text">
+      <h3>Acro Music</h3>
+      <p class="subtitle">Discord Bot</p>
+      <p>Discord bot that provides premium quality music that can be used for free.</p>
+    </div>
+    <img src="https://brandlogos.net/wp-content/uploads/2021/11/discord-logo.png" alt="Discord Bot" class="card-img">
+  </a>
+  <!-- PROJECT 2 -->
+  <a href="#" class="card" target="_blank">
+    <div class="card-text">
+      <h3>Acro Bot</h3>
+      <p class="subtitle">WhatsApp Bot</p>
+      <p>A simple and easy-to-use WhatsApp bot project, written in Javascript.</p>
+    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/767px-WhatsApp.svg.png" alt="Whatsapp logo" class="card-img">
+  </a>
+  <!-- PROJECT 3 -->
+  <a href="https://bin.acronet.work" class="card" target="_blank">
+    <div class="card-text">
+      <h3>Hastebin</h3>
+      <p class="subtitle">Website</p>
+      <p>Use hastebin to temporarily store your code that you can share..</p>
+    </div>
+    <img src="https://images.sftcdn.net/images/t_app-icon-m/p/d3687937-9f53-46f4-994a-0ad24f74be3a/1357193560/hastebin-logo" alt="Hastebin Logo" class="card-img">
+  </a>
+</div>
+
+<!-- FOOTER SECTION -->
+<%- include("./layouts/footer.ejs"); %>
+
+
+<!-- STYLE SECTION -->
 <style>
-  .swiper {
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url('../assets/wallpaper.png') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* semi-transparan hitam */
+    z-index: -1;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease-out forwards;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+/* HERO STYLE (CONTAINER ATAS) */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 70px;
+    margin-bottom: 30px;
+}
+
+.hero-content .highlight {
+    color: #ffc800;
+}
+
+.hero-content .subtitle {
+    font-size: 20px;
+    color: #ddd;
+    margin-bottom: 30px;
+}
+
+.status-and-play {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.status-and-play .server-status,
+.status-and-play .play-now-button {
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+    height: 50px;
+    box-sizing: border-box;
+}
+
+.status-and-play .server-status {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+.status-and-play .play-now-button {
+    background: #ffc800;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.status-and-play .play-now-button:hover {
+    background: #e6b700;
+}
+
+.animated-gradient {
+    font-weight: bold;
+    background: linear-gradient(
+        -45deg,
+        #0050ff,
+        #00ccff,
+        #0050ff,
+        #00ccff
+    );
+    background-size: 300% 300%;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShine 4s ease infinite;
+}
+
+@keyframes gradientShine {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: 32px;
+    }
+
+    .hero-content .subtitle {
+      font-size: 16px;
+    }
+
+    .play-now-button {
+      font-size: 16px;
+      padding: 10px 24px;
+    }
+}
+
+/* INFORMATION & STATISTIC SECTION*/
+.info-wrapper {
+    display: flex;
+    justify-content: center; /* Tengahin */
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+  
+.info-box {
+    background-color: rgba(0, 0, 0, 0.4); /* transparan hitam */
+    backdrop-filter: blur(10px); /* efek blur modern */
+    -webkit-backdrop-filter: blur(10px); /* untuk Safari */
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    width: 280px;
+}
+  
+.info-icon {
+    background-color: #1e293b;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.info-icon img {
+    width: 32px;
+    height: 32px;
+    filter: invert(84%) sepia(95%) saturate(280%) hue-rotate(10deg);
+}
+  
+.info-text .info-title {
+    font-size: 14px;
+    color: #ccc;
+}
+  
+.info-text .info-value {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* JOIN DISCORD BUTTON */
+.disbut-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding-top: 20px;
+}
+
+.discord-button {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    background-color: #5865F2;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.discord-button:hover {
+    background-color: #4752c4;
+}
+
+.discord-button i {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+/* TITLE SECTION */
+.gamemode-subtitle {
+    font-size: 18px;
+    color: #dddddd;
+    margin-top: -10px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.gamemode-title {
+    text-align: center;
+    font-size: 32px;
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+.gradient-gamemode {
+    font-weight: bold;
+    background: linear-gradient(45deg, #ffffff, #f0f0f0, #e0e0e0);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+  
+  @keyframes fadeScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+.animated-text {
+    animation: fadeScale 0.8s ease-out forwards;
+    opacity: 0;
+    animation-delay: 0.3s;
+}
+
+/* SERVER GAMEMODE SWIPER SECTION */
+.swiper {
     width: 100%;
     max-width: 960px;
     padding: 60px 0;
@@ -355,63 +673,76 @@
   .swiper-button-prev {
     color: #ffffff;
   }
+
+/* OTHER PROJECTS SECTION */
+.project-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* penting agar card terpusat */
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+  
+.card {
+    padding: 20px;
+    border-radius: 12px;
+    width: 320px;
+    position: relative;
+    background-color: rgba(120, 120, 120, 0.4); /* transparan hitam */
+    backdrop-filter: blur(10px); /* efek blur modern */
+    -webkit-backdrop-filter: blur(10px); /* untuk Safari */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: left;
+}
+  
+.card:hover {
+    transform: scale(1.03);
+}
+  
+.project-cards a {
+    text-decoration: none;
+    color: inherit;
+}
+  
+.project-cards a h3 {
+    text-decoration: none;
+}
+  
+.card-text h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #9ec9f7;
+}
+  
+.subtitle {
+    color: #9ec9f7;
+    font-size: 14px;
+    margin: 5px 0 10px;
+}
+  
+.card-text p {
+    font-size: 14px;
+    color: #c8e1ff;
+}
+  
+.card-img {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+  
+  @media (max-width: 768px) {
+    .card {
+      width: 90%;
+    }
+  }
 </style>
-
-
-<script>
-  const swiper = new Swiper(".mySwiper", {
-    slidesPerView: 'auto',
-    centeredSlides: true,
-    loop: true,
-    spaceBetween: 30,
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-    autoplay: {
-      delay: 5000, // 5000ms = 5 detik
-      disableOnInteraction: false // agar tetap autoplay walau user klik panah
-    },
-  });
-</script>
-
-
-<!-- OTHER PROJECT SECTION -->
-<h2 class="gamemode-title gradient-gamemode animated-text" data-aos="fade-up">Other Projects</h2>
-<p class="gamemode-subtitle animated-text" data-aos="fade-up">We are also developing other projects</p>
-
-<div class="project-cards" data-aos="fade-up">
-  <!-- PROJECT 1 -->
-  <a href="#" class="card" target="_blank">
-    <div class="card-text">
-      <h3>Acro Music</h3>
-      <p class="subtitle">Discord Bot</p>
-      <p>Discord bot that provides premium quality music that can be used for free.</p>
-    </div>
-    <img src="https://brandlogos.net/wp-content/uploads/2021/11/discord-logo.png" alt="Discord Bot" class="card-img">
-  </a>
-  <!-- PROJECT 2 -->
-  <a href="#" class="card" target="_blank">
-    <div class="card-text">
-      <h3>Acro Bot</h3>
-      <p class="subtitle">WhatsApp Bot</p>
-      <p>A simple and easy-to-use WhatsApp bot project, written in Javascript.</p>
-    </div>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/767px-WhatsApp.svg.png" alt="Whatsapp logo" class="card-img">
-  </a>
-  <!-- PROJECT 3 -->
-  <a href="https://bin.acronet.work" class="card" target="_blank">
-    <div class="card-text">
-      <h3>Hastebin</h3>
-      <p class="subtitle">Website</p>
-      <p>Use hastebin to temporarily store your code that you can share..</p>
-    </div>
-    <img src="https://images.sftcdn.net/images/t_app-icon-m/p/d3687937-9f53-46f4-994a-0ad24f74be3a/1357193560/hastebin-logo" alt="Hastebin Logo" class="card-img">
-  </a>
-</div>
-
-<!-- FOOTER SECTION -->
-<%- include("./layouts/footer.ejs"); %>
 
 <!-- AOS JS -->
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>

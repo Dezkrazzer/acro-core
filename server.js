@@ -66,6 +66,6 @@ app.get("/api/case", async (req, res) => {
     }
 });
 
-app.listen("1039", () => {
-    client.logger.log("> ✅ • You app is listening on port 1039", "success");
+app.listen("1072", () => {
+    client.logger.log("> ✅ • You app is listening on port 1072", "success");
 });

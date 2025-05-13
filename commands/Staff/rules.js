@@ -25,7 +25,7 @@ module.exports = {
         })
         .setDescription("```Selamat datang di Acro Network – tempat di mana imajinasi menjadi kenyataan! Bergabunglah dengan kami dan temukan dunia yang penuh petualangan, keajaiban, dan komunitas yang menyenangkan. Jangan lewatkan kesempatan untuk menjadi bagian dari pengalaman yang tak terlupakan!```\n")
         .addFields(
-            { name: "IP Address", value: "play.acronetwork.my.id", inline: true },
+            { name: "IP Address", value: client.config.server-ip, inline: true },
             { name: "Port", value: "1025 (For Bedrock)", inline: true },
             { name: "Client", value: "Supported Minecraft Java & Bedrock (Crossplay)" },
             { name: "Version", value: "Supported 1.18.x - 1.21.x" }
@@ -76,7 +76,7 @@ module.exports = {
         .setDescription(`Here are links to available servers`)
         .addFields(
             { name: "Discord Server", value: "https://dsc.gg/acronetwork" },
-            { name: "Website", value: "https://acronetwork.my.id" },
+            { name: "Website", value: "https://acronet.work" },
             { name: "Status Page", value: "https://status.acronetwork.my.id" },
             { name: "Minecraft Vote", value: "▪ https://minecraft-mp.com/server/335686/vote/ (primary)\n▪ https://topminecraftservers.org/vote/38697\n▪ https://minecraftpocket-servers.com/server/129241/vote/" },
             { name: "Donate", value: "https://sociabuzz.com/acronetwork/tribe" },

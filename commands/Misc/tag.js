@@ -18,6 +18,15 @@ module.exports = {
         }
 
         if (args[0] === "add") {
+            if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) {
+                return message.channel.send({
+                    embeds: [
+                        new Discord.EmbedBuilder()
+                            .setDescription("<a:no:954773357407113298> | I'm sorry but you don't have permission to do that.")
+                            .setColor(Discord.Colors.Red)
+                    ]
+                });
+            }
             if (!args[1]) {
                 return message.channel.send({
                     embeds: [
@@ -68,6 +77,15 @@ module.exports = {
         }
 
         if (args[0] === "delete") {
+            if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) {
+                return message.channel.send({
+                    embeds: [
+                        new Discord.EmbedBuilder()
+                            .setDescription("<a:no:954773357407113298> | I'm sorry but you don't have permission to do that.")
+                            .setColor(Discord.Colors.Red)
+                    ]
+                });
+            }
             if (!args[1]) {
                 return message.channel.send({
                     embeds: [
@@ -97,6 +115,111 @@ module.exports = {
                 embeds: [
                     new Discord.EmbedBuilder()
                         .setDescription(`<a:yes:954773528153059350> | Tag \`${name}\` has been deleted.`)
+                        .setColor(Discord.Colors.Green)
+                ]
+            });
+        }
+
+        if (args[0] === "edit") {
+            if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.ManageMessages)) {
+                return message.channel.send({
+                    embeds: [
+                        new Discord.EmbedBuilder()
+                            .setDescription("<a:no:954773357407113298> | I'm sorry but you don't have permission to do that.")
+                            .setColor(Discord.Colors.Red)
+                    ]
+                });
+            }
+            if (!args[1]) {
+                return message.channel.send({
+                    embeds: [
+                        new Discord.EmbedBuilder()
+                            .setDescription("<a:no:954773357407113298> | You need to specify a name to edit")
+                            .setColor(Discord.Colors.Red)
+                    ]
+                });
+            }
+
+            let name = args[1];
+            let tag = await Tag.findOne({ name: name });
+
+            if (!tag) {
+                return message.channel.send({
+                    embeds: [
+                        new Discord.EmbedBuilder()
+                            .setDescription("<a:no:954773357407113298> | This tag doesn't exist")
+                            .setColor(Discord.Colors.Red)
+                    ]
+                });
+            }
+
+            let response = args.slice(2).join(" ");
+
+            if (!response) {
+                return message.channel.send({
+                    embeds: [
+                        new Discord.EmbedBuilder()
+                            .setDescription("<a:no:954773357407113298> | You need to specify a response")
+                            .setColor(Discord.Colors.Red)
+                    ]
+                });
+            }
+
+            await Tag.updateOne({ name: name }, { response: response });
+
+            return message.channel.send({
+                embeds: [
+                    new Discord.EmbedBuilder()
+                        .setDescription(`<a:yes:954773528153059350> | Tag \`${name}\` has been updated.`)
+                        .setColor(Discord.Colors.Green)
+                ]
+            });
+        }
+
+        if (args[0] === "list") {
+
+            let tags = await Tag.find({});
+
+            if (tags.length === 0) {
+                return message.channel.send({
+                    embeds: [
+                        new Discord.EmbedBuilder()
+                            .setDescription("<a:no:954773357407113298> | No tags found")
+                            .setColor(Discord.Colors.Red)
+                    ]
+                });
+            }
+
+            let tagList = tags.map(tag => `\`${tag.name}\``).join(", ");
+
+            return message.channel.send({
+                embeds: [
+                    new Discord.EmbedBuilder()
+                        .setDescription(`Here are the available tags:\n${tagList}`)
+                        .setColor(Discord.Colors.Green)
+                ]
+            });
+        }
+            }
+
+            let tags = await Tag.find({});
+
+            if (tags.length === 0) {
+                return message.channel.send({
+                    embeds: [
+                        new Discord.EmbedBuilder()
+                            .setDescription("<a:no:954773357407113298> | No tags found")
+                            .setColor(Discord.Colors.Red)
+                    ]
+                });
+            }
+
+            let tagList = tags.map(tag => `\`${tag.name}\``).join(", ");
+
+            return message.channel.send({
+                embeds: [
+                    new Discord.EmbedBuilder()
+                        .setDescription(`Here are the available tags:\n${tagList}`)
                         .setColor(Discord.Colors.Green)
                 ]
             });

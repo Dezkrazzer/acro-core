@@ -14,12 +14,6 @@ app.use(urlencoded({ extended: false }));
 app.use(express.static(resolve(__dirname, "views")));
 app.use(express.static(resolve(__dirname, "public")));
 
-const voteRedirect = {
-  '/vote-1': 'https://minecraft-mp.com/server/335686/vote/',
-  '/vote-2': 'https://topminecraftservers.org/vote/38697',
-  '/vote-3': 'https://minecraftpocket-servers.com/server/129241/vote/',
-};
-
 // MENGACAK SCRIPT DI HTML
 function obfuscateInlineScripts(html) {
     return html.replace(/<script>([\s\S]*?)<\/script>/g, (match, jsCode) => {
@@ -61,17 +55,6 @@ app.get('/', (req, res) => {
       res.send(minifiedHtml);
     });
   });
-
-app.get('/:voteId', (req, res) => {
-  const path = '/' + req.params.voteId;
-  const targetUrl = voteRedirect[path];
-
-  if (targetUrl) {
-    return res.redirect(targetUrl);
-  } else {
-    return res.status(404).send('Link tidak ditemukan');
-  }
-});
 
 app.get("/api/case", async (req, res) => {
     try {

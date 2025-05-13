@@ -176,55 +176,6 @@ module.exports = {
             });
         }
 
-        if (args[0] === "list") {
-
-            let tags = await Tag.find({});
-
-            if (tags.length === 0) {
-                return message.channel.send({
-                    embeds: [
-                        new Discord.EmbedBuilder()
-                            .setDescription("<a:no:954773357407113298> | No tags found")
-                            .setColor(Discord.Colors.Red)
-                    ]
-                });
-            }
-
-            let tagList = tags.map(tag => `\`${tag.name}\``).join(", ");
-
-            return message.channel.send({
-                embeds: [
-                    new Discord.EmbedBuilder()
-                        .setDescription(`Here are the available tags:\n${tagList}`)
-                        .setColor(Discord.Colors.Green)
-                ]
-            });
-        }
-            }
-
-            let tags = await Tag.find({});
-
-            if (tags.length === 0) {
-                return message.channel.send({
-                    embeds: [
-                        new Discord.EmbedBuilder()
-                            .setDescription("<a:no:954773357407113298> | No tags found")
-                            .setColor(Discord.Colors.Red)
-                    ]
-                });
-            }
-
-            let tagList = tags.map(tag => `\`${tag.name}\``).join(", ");
-
-            return message.channel.send({
-                embeds: [
-                    new Discord.EmbedBuilder()
-                        .setDescription(`Here are the available tags:\n${tagList}`)
-                        .setColor(Discord.Colors.Green)
-                ]
-            });
-        }
-
         if (!args[0]) {
             return message.channel.send({
                 embeds: [

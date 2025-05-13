@@ -25,7 +25,7 @@ module.exports = {
         })
         .setDescription("```Selamat datang di Acro Network – tempat di mana imajinasi menjadi kenyataan! Bergabunglah dengan kami dan temukan dunia yang penuh petualangan, keajaiban, dan komunitas yang menyenangkan. Jangan lewatkan kesempatan untuk menjadi bagian dari pengalaman yang tak terlupakan!```\n")
         .addFields(
-            { name: "IP Address", value: client.config.server-ip, inline: true },
+            { name: "IP Address", value: client.config.serverIP, inline: true },
             { name: "Port", value: "1025 (For Bedrock)", inline: true },
             { name: "Client", value: "Supported Minecraft Java & Bedrock (Crossplay)" },
             { name: "Version", value: "Supported 1.18.x - 1.21.x" }

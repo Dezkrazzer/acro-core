@@ -225,6 +225,9 @@ client.on('messageCreate', async (message) => {
 })
 
 // ===== END OF ANTI-BADLINK EVENT ===== //
-await deploySlashCommands();
 client.login(config.token).catch(() => { client.logger.log('Invaid TOKEN!', "warn") });
+client.once('ready', async () => {
+  console.log(`✅ Logged in as ${client.user.tag}`);
+  await deploySlashCommands(client);
+});
 })();

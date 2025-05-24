@@ -7,6 +7,7 @@ module.exports = {
         if (!command || !command.execute) return;
 
         try {
+            client.logger.log(`> ID : ${interaction.user.id} | User : ${interaction.user.tag} | slash | ${command.name}`, "info");
             await command.execute(interaction, client);
         } catch (error) {
             console.error(error);

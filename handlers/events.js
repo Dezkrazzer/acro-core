@@ -1,19 +1,31 @@
 const fs = require("fs");
+const path = require("path");
 
 module.exports = (client) => {
+  const eventsPath = path.join(__dirname, "../events");
+  const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith(".js"));
 
-    const eventFiles = fs.readdirSync(`./events/`).filter((file) => file.endsWith(".js"));
+  for (const file of eventFiles) {
+    try {
+      const event = require(path.join(eventsPath, file));
 
-    for (let file of eventFiles) {
-        try {
-            const Event = require(`../events/${file}`);
-            Event.event = Event.event || file.replace(".js", "")
-            client.on(file.split(".")[0], (...args) => Event(client, ...args));
-            client.logger.log(`> 🔃 • Loaded event on ${file}`, "event");
-        } catch (err) {
-            client.logger.log("Error While loading", "warn")
-            client.logger.log(err, "error");
-        }
+      if (!event.name || typeof event.execute !== 'function') {
+        client.logger.log(`> ⚠️ • Invalid event structure in "${file}"`, "warn");
+        continue;
+      }
+
+      if (event.once) {
+        client.once(event.name, (...args) => event.execute(...args, client));
+      } else {
+        client.on(event.name, (...args) => event.execute(...args, client));
+      }
+
+      client.logger.log(`> 🔃 • Loaded event "${event.name}" from ${file}`, "event");
+    } catch (err) {
+      client.logger.log(`> ❌ • Failed to load event from "${file}"`, "error");
+      client.logger.log(err, "error");
     }
-    client.logger.log(`> ✅ • All EVENT successfully loaded`, "success");
+  }
+
+  client.logger.log(`> ✅ • All EVENT successfully loaded`, "success");
 };

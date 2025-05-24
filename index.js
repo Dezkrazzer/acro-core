@@ -2,6 +2,7 @@ const discord = require("discord.js");
 const config = require("./config.json");
 const { KeyMongo } = require("key-mongo");
 const mongoose = require("mongoose");
+const { REST, Routes } = require('discord.js');
 require('./server.js');
 
 // ===== ANTI-BADLINK FEATURE ===== //
@@ -37,7 +38,41 @@ function containsBannedUrl(messageContent) {
     return false; 
   }
 
+async function deploySlashCommands() {
+    const commands = [];
+    const foldersPath = path.join(__dirname, 'commands');
+    const commandFolders = fs.readdirSync(foldersPath);
+
+    for (const folder of commandFolders) {
+        const commandsPath = path.join(foldersPath, folder);
+        const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+        for (const file of commandFiles) {
+            const filePath = path.join(commandsPath, file);
+            const command = require(filePath);
+
+            if ('data' in command) {
+                commands.push(command.data.toJSON());
+            }
+        }
+    }
+
+    const rest = new REST({ version: '10' }).setToken(config.token);
+
+    try {
+        console.log('🔃 Registering slash commands...');
+        await rest.put(
+            Routes.applicationCommands(config.clientId),
+            { body: commands }
+        );
+        console.log('✅ Slash commands registered successfully.');
+    } catch (error) {
+        console.error('❌ Error registering slash commands:', error);
+    }
+}
+
 // ===== END OF ANTI-BADLINK FEATURE ===== //
+(async () => {
 
 const client = new discord.Client({
     closeTimeout: 3_000 ,
@@ -190,5 +225,6 @@ client.on('messageCreate', async (message) => {
 })
 
 // ===== END OF ANTI-BADLINK EVENT ===== //
-
+await deploySlashCommands();
 client.login(config.token).catch(() => { client.logger.log('Invaid TOKEN!', "warn") });
+})();

@@ -42,14 +42,14 @@ async function deploySlashCommands(client) {
 
   const rest = new REST({ version: '10' }).setToken(config.token);
   try {
-    console.log('🔃 Registering slash commands...');
+    client.logger.log(`> 🔃 • Registering slash commands...`, "event");
     await rest.put(
       Routes.applicationCommands(client.application.id),
       { body: commands }
     );
-    console.log('✅ Slash commands registered successfully.');
+    client.logger.log(`> ✅ • Slash commands registered successfully`, "success");
   } catch (error) {
-    console.error('❌ Error registering slash commands:', error);
+    client.logger.log(`> ❌ • Failed to register slash commands: ${error.message}`, "error");
   }
 }
 
@@ -187,7 +187,7 @@ async function deploySlashCommands(client) {
   });
 
   client.once('ready', async () => {
-    console.log(`✅ Logged in as ${client.user.tag}`);
+    client.logger.log(`> ✅ • ${client.user.username}#${client.user.discriminator} ready to service!`, "success");
     await client.application.fetch();
     await deploySlashCommands(client);
   });

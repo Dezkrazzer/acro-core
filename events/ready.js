@@ -1,16 +1,14 @@
-const config = require("../config.json");
 const discord = require("discord.js");
 
-module.exports = async (client) => {
-
-    client.user.setPresence({
-        status: "online"
+module.exports = {
+  name: "ready",
+  once: true,
+  async execute(client) {
+    client.user.setPresence({ status: "online" });
+    client.user.setActivity(`Acro Network | play.acronet.work`, {
+      type: discord.ActivityType.Watching,
     });
-    client.user.setActivity(`Acro Network | play.acronetwork.my.id`, {
-        type: discord.ActivityType.Watching
-    });
 
-    
-    client.logger.log(`> ✅ • ${client.user.username}#${client.user.discriminator} has been online`, "success");
-
+    client.logger.log(`> ✅ • ${client.user.username}#${client.user.discriminator} is online`, "success");
+  },
 };

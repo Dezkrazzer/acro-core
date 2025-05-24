@@ -1,25 +1,21 @@
-const discord = require("discord.js");
-const config = require("../config.json");
-const isMute = require("./../database/Schema/isMute");
-const Case = require("./../database/Schema/Case");
-
-
-module.exports = async (client, message) => {
-    
-    let prefix = client.config.prefix;
+module.exports = {
+  name: "messageCreate",
+  async execute(message, client) {
+    const prefix = client.config.prefix;
     if (!message.content.startsWith(prefix) || message.author.bot || message.channel.type === 'dm') return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const cmda = args.shift().toLowerCase();
-    let command = client.commands.get(cmda) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmda));
+    const command = client.commands.get(cmda) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmda));
     if (!command) return;
 
     try {
-        command.run(client, message, args)
+      command.run(client, message, args);
     } catch (error) {
-        client.logger.log(error, "error");
-        message.reply({ content: `there was an error trying to execute that command!` });
+      client.logger.log(error, "error");
+      message.reply({ content: `There was an error trying to execute that command!` });
     } finally {
-        client.logger.log(`> ID : ${message.author.id} | User : ${message.author.tag} | command | ${command.name}`, "info");
+      client.logger.log(`> ID : ${message.author.id} | User : ${message.author.tag} | command | ${command.name}`, "info");
     }
+  },
 };

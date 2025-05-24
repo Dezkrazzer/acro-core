@@ -1,27 +1,36 @@
 const fs = require("fs");
+const path = require("path");
+const { Collection } = require("discord.js");
 
 module.exports = (client) => {
+  client.commands = new Collection();
+  client.slashArray = [];
 
-    client.commands = new Map();
-    client.slashArray = [];
+  const foldersPath = path.join(__dirname, "../commands");
+  const commandFolders = fs.readdirSync(foldersPath);
 
-    let folders = fs.readdirSync("./commands/");
-    folders.forEach((dir) => {
-        const commandFiles = fs.readdirSync(`./commands/${dir}`).filter((file) => file.endsWith(".js"));
-        for (const file of commandFiles) {
-            const command = require(`../commands/${dir}/${file}`);
+  for (const folder of commandFolders) {
+    const commandsPath = path.join(foldersPath, folder);
+    const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith(".js"));
 
-            if (!command.name) continue;
+    for (const file of commandFiles) {
+      const filePath = path.join(commandsPath, file);
+      const command = require(filePath);
 
-            client.commands.set(command.name, command);
+      if (!command.name) {
+        client.logger.log(`> ⚠️ • Command "${file}" skipped: no 'name' property`, "warn");
+        continue;
+      }
 
-            // Daftarkan slash command jika ada
-            if (command.data) {
-                client.slashArray.push(command.data.toJSON());
-            }
-        }
-    });
+      client.commands.set(command.name, command);
 
-    client.logger.log(`> ✅ • All COMMAND successfully loaded`, "success");
+      if (command.data && typeof command.data.name === "string") {
+        client.slashArray.push(command.data.toJSON());
+      } else {
+        client.logger.log(`> ⚠️ • Command "${file}" has no valid 'data' for slash`, "warn");
+      }
+    }
+  }
+
+  client.logger.log(`> ✅ • All commands loaded successfully`, "success");
 };
-

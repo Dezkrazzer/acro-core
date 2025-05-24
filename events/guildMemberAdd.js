@@ -21,10 +21,11 @@ module.exports = {
       .setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 4096 }))
       .setColor(Discord.Colors.Green)
       .setDescription(
-        `\u200B\n\u200B\n\u200B\n` +
-        `• Username :: ${member.user.globalName} | ${member.user.username}\n` +
-        `• ID :: ${member.user.id}\n` +
-        `• Created At :: ${new Date(member.user.createdTimestamp).toString()}`
+        `\`\`\`asciidoc
+                  • Username :: ${member.user.globalName} | ${member.user.username}
+                  • ID :: ${member.user.id}
+                  • Created At :: ${new Date(member.user.createdTimestamp).toString()}    
+              \`\`\``
       )
       .setFooter({
         text: `Member joined`,

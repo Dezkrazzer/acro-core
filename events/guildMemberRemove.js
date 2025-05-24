@@ -18,7 +18,13 @@ module.exports = {
       .setTitle(`[\`${member.guild.memberCount}\`] Member left.`)
       .setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 4096 }))
       .setColor(Discord.Colors.Red)
-      .setDescription(`• Username :: ${member.user.globalName} | ${member.user.username}\n• ID :: ${member.user.id}\n• Created At :: ${new Date(member.user.createdTimestamp).toString()}`)
+      .setDescription(
+      `\`\`\`asciidoc
+				• Username :: ${member.user.globalName} | ${member.user.username}
+				• ID :: ${member.user.id}
+				• Created At :: ${new Date(member.user.createdTimestamp).toString()}    
+			\`\`\``
+    )
       .setFooter({
         text: `Member left`,
         iconURL: `https://cdn.discordapp.com/emojis/574840995246768149.png?v=1`,

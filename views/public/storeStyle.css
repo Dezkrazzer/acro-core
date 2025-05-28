@@ -16,3 +16,34 @@ body::before {
     z-index: -1;
 }
 
+.store-title {
+    text-align: center;
+    font-size: 32px;
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+.gradient-store {
+    font-weight: bold;
+    background: linear-gradient(45deg, #ffffff, #f0f0f0, #e0e0e0);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+  
+  @keyframes fadeScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+.animated-text {
+    animation: fadeScale 0.8s ease-out forwards;
+    opacity: 0;
+    animation-delay: 0.3s;
+}

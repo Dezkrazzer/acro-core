@@ -14,8 +14,7 @@ module.exports = {
         let member =
             message.mentions.members.first() ||
             message.guild.members.cache.get(args[0]) ||
-            message.guild.members.cache.find(m => m.user.username.toLowerCase().includes(nameQuery)) ||
-            message.member;
+            (nameQuery ? message.guild.members.cache.find(m => m.user.username.toLowerCase().includes(nameQuery)) : null);
 
         // Step 2: Fetch all if not found
         if (!member && nameQuery) {

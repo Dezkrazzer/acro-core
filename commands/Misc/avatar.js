@@ -7,8 +7,12 @@ module.exports = {
     category: "Misc",
     run: async (client, message, args) => {
         const nameQuery = args.join(" ").toLowerCase();
-        let user = message.mentions.users.first() || client.users.cache.find(u => u.username.toLowerCase().includes(nameQuery)) || client.users.cache.get(args[0]) || message.author;
-        let image = user.avatarURL({ dynamic: true, size: 4096 });
+        let member =
+            message.mentions.members.first() ||
+            message.guild.members.cache.get(args[0]) ||
+            message.guild.members.cache.find(m => m.user.username.toLowerCase().includes(nameQuery)) ||
+            message.member;
+        let image = member.user.avatarURL({ dynamic: true, size: 4096 });
 
         let EmbedAvatar = new Discord.EmbedBuilder()
             .setColor("#2f3136")

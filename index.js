@@ -70,6 +70,7 @@ async function deploySlashCommands(client) {
     }
   });
 
+  module.exports = client;
   client.commands = new discord.Collection();
   client.aliases = new discord.Collection();
   client.config = config;

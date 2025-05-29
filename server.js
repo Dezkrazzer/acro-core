@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express()
-const client = require("./index.js");
+const client = require('./client');
 client.logger = require("./Utils/logger.js");
 const cases = require("./database/Schema/Case")
 const { json, urlencoded } = require("body-parser")

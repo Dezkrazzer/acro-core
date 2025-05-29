@@ -73,16 +73,19 @@ app.get('/team', (req, res) => {
       const guild = client.guilds.cache.get("954173179042091028");
       const rootRole = guild.roles.cache.find(role => role.name.toLowerCase() === "root");
 
-      const rootMembers = rootRole.members.map(member => ({
-        id: member.id,
-        username: member.user.username,
-        tag: member.user.tag,
-        avatar: member.user.displayAvatarURL({ dynamic: true, size: 4096 }),
-        presence: member.presence?.status || 'offline',
-        description: "Root Admin of the Server" // bisa kamu sesuaikan
-    }));
+      const rootMembers = rootRole.members
+        .filter(member => !member.user.bot) // HANYA MANUSIA
+        .map(member => ({
+            id: member.id,
+            username: member.user.username,
+            tag: member.user.tag,
+            avatar: member.user.displayAvatarURL({ format: "webp", size: 128 }),
+            presence: member.presence?.status || 'offline',
+            description: "Root Admin of the Server"
+        }));
+
   
-      res.send(minifiedHtml);
+      res.send(minifiedHtml, { rootMembers});
     });
 });
 

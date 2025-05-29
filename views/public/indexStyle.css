@@ -35,6 +35,12 @@ body::before {
     font-style: normal;
 }
 
+.server-name {
+    font-family: "Cherry Bomb One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
 /* HERO STYLE (CONTAINER ATAS) */
 .hero {
     min-height: 100vh;

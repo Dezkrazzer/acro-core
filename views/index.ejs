@@ -105,6 +105,19 @@
   setInterval(fetchServerStatus, 60000);
 </script>
 
+<script>
+  fetch("https://discord.com/api/guilds/954173179042091028/widget.json")
+    .then(response => response.json())
+    .then(data => {
+      const members = data.presence_count || data.members.length;
+      document.getElementById("discord-members").textContent = `${members} Online`;
+    })
+    .catch(error => {
+      document.getElementById("discord-members").textContent = "Unavailable";
+      console.error("Error fetching Discord members:", error);
+    });
+</script>
+
 <body>
     <!-- Navbar -->
     <nav class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
@@ -199,8 +212,8 @@
                     <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-500 text-white">
                         <i class="fab fa-discord text-xl"></i>
                     </div>
-                    <h3 class="mt-4 text-xl font-bold text-white">Discord Members</h3>
-                    <p class="mt-2 text-3xl font-bold gradient-text"><%= client.guilds.cache.get("954173179042091028").memberCount %></p>
+                    <h3 class="mt-4 text-xl font-bold text-white">Discord Online</h3>
+                    <p id="discord-members" class="mt-2 text-3xl font-bold gradient-text">Loading...</p>
                     <a href="#" class="mt-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-all">
                         Join Discord
                     </a>

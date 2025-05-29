@@ -403,6 +403,8 @@ body::before {
   
 .subtitle {
     font-family: "WDXL Lubrifont TC", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     color: #9ec9f7;
     font-size: 14px;
     margin: 5px 0 10px;

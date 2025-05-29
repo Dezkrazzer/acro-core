@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 const { REST, Routes } = require('discord.js');
 const path = require('path');
 const fs = require('fs');
-require('./server.js');
 
 // ===== ANTI-BADLINK FEATURE ===== //
 const isMute = require("./database/Schema/isMute");
@@ -70,7 +69,6 @@ async function deploySlashCommands(client) {
     }
   });
 
-  module.exports = client;
   client.commands = new discord.Collection();
   client.aliases = new discord.Collection();
   client.config = config;
@@ -191,6 +189,8 @@ async function deploySlashCommands(client) {
     client.logger.log(`> ✅ • ${client.user.username}#${client.user.discriminator} ready to service!`, "success");
     await client.application.fetch();
     await deploySlashCommands(client);
+
+    require('./server.js');
   });
 
   client.login(config.token).catch(() => {

@@ -178,18 +178,19 @@
     <div class="relative bg-gradient-to-b from-gray-900 to-gray-800 py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
-                <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">
-                    Welcome to <span class="gradient-text">Acro Network</span>
-                </h1>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    The most exciting Minecraft server with unique game modes and an amazing community.
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-300">Welcome to</h1>
+                <h2 class="text-5xl md:text-7xl font-bold gradient-text mt-2">Acro Network</h2>
+                <p class="mt-6 text-lg text-gray-300 max-w-2xl mx-auto">
+                    A digital community focused on developing projects on online platforms
                 </p>
-                <div class="mt-8 flex justify-center space-x-4">
-                    <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-all">
-                        <i class="fas fa-play mr-2"></i> Join Now
-                    </a>
-                    <a href="#" class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition-all">
-                        <i class="fas fa-store mr-2"></i> Visit Store
+                
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <div class="bg-gray-800 rounded-lg p-4 flex items-center">
+                        <div id="server-status-dot" class="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse"></div>
+                        <span class="text-gray-300">Players Online: <span id="player-count" class="text-white font-bold">Loading...</span></span>
+                    </div>
+                    <a onclick="copyIP()" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-bold transition-all flex items-center">
+                        <i class="fas fa-play mr-2"></i> Play Now
                     </a>
                 </div>
             </div>
@@ -199,22 +200,37 @@
     <!-- Stats Section -->
     <div class="bg-gray-800 py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-                    <div class="text-3xl font-bold text-blue-400 mb-2">1,500+</div>
-                    <div class="text-gray-300">Daily Players</div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Discord Members -->
+                <div class="bg-gray-900 rounded-xl p-6 text-center transition-all card-hover">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-500 text-white">
+                        <i class="fab fa-discord text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-xl font-bold text-white">Discord Online</h3>
+                    <p id="discord-members" class="mt-2 text-3xl font-bold gradient-text">Loading...</p>
+                    <a href="#" class="mt-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-all">
+                        Join Discord
+                    </a>
                 </div>
-                <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-                    <div class="text-3xl font-bold text-blue-400 mb-2">5</div>
-                    <div class="text-gray-300">Game Modes</div>
+                
+                <!-- Server Version -->
+                <div class="bg-gray-900 rounded-xl p-6 text-center transition-all card-hover">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-500 text-white">
+                        <i class="fas fa-code-branch text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-xl font-bold text-white">Server Version</h3>
+                    <p class="mt-2 text-3xl font-bold gradient-text">1.18.x - 1.21.x</p>
+                    <p class="mt-2 text-gray-400">Always up-to-date</p>
                 </div>
-                <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-                    <div class="text-3xl font-bold text-blue-400 mb-2">24/7</div>
-                    <div class="text-gray-300">Uptime</div>
-                </div>
-                <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
-                    <div class="text-3xl font-bold text-blue-400 mb-2">10,000+</div>
-                    <div class="text-gray-300">Community Members</div>
+                
+                <!-- Registered Players -->
+                <div class="bg-gray-900 rounded-xl p-6 text-center transition-all card-hover">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-purple-500 text-white">
+                        <i class="fas fa-users text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-xl font-bold text-white">Registered Players</h3>
+                    <p class="mt-2 text-3xl font-bold gradient-text">200+</p>
+                    <p class="mt-2 text-gray-400">And growing!</p>
                 </div>
             </div>
         </div>
@@ -225,42 +241,111 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-white">Our Game Modes</h2>
-                <p class="text-gray-400 mt-2 max-w-2xl mx-auto">
-                    Explore our diverse selection of game modes that cater to all types of players.
+                <p class="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">
+                    Experience different ways to play Minecraft with our unique game modes
                 </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg card-hover transition-all">
-                    <img src="https://via.placeholder.com/600x400" alt="Survival" class="w-full h-48 object-cover">
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
+                <!-- Survival Mix -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden transition-all card-hover">
+                    <div class="h-48 bg-blue-900 flex items-center justify-center">
+                        <img src="https://media.discordapp.net/attachments/1256974532397240342/1377619797675737108/image.png?ex=68399fea&is=68384e6a&hm=df878aba629092c22f5ab55136492160f8ad75a21ec1f8f706074c8737bc4fdc&=&format=webp&quality=lossless&width=1423&height=800" alt="Survival Mix" class="w-full h-full object-cover">
+                    </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-white mb-2">Survival</h3>
-                        <p class="text-gray-400 mb-4">
-                            Classic survival experience with land claiming, economy, and custom features.
+                        <h3 class="text-xl font-bold text-white">Survival Mix</h3>
+                        <p class="mt-2 text-gray-300">
+                            A unique blend of survival with custom items, economy, and land claiming. Perfect for players who want more than vanilla but not too complex.
                         </p>
-                        <a href="#" class="text-blue-400 hover:text-blue-300 font-medium">Learn More →</a>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="inline-block bg-blue-500 text-white text-xs px-2 py-1 rounded">Popular</span>
+                            <span class="inline-block bg-gray-600 text-white text-xs px-2 py-1 rounded">Economy</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg card-hover transition-all">
-                    <img src="https://via.placeholder.com/600x400" alt="Skyblock" class="w-full h-48 object-cover">
+                <!-- Vanilla -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden transition-all card-hover">
+                    <div class="h-48 bg-green-900 flex items-center justify-center">
+                        <img src="https://media.discordapp.net/attachments/1014157862831931412/1377603493350871130/image.png?ex=683990bb&is=68383f3b&hm=39bb1e47edbff81d5a615c6f390cce6018d3119812993a7229b47fb5bada0e06&=&format=webp&quality=lossless&width=1550&height=800" alt="Vanilla" class="w-full h-full object-cover">
+                    </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-white mb-2">Skyblock</h3>
-                        <p class="text-gray-400 mb-4">
-                            Challenge yourself with our unique take on the popular Skyblock mode.
+                        <h3 class="text-xl font-bold text-white">Vanilla</h3>
+                        <p class="mt-2 text-gray-300">
+                            Classic Minecraft experience with minimal changes. Just pure survival with a friendly community and occasional events.
                         </p>
-                        <a href="#" class="text-blue-400 hover:text-blue-300 font-medium">Learn More →</a>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="inline-block bg-green-500 text-white text-xs px-2 py-1 rounded">Classic</span>
+                            <span class="inline-block bg-gray-600 text-white text-xs px-2 py-1 rounded">No Plugins</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg card-hover transition-all">
-                    <img src="https://via.placeholder.com/600x400" alt="Minigames" class="w-full h-48 object-cover">
+                <!-- Creative -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden transition-all card-hover">
+                    <div class="h-48 bg-purple-900 flex items-center justify-center">
+                        <img src="https://media.discordapp.net/attachments/1256974532397240342/1377614477457100972/2025-05-29_18.46.22.png?ex=68399af6&is=68384976&hm=8aafde79d378977c21541a5daac6b60860bc13a9490569ae626e06232cf8016c&=&format=webp&quality=lossless&width=1421&height=800" alt="Creative" class="w-full h-full object-cover">
+                    </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-white mb-2">Minigames</h3>
-                        <p class="text-gray-400 mb-4">
-                            Fast-paced minigames including Bed Wars, Sky Wars, and more!
+                        <h3 class="text-xl font-bold text-white">Creative</h3>
+                        <p class="mt-2 text-gray-300">
+                            Creative building with plot worlds, custom items, and building competitions. Show off your creativity and get rewarded!
                         </p>
-                        <a href="#" class="text-blue-400 hover:text-blue-300 font-medium">Learn More →</a>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="inline-block bg-purple-500 text-white text-xs px-2 py-1 rounded">Creative</span>
+                            <span class="inline-block bg-gray-600 text-white text-xs px-2 py-1 rounded">Building</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Skyblock -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden transition-all card-hover">
+                    <div class="h-48 bg-yellow-900 flex items-center justify-center">
+                        <img src="https://www.onlygfx.com/wp-content/uploads/2018/04/coming-soon-stamp-3.png" alt="Skyblock" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white">Skyblock</h3>
+                        <p class="mt-2 text-gray-300">
+                            Challenge yourself with our custom Skyblock experience. Start with nothing on a floating island and work your way up!
+                        </p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="inline-block bg-yellow-500 text-white text-xs px-2 py-1 rounded">Challenging</span>
+                            <span class="inline-block bg-gray-600 text-white text-xs px-2 py-1 rounded">Progression</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Prison -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden transition-all card-hover">
+                    <div class="h-48 bg-red-900 flex items-center justify-center">
+                        <img src="https://www.onlygfx.com/wp-content/uploads/2018/04/coming-soon-stamp-3.png" alt="Prison" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white">Prison</h3>
+                        <p class="mt-2 text-gray-300">
+                            Work your way up through the ranks in our prison server. Mine, sell, and upgrade your way to freedom!
+                        </p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="inline-block bg-red-500 text-white text-xs px-2 py-1 rounded">Grindy</span>
+                            <span class="inline-block bg-gray-600 text-white text-xs px-2 py-1 rounded">Ranks</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Factions -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden transition-all card-hover">
+                    <div class="h-48 bg-orange-900 flex items-center justify-center">
+                        <img src="https://www.onlygfx.com/wp-content/uploads/2018/04/coming-soon-stamp-3.png" alt="Factions" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white">Factions</h3>
+                        <p class="mt-2 text-gray-300">
+                            Team up with friends, claim land, and battle other factions in this competitive PvP environment with custom enhancements.
+                        </p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="inline-block bg-orange-500 text-white text-xs px-2 py-1 rounded">PvP</span>
+                            <span class="inline-block bg-gray-600 text-white text-xs px-2 py-1 rounded">Teams</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -271,39 +356,59 @@
     <div class="bg-gray-800 py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-white">Our Other Projects</h2>
-                <p class="text-gray-400 mt-2 max-w-2xl mx-auto">
-                    Check out our other amazing projects and services.
+                <h2 class="text-3xl font-bold text-white">Other Projects</h2>
+                <p class="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">
+                    Beyond Minecraft, we develop various digital projects to enhance your online experience
                 </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-gray-900 p-8 rounded-lg shadow-lg">
-                    <div class="flex items-start">
-                        <div class="bg-blue-500 p-3 rounded-lg mr-4">
-                            <i class="fas fa-server text-white text-xl"></i>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Discord Bot -->
+                <div class="bg-gray-900 rounded-xl p-6 transition-all card-hover">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-full bg-blue-500 flex items-center justify-center">
+                            <i class="fab fa-discord text-xl text-white"></i>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-white mb-2">Web Hosting</h3>
-                            <p class="text-gray-400">
-                                Premium web hosting services with 99.9% uptime and 24/7 support.
-                            </p>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-bold text-white">Discord Bot</h3>
+                            <p class="text-gray-300">Utility bot for server management</p>
                         </div>
                     </div>
+                    <p class="mt-4 text-gray-300">
+                        Our custom Discord bot provides server statistics, moderation tools, and fun commands to enhance your community experience.
+                    </p>
                 </div>
                 
-                <div class="bg-gray-900 p-8 rounded-lg shadow-lg">
-                    <div class="flex items-start">
-                        <div class="bg-purple-500 p-3 rounded-lg mr-4">
-                            <i class="fas fa-code text-white text-xl"></i>
+                <!-- WhatsApp Bot -->
+                <div class="bg-gray-900 rounded-xl p-6 transition-all card-hover">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-full bg-green-500 flex items-center justify-center">
+                            <i class="fab fa-whatsapp text-xl text-white"></i>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-white mb-2">Web Development</h3>
-                            <p class="text-gray-400">
-                                Custom website development tailored to your specific needs.
-                            </p>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-bold text-white">WhatsApp Bot</h3>
+                            <p class="text-gray-300">Automation and utility bot</p>
                         </div>
                     </div>
+                    <p class="mt-4 text-gray-300">
+                        Manage groups, get server updates, and access utilities directly from WhatsApp with our feature-rich bot.
+                    </p>
+                </div>
+                
+                <!-- Hastebin -->
+                <div class="bg-gray-900 rounded-xl p-6 transition-all card-hover">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 h-12 w-12 rounded-full bg-purple-500 flex items-center justify-center">
+                            <i class="fas fa-paste text-xl text-white"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-bold text-white">Hastebin</h3>
+                            <p class="text-gray-300">Code sharing platform</p>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-gray-300">
+                        Our private pastebin service allows you to quickly share code snippets and text with syntax highlighting and expiration options.
+                    </p>
                 </div>
             </div>
         </div>
@@ -313,45 +418,60 @@
     <footer class="bg-gray-900 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Server Info -->
                 <div>
-                    <h3 class="text-white text-lg font-bold mb-4">Acro Network</h3>
-                    <p class="text-gray-400">
-                        The best Minecraft server with unique game modes and an amazing community.
+                    <div class="flex items-center">
+                        <img class="h-8 w-8" src="./assets/logo.png" alt="Acro Network Logo">
+                        <span class="ml-2 text-xl font-bold text-white">Acro Network</span>
+                    </div>
+                    <p class="mt-4 text-gray-300">
+                        A digital community focused on developing projects on online platforms.
                     </p>
                 </div>
                 
+                <!-- Social Media -->
                 <div>
-                    <h3 class="text-white text-lg font-bold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Store</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Vote</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Staff</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-white text-lg font-bold mb-4">Legal</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Refund Policy</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-white text-lg font-bold mb-4">Connect With Us</h3>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-discord"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-youtube"></i></a>
+                    <h3 class="text-lg font-bold text-white">Connect With Us</h3>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-blue-400 transition-all">
+                            <i class="fab fa-discord text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-blue-400 transition-all">
+                            <i class="fab fa-tiktok text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-blue-400 transition-all">
+                            <i class="fab fa-youtube text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-blue-400 transition-all">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
                     </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold text-white">Quick Links</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">Home</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">Staff</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">Vote</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">Store</a></li>
+                    </ul>
+                </div>
+                
+                <!-- External Links -->
+                <div>
+                    <h3 class="text-lg font-bold text-white">External Links</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">Github</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">Discord</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">Server List</a></li>
+                    </ul>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-                <p>© 2023 Acro Network. All rights reserved.</p>
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
+                <p>© 2025 Acro Network. All rights reserved.</p>
             </div>
         </div>
     </footer>

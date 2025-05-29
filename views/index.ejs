@@ -127,8 +127,26 @@
         menu.classList.toggle('hidden');
       });
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+  const btn = document.getElementById('mobile-menu-button');
+  const menu = document.getElementById('mobile-menu');
+  const otherLinksToggle = document.getElementById('other-links-toggle');
+  const otherLinksDropdown = document.getElementById('other-links-dropdown');
+  const chevronIcon = document.getElementById('chevron-icon');
+
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+
+  otherLinksToggle.addEventListener('click', () => {
+    otherLinksDropdown.classList.toggle('hidden');
+    chevronIcon.classList.toggle('rotate-180'); // Putar ikon chevron saat toggle
+  });
+});
+
   </script>
-  
+
 <body>
     <!-- Navbar -->
     <nav class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
@@ -195,9 +213,19 @@
       <a href="#" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Staff</a>
       <a href="#" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Vote</a>
       <a href="#" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Store</a>
-      <a href="#" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Rules</a>
-      <a href="#" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Gallery</a>
-      <a href="#" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Wiki</a>
+      <div>
+  <button id="other-links-toggle" class="w-full text-left text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium flex justify-between items-center">
+    Other Links
+    <svg class="ml-2 h-4 w-4 transform transition-transform" id="chevron-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+  <div id="other-links-dropdown" class="hidden ml-4 mt-1 space-y-1">
+    <a href="#" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm">Rules</a>
+    <a href="#" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm">Gallery</a>
+    <a href="#" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm">Wiki</a>
+  </div>
+</div>
       <a href="#" class="block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium text-center">
         <i class="fas fa-play mr-1"></i> Play Now
       </a>

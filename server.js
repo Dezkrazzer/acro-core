@@ -63,8 +63,12 @@ app.get('/team', async (req, res) => {
     if (!guild) return res.status(404).send("Guild not found");
 
     await guild.members.fetch();
+
     const rootRole = guild.roles.cache.find(role => role.name.toLowerCase() === "root");
     if (!rootRole) return res.status(404).send("Role 'root' not found");
+
+    const adminRole = guild.roles.cache.find(role => role.name.toLowerCase() === "Administrator");
+    if (!adminRole) return res.status(404).send("Role 'Administrator' not found");
 
     const rootMembers = rootRole.members
       .filter(member => !member.user.bot)
@@ -75,9 +79,17 @@ app.get('/team', async (req, res) => {
         avatar: member.user.displayAvatarURL({ format: "webp", size: 128 }),
         presence: member.presence?.status || 'offline'
       }));
+    
+    const adminMembers = adminRole.members
+      .filter(member => !member.user.bot)
+      .map(member => ({
+        id: member.id,
+        globalName: member.user.globalName,
+        username: member.user.username,
+        avatar: member.user.displayAvatarURL({ format: "webp", size: 128 }),
+        presence: member.presence?.status || 'offline'
+      }));
 
-    // Gunakan app.render, bukan res.render
-    console.log("rootMembers:", rootMembers);
 
     req.app.render("team", { bot: client, req, res, rootMembers }, (err, html) => {
       if (err) {

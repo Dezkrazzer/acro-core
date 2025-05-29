@@ -309,7 +309,6 @@
                                 <span class="role-badge role-owner ml-2">Owner</span>
                             </div>
                             <p class="text-gray-400 text-sm">@<%= member.username %></p>
-                            
                         </div>
                     </div>
                 
@@ -325,59 +324,25 @@
                 </div>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <!-- Staff Card 3 -->
+                    <% adminMembers.forEach(member => { %>
                     <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
                         <div class="relative mr-4">
-                            <img src="https://cdn.discordapp.com/avatars/345678901234567890/a_abcdef1234567890abcdef1234567890.webp?size=128" 
-                                 alt="Admin Avatar" 
+                            <img src="<%= member.avatar %>" 
+                                 alt="<%= member.username %> Avatar" 
                                  class="w-16 h-16 rounded-full border-2 border-red-500">
-                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-online rounded-full border-2 border-gray-800"></div>
+                            <div class="absolute bottom-0 right-0 w-4 h-4 
+                            <%= member.presence === 'online' ? 'bg-green-500' : member.presence === 'idle' ? 'bg-yellow-500' : member.presence === 'dnd' ? 'bg-red-500' : 'bg-gray-500' %> 
+                            rounded-full border-2 border-gray-800"></div>
                         </div>
                         <div>
                             <div class="flex items-center">
-                                <h4 class="text-lg font-semibold text-white">Mike</h4>
+                                <h4 class="text-lg font-semibold text-white"><%= member.globalName %></h4>
                                 <span class="role-badge role-admin ml-2">Admin</span>
                             </div>
-                            <p class="text-gray-400 text-sm">@mike</p>
-                            <p class="text-gray-300 mt-1 text-sm">System Administrator</p>
+                            <p class="text-gray-400 text-sm">@<%= member.username %></p>
                         </div>
                     </div>
-                    
-                    <!-- Staff Card 4 -->
-                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
-                        <div class="relative mr-4">
-                            <img src="https://cdn.discordapp.com/avatars/456789012345678901/a_abcdef1234567890abcdef1234567890.webp?size=128" 
-                                 alt="Admin Avatar" 
-                                 class="w-16 h-16 rounded-full border-2 border-red-500">
-                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-dnd rounded-full border-2 border-gray-800"></div>
-                        </div>
-                        <div>
-                            <div class="flex items-center">
-                                <h4 class="text-lg font-semibold text-white">Jenny</h4>
-                                <span class="role-badge role-admin ml-2">Admin</span>
-                            </div>
-                            <p class="text-gray-400 text-sm">@jenny</p>
-                            <p class="text-gray-300 mt-1 text-sm">Plugin Developer</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Staff Card 5 -->
-                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
-                        <div class="relative mr-4">
-                            <img src="https://cdn.discordapp.com/avatars/567890123456789012/a_abcdef1234567890abcdef1234567890.webp?size=128" 
-                                 alt="Admin Avatar" 
-                                 class="w-16 h-16 rounded-full border-2 border-red-500">
-                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-offline rounded-full border-2 border-gray-800"></div>
-                        </div>
-                        <div>
-                            <div class="flex items-center">
-                                <h4 class="text-lg font-semibold text-white">David</h4>
-                                <span class="role-badge role-admin ml-2">Admin</span>
-                            </div>
-                            <p class="text-gray-400 text-sm">@david</p>
-                            <p class="text-gray-300 mt-1 text-sm">Event Coordinator</p>
-                        </div>
-                    </div>
+                    <% }) %>
                 </div>
             </div>
             

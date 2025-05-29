@@ -70,11 +70,10 @@ app.get('/team', async (req, res) => {
       .filter(member => !member.user.bot)
       .map(member => ({
         id: member.id,
+        globalName: member.user.globalName,
         username: member.user.username,
-        tag: member.user.tag,
-        avatar: member.user.displayAvatarURL({ format: "webp", size: 128 }),
-        presence: member.presence?.status || 'offline',
-        description: "Root Admin of the Server"
+        avatar: member.user.displayAvatarURL({ dynamic: true, size: 4096 }),
+        presence: member.presence?.status || 'offline'
       }));
 
     // Gunakan app.render, bukan res.render

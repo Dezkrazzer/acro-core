@@ -72,7 +72,7 @@ app.get('/team', async (req, res) => {
         id: member.id,
         globalName: member.user.globalName,
         username: member.user.username,
-        avatar: member.user.displayAvatarURL({ dynamic: true, size: 4096 }),
+        avatar: member.user.displayAvatarURL({ format: "webp", size: 128 }),
         presence: member.presence?.status || 'offline'
       }));
 

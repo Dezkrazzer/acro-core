@@ -41,6 +41,7 @@ body::before {
 .server-name {
     font-family: "Roboto", sans-serif;
     font-optical-sizing: auto;
+    font-size: 100px;
     font-weight: 700;
     font-style: normal;
     font-variation-settings:

@@ -293,43 +293,28 @@
                 </div>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <!-- Staff Card 1 -->
-                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
-                        <div class="relative mr-4">
-                            <img src="https://cdn.discordapp.com/avatars/123456789012345678/a_abcdef1234567890abcdef1234567890.webp?size=128" 
-                                 alt="Owner Avatar" 
-                                 class="w-16 h-16 rounded-full border-2 border-blue-500">
-                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-online rounded-full border-2 border-gray-800"></div>
-                        </div>
-                        <div>
-                            <div class="flex items-center">
-                                <h4 class="text-lg font-semibold text-white">Alex</h4>
-                                <span class="role-badge role-owner ml-2">Owner</span>
-                            </div>
-                            <p class="text-gray-400 text-sm">@alex</p>
-                            <p class="text-gray-300 mt-1 text-sm">Server Founder & Lead Developer</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Staff Card 2 -->
-                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
-                        <div class="relative mr-4">
-                            <img src="https://cdn.discordapp.com/avatars/234567890123456789/a_abcdef1234567890abcdef1234567890.webp?size=128" 
-                                 alt="Owner Avatar" 
-                                 class="w-16 h-16 rounded-full border-2 border-blue-500">
-                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-idle rounded-full border-2 border-gray-800"></div>
-                        </div>
-                        <div>
-                            <div class="flex items-center">
-                                <h4 class="text-lg font-semibold text-white">Sarah</h4>
-                                <span class="role-badge role-owner ml-2">Owner</span>
-                            </div>
-                            <p class="text-gray-400 text-sm">@sarah</p>
-                            <p class="text-gray-300 mt-1 text-sm">Community Manager & Designer</p>
-                        </div>
-                    </div>
+    <% rootMembers.forEach(member => { %>
+        <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
+            <div class="relative mr-4">
+                <img src="<%= member.avatar %>" 
+                     alt="<%= member.username %> Avatar" 
+                     class="w-16 h-16 rounded-full border-2 border-blue-500">
+                <div class="absolute bottom-0 right-0 w-4 h-4 
+                            <%= member.presence === 'online' ? 'bg-green-500' : member.presence === 'idle' ? 'bg-yellow-500' : member.presence === 'dnd' ? 'bg-red-500' : 'bg-gray-500' %> 
+                            rounded-full border-2 border-gray-800">
                 </div>
             </div>
+            <div>
+                <div class="flex items-center">
+                    <h4 class="text-lg font-semibold text-white"><%= member.username %></h4>
+                    <span class="role-badge role-owner ml-2">Root</span>
+                </div>
+                <p class="text-gray-400 text-sm">@<%= member.tag %></p>
+                <p class="text-gray-300 mt-1 text-sm"><%= member.description %></p>
+            </div>
+        </div>
+    <% }) %>
+</div>
             
             <!-- Administrators -->
             <div class="mb-12">

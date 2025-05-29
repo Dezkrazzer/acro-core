@@ -69,6 +69,18 @@ app.get('/team', (req, res) => {
         minifyCSS: true,
         ignoreCustomFragments: [/<%[\s\S]*?%>/]  // agar tag EJS tidak rusak
       });
+
+      const guild = client.guilds.cache.get("954173179042091028");
+      const rootRole = guild.roles.cache.find(role => role.name.toLowerCase() === "root");
+
+      const rootMembers = rootRole.members.map(member => ({
+        id: member.id,
+        username: member.user.username,
+        tag: member.user.tag,
+        avatar: member.user.displayAvatarURL({ dynamic: true, size: 4096 }),
+        presence: member.presence?.status || 'offline',
+        description: "Root Admin of the Server" // bisa kamu sesuaikan
+    }));
   
       res.send(minifiedHtml);
     });

@@ -231,21 +231,133 @@
     <!-- Hero Section -->
     <div class="relative bg-gradient-to-b from-gray-900 to-gray-800 py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-300">Welcome to</h1>
-                <h2 class="text-5xl md:text-7xl font-bold gradient-text mt-2">Acro Network</h2>
-                <p class="mt-6 text-lg text-gray-300 max-w-2xl mx-auto">
-                    A digital community focused on developing projects on online platforms
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white">Our Staff Team</h2>
+                <p class="text-gray-400 mt-2 max-w-2xl mx-auto">
+                    Meet the dedicated team that keeps Acro Network running smoothly.
                 </p>
+            </div>
+            
+            <!-- Owners -->
+            <div class="mb-12">
+                <div class="flex items-center mb-6">
+                    <div class="w-1 h-8 bg-blue-500 mr-4 rounded-full"></div>
+                    <h3 class="text-2xl font-bold text-white">Owners</h3>
+                </div>
                 
-                <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <div class="bg-gray-800 rounded-lg p-4 flex items-center">
-                        <div id="server-status-dot" class="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse"></div>
-                        <span class="text-gray-300">Players Online: <span id="player-count" class="text-white font-bold">Loading...</span></span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <% rootMembers.forEach(member => { %>
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
+                        <div class="relative mr-4">
+                            <img src="<%= member.avatar %>" 
+                                 alt="<%= member.username %> Avatar" 
+                                 class="w-16 h-16 rounded-full border-2 border-blue-500">
+                            <div class="absolute bottom-0 right-0 w-4 h-4 
+                            <%= member.presence === 'online' ? 'bg-green-500' : member.presence === 'idle' ? 'bg-yellow-500' : member.presence === 'dnd' ? 'bg-red-500' : 'bg-gray-500' %> 
+                            rounded-full border-2 border-gray-800"></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <h4 class="text-lg font-semibold text-white"><%= member.globalName %></h4>
+                                <span class="role-badge role-owner ml-2">Owner</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">@<%= member.username %></p>
+                        </div>
                     </div>
-                    <a onclick="copyIP()" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-bold transition-all flex items-center">
-                        <i class="fas fa-play mr-2"></i> Play Now
-                    </a>
+                
+                  <% }) %>
+                </div>
+            </div>
+            
+            <!-- Administrators -->
+            <div class="mb-12">
+                <div class="flex items-center mb-6">
+                    <div class="w-1 h-8 bg-red-500 mr-4 rounded-full"></div>
+                    <h3 class="text-2xl font-bold text-white">Administrators</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <% adminMembers.forEach(member => { %>
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
+                        <div class="relative mr-4">
+                            <img src="<%= member.avatar %>" 
+                                 alt="<%= member.username %> Avatar" 
+                                 class="w-16 h-16 rounded-full border-2 border-red-500">
+                            <div class="absolute bottom-0 right-0 w-4 h-4 
+                            <%= member.presence === 'online' ? 'bg-green-500' : member.presence === 'idle' ? 'bg-yellow-500' : member.presence === 'dnd' ? 'bg-red-500' : 'bg-gray-500' %> 
+                            rounded-full border-2 border-gray-800"></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <h4 class="text-lg font-semibold text-white"><%= member.globalName %></h4>
+                                <span class="role-badge role-admin ml-2">Admin</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">@<%= member.username %></p>
+                        </div>
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
+            
+            <!-- Moderators -->
+            <div class="mb-12">
+                <div class="flex items-center mb-6">
+                    <div class="w-1 h-8 bg-green-500 mr-4 rounded-full"></div>
+                    <h3 class="text-2xl font-bold text-white">Moderators</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <% modMembers.forEach(member => { %>
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
+                        <div class="relative mr-4">
+                            <img src="<%= member.avatar %>" 
+                                 alt="<%= member.username %> Avatar" 
+                                 class="w-16 h-16 rounded-full border-2 border-green-500">
+                            <div class="absolute bottom-0 right-0 w-4 h-4 
+                            <%= member.presence === 'online' ? 'bg-green-500' : member.presence === 'idle' ? 'bg-yellow-500' : member.presence === 'dnd' ? 'bg-red-500' : 'bg-gray-500' %> 
+                            rounded-full border-2 border-gray-800"></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <h4 class="text-lg font-semibold text-white"><%= member.globalName %></h4>
+                                <span class="role-badge role-moderator ml-2">Mod</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">@<%= member.username %></p>
+                        </div>
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
+            
+            <!-- Contributors -->
+            <div>
+                <div class="flex items-center mb-6">
+                    <div class="w-1 h-8 bg-yellow-500 mr-4 rounded-full"></div>
+                    <h3 class="text-2xl font-bold text-white">Contributors</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Staff Card 10 
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
+                        <div class="relative mr-4">
+                            <img src="https://cdn.discordapp.com/avatars/123456789012345678/a_abcdef1234567890abcdef1234567890.webp?size=128" 
+                                 alt="Contributor Avatar" 
+                                 class="w-16 h-16 rounded-full border-2 border-yellow-500">
+                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-online rounded-full border-2 border-gray-800"></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <h4 class="text-lg font-semibold text-white">Tom</h4>
+                                <span class="role-badge role-contributor ml-2">Contributor</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">@tom</p>
+                            <p class="text-gray-300 mt-1 text-sm">Builder & Texture Artist</p>
+                        </div>
+                    </div> -->
+                    
+                    <p class="text-gray-400 text-center col-span-full">
+                        We don't have any contributors at the moment, you can donate to the server to get contributors and your name will be displayed here.
+                    </p>
                 </div>
             </div>
         </div>

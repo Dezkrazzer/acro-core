@@ -67,7 +67,7 @@ app.get('/team', async (req, res) => {
     const rootRole = guild.roles.cache.find(role => role.name.toLowerCase() === "root");
     if (!rootRole) return res.status(404).send("Role 'root' not found");
 
-    const adminRole = guild.roles.cache.find(role => role.name.toLowerCase() === "Administrator");
+    const adminRole = guild.roles.cache.get("954173497222004836")
     if (!adminRole) return res.status(404).send("Role 'Administrator' not found");
 
     const rootMembers = rootRole.members

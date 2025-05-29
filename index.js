@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const { REST, Routes } = require('discord.js');
 const path = require('path');
 const fs = require('fs');
+const startServer = require('./server');
 
 // ===== ANTI-BADLINK FEATURE ===== //
 const isMute = require("./database/Schema/isMute");
@@ -190,7 +191,7 @@ async function deploySlashCommands(client) {
     await client.application.fetch();
     await deploySlashCommands(client);
 
-    require('./server.js');
+    startServer(client);
   });
 
   client.login(config.token).catch(() => {

@@ -1,3 +1,4 @@
+module.exports = function startServer(client) {
 const express = require("express");
 const app = express()
 const client = require("./index.js");
@@ -60,6 +61,9 @@ app.get('/team', async (req, res) => {
   try {
     const guild = client.guilds.cache.get("954173179042091028");
     if (!guild) return res.status(404).send("Guild not found");
+
+    console.log("client.guilds:", client.guilds);
+    console.log("client.guilds.cache:", client.guilds?.cache);
 
     const rootRole = guild.roles.cache.find(role => role.name.toLowerCase() === "root");
     if (!rootRole) return res.status(404).send("Role 'root' not found");
@@ -127,3 +131,4 @@ app.get("/api/case", async (req, res) => {
 app.listen("1039", () => {
     client.logger.log("> ✅ • You app is listening on port 1039", "success");
 });
+}

@@ -57,11 +57,12 @@ app.get('/', (req, res) => {
   });
 
 app.get('/team', (req, res) => {
-    res.render('team', { bot: client, req, res }, (err, html) => {
+    res.render('team', { bot: client, req, res }, async (err, html) => {
       if (err) return res.status(500).send(err.message);
 
       const obfuscatedHTML = obfuscateInlineScripts(html);
   
+      const html = await ejs.renderFile("views/team.ejs", { rootMembers });
       const minifiedHtml = minify(obfuscatedHTML, {
         collapseWhitespace: true,
         removeComments: true,
@@ -85,7 +86,7 @@ app.get('/team', (req, res) => {
         }));
 
   
-      res.send(minifiedHtml, { rootMembers});
+      res.send(minifiedHtml);
     });
 });
 

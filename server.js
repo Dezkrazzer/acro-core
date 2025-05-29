@@ -56,38 +56,44 @@ app.get('/', (req, res) => {
     });
   });
 
-app.get('/team', (req, res) => {
-    res.render('team', { bot: client, req, res }, async (err, html) => {
-      if (err) return res.status(500).send(err.message);
+app.get('/team', async (req, res) => {
+  try {
+    const guild = client.guilds.cache.get("954173179042091028");
+    if (!guild) return res.status(404).send("Guild not found");
 
-      const obfuscatedHTML = obfuscateInlineScripts(html);
-  
-      const html = await ejs.renderFile("views/team.ejs", { rootMembers });
-      const minifiedHtml = minify(obfuscatedHTML, {
-        collapseWhitespace: true,
-        removeComments: true,
-        //minifyJS: true,
-        minifyCSS: true,
-        ignoreCustomFragments: [/<%[\s\S]*?%>/]  // agar tag EJS tidak rusak
-      });
+    const rootRole = guild.roles.cache.find(role => role.name.toLowerCase() === "root");
+    if (!rootRole) return res.status(404).send("Role 'root' not found");
 
-      const guild = client.guilds.cache.get("954173179042091028");
-      const rootRole = guild.roles.cache.find(role => role.name.toLowerCase() === "root");
+    const rootMembers = rootRole.members
+      .filter(member => !member.user.bot)
+      .map(member => ({
+        id: member.id,
+        username: member.user.username,
+        tag: member.user.tag,
+        avatar: member.user.displayAvatarURL({ format: "webp", size: 128 }),
+        presence: member.presence?.status || 'offline',
+        description: "Root Admin of the Server"
+      }));
 
-      const rootMembers = rootRole.members
-        .filter(member => !member.user.bot) // HANYA MANUSIA
-        .map(member => ({
-            id: member.id,
-            username: member.user.username,
-            tag: member.user.tag,
-            avatar: member.user.displayAvatarURL({ format: "webp", size: 128 }),
-            presence: member.presence?.status || 'offline',
-            description: "Root Admin of the Server"
-        }));
+    // Render EJS secara manual
+    const rawHtml = await ejs.renderFile("views/team.ejs", { bot: client, req, res, rootMembers });
 
-  
-      res.send(minifiedHtml);
+    // Obfuscate jika kamu punya fungsi seperti ini
+    const obfuscatedHTML = obfuscateInlineScripts(rawHtml); // jika tidak, pakai rawHtml saja
+
+    // Minify HTML
+    const minifiedHtml = minify(obfuscatedHTML, {
+      collapseWhitespace: true,
+      removeComments: true,
+      minifyCSS: true,
+      ignoreCustomFragments: [/<%[\s\S]*?%>/] // jaga kalau masih ada EJS tag (meski seharusnya sudah tidak ada)
     });
+
+    res.send(minifiedHtml);
+  } catch (err) {
+    console.error("Error in /team route:", err);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 app.get('/store', (req, res) => {

@@ -130,23 +130,24 @@
   </script>
 
   <script defer>
-    document.addEventListener('DOMContentLoaded', function () {
-  const btn = document.getElementById('mobile-menu-button');
-  const menu = document.getElementById('mobile-menu');
-  const otherLinksToggle = document.getElementById('other-links-toggle');
-  const otherLinksDropdown = document.getElementById('other-links-dropdown');
-  const chevronIcon = document.getElementById('chevron-icon');
+ document.addEventListener('DOMContentLoaded', function () {
+      const menuBtn = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const otherBtn = document.getElementById('other-links-toggle');
+      const otherDropdown = document.getElementById('other-links-dropdown');
+      const chevronIcon = document.getElementById('chevron-icon');
 
-  btn.addEventListener('click', () => {
-    menu.classList.toggle('hidden');
-  });
+      // Toggle main mobile menu
+      menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
 
-  otherLinksToggle.addEventListener('click', () => {
-    otherLinksDropdown.classList.toggle('hidden');
-    chevronIcon.classList.toggle('rotate-180'); // Putar ikon chevron saat toggle
-  });
-});
-
+      // Toggle "Other Links" dropdown
+      otherBtn.addEventListener('click', () => {
+        otherDropdown.classList.toggle('hidden');
+        chevronIcon.classList.toggle('rotate-180');
+      });
+    });
   </script>
 
 <body>

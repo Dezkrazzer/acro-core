@@ -48,6 +48,12 @@ body::before {
         "wdth" 100;
 }
 
+@media (max-width: 768px) {
+    .server-name {
+        font-size: 50px;
+    }
+}
+
 /* HERO STYLE (CONTAINER ATAS) */
 .hero {
     min-height: 100vh;

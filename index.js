@@ -61,6 +61,7 @@ async function deploySlashCommands(client) {
       discord.GatewayIntentBits.Guilds,
       discord.GatewayIntentBits.GuildMessages,
       discord.GatewayIntentBits.GuildMembers,
+      discord.GatewayIntentBits.GuildPresences,
       discord.GatewayIntentBits.MessageContent
     ],
     allowedMentions: { parse: ["users"], repliedUser: true },

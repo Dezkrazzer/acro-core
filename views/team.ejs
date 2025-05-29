@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acro Network - Minecraft Server</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E293B', // Dark gray
+                        secondary: '#7DD3FC', // Light blue
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0F172A;
+            color: #E2E8F0;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #7DD3FC, #38BDF8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(29, 78, 216, 0.3);
+        }
+        
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+        
+        /* Mobile menu animation */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .mobile-menu.open {
+            max-height: 500px;
+            transition: max-height 0.5s ease-in;
+        }
+        
+        /* Hamburger animation */
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger span:nth-child(2) {
+            margin: 6px 0;
+        }
+        
+        .hamburger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Discord presence indicators */
+        .presence-online {
+            background-color: #3BA55D;
+        }
+        
+        .presence-idle {
+            background-color: #FAA61A;
+        }
+        
+        .presence-dnd {
+            background-color: #ED4245;
+        }
+        
+        .presence-offline {
+            background-color: #747F8D;
+        }
+        
+        /* Staff card styling */
+        .staff-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .staff-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: rgba(125, 211, 252, 0.3);
+        }
+        
+        /* Role badges */
+        .role-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.5rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+        }
+        
+        .role-owner {
+            background-color: #5865F2;
+        }
+        
+        .role-admin {
+            background-color: #ED4245;
+        }
+        
+        .role-moderator {
+            background-color: #3BA55D;
+        }
+        
+        .role-contributor {
+            background-color: #FAA61A;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo and server name - Always visible even on mobile -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <img class="h-8 w-8" src="./assets/logo.png" alt="Acro Network Logo">
+                    </div>
+                    <div class="ml-3">
+                        <span class="text-xl font-bold text-white">Acro Network</span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#" class="text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Staff</a>
+                        <a href="#" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Vote</a>
+                        <a href="#" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Store</a>
+                        
+                        <!-- Dropdown -->
+                        <div class="relative">
+                            <button id="dropdown-button" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                                Other Links
+                                <svg class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div id="dropdown-menu" class="absolute left-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 z-50 hidden">
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Rules</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Gallery</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Wiki</a>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-all">
+                            <i class="fas fa-play mr-1"></i> Play Now
+                        </a>
+                        
+                        <a href="#" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                            <i class="fas fa-user-circle mr-1"></i> Profile
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="hamburger text-gray-300 hover:text-white focus:outline-none">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="mobile-menu bg-gray-900 md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-white">Home</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Staff</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Vote</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Store</a>
+                
+                <!-- Mobile dropdown -->
+                <div class="relative">
+                    <button id="mobile-dropdown-button" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white flex items-center justify-between">
+                        Other Links
+                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div id="mobile-dropdown-menu" class="pl-4 hidden">
+                        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Rules</a>
+                        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Gallery</a>
+                        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Wiki</a>
+                    </div>
+                </div>
+                
+                <a href="#" class="bg-blue-500 block px-3 py-2 rounded-md text-base font-medium text-white hover:text-white">
+                    <i class="fas fa-play mr-1"></i> Play Now
+                </a>
+                
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">
+                    <i class="fas fa-user-circle mr-1"></i> Profile
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative bg-gradient-to-b from-gray-900 to-gray-800 py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-300">Welcome to</h1>
+                <h2 class="text-5xl md:text-7xl font-bold gradient-text mt-2">Acro Network</h2>
+                <p class="mt-6 text-lg text-gray-300 max-w-2xl mx-auto">
+                    A digital community focused on developing projects on online platforms
+                </p>
+                
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <div class="bg-gray-800 rounded-lg p-4 flex items-center">
+                        <div id="server-status-dot" class="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse"></div>
+                        <span class="text-gray-300">Players Online: <span id="player-count" class="text-white font-bold">Loading...</span></span>
+                    </div>
+                    <a onclick="copyIP()" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-bold transition-all flex items-center">
+                        <i class="fas fa-play mr-2"></i> Play Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Stats Section -->
+    <div class="bg-gray-800 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
+                    <div class="text-3xl font-bold text-blue-400 mb-2">1,500+</div>
+                    <div class="text-gray-300">Daily Players</div>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
+                    <div class="text-3xl font-bold text-blue-400 mb-2">5</div>
+                    <div class="text-gray-300">Game Modes</div>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
+                    <div class="text-3xl font-bold text-blue-400 mb-2">24/7</div>
+                    <div class="text-gray-300">Uptime</div>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
+                    <div class="text-3xl font-bold text-blue-400 mb-2">10,000+</div>
+                    <div class="text-gray-300">Community Members</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Staff Section -->
+    <div id="staff" class="bg-gray-900 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white">Our Staff Team</h2>
+                <p class="text-gray-400 mt-2 max-w-2xl mx-auto">
+                    Meet the dedicated team that keeps Acro Network running smoothly.
+                </p>
+            </div>
+            
+            <!-- Owners -->
+            <div class="mb-12">
+                <div class="flex items-center mb-6">
+                    <div class="w-1 h-8 bg-blue-500 mr-4 rounded-full"></div>
+                    <h3 class="text-2xl font-bold text-white">Owners</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Staff Card 1 -->
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
+                        <div class="relative mr-4">
+                            <img src="https://cdn.discordapp.com/avatars/123456789012345678/a_abcdef1234567890abcdef1234567890.webp?size=128" 
+                                 alt="Owner Avatar" 
+                                 class="w-16 h-16 rounded-full border-2 border-blue-500">
+                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-online rounded-full border-2 border-gray-800"></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <h4 class="text-lg font-semibold text-white">Alex</h4>
+                                <span class="role-badge role-owner ml-2">Owner</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">@alex</p>
+                            <p class="text-gray-300 mt-1 text-sm">Server Founder & Lead Developer</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Staff Card 2 -->
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
+                        <div class="relative mr-4">
+                            <img src="https://cdn.discordapp.com/avatars/234567890123456789/a_abcdef1234567890abcdef1234567890.webp?size=128" 
+                                 alt="Owner Avatar" 
+                                 class="w-16 h-16 rounded-full border-2 border-blue-500">
+                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-idle rounded-full border-2 border-gray-800"></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <h4 class="text-lg font-semibold text-white">Sarah</h4>
+                                <span class="role-badge role-owner ml-2">Owner</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">@sarah</p>
+                            <p class="text-gray-300 mt-1 text-sm">Community Manager & Designer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Administrators -->
+            <div class="mb-12">
+                <div class="flex items-center mb-6">
+                    <div class="w-1 h-8 bg-red-500 mr-4 rounded-full"></div>
+                    <h3 class="text-2xl font-bold text-white">Administrators</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Staff Card 3 -->
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
+                        <div class="relative mr-4">
+                            <img src="https://cdn.discordapp.com/avatars/345678901234567890/a_abcdef1234567890abcdef1234567890.webp?size=128" 
+                                 alt="Admin Avatar" 
+                                 class="w-16 h-16 rounded-full border-2 border-red-500">
+                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-online rounded-full border-2 border-gray-800"></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <h4 class="text-lg font-semibold text-white">Mike</h4>
+                                <span class="role-badge role-admin ml-2">Admin</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">@mike</p>
+                            <p class="text-gray-300 mt-1 text-sm">System Administrator</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Staff Card 4 -->
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
+                        <div class="relative mr-4">
+                            <img src="https://cdn.discordapp.com/avatars/456789012345678901/a_abcdef1234567890abcdef1234567890.webp?size=128" 
+                                 alt="Admin Avatar" 
+                                 class="w-16 h-16 rounded-full border-2 border-red-500">
+                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-dnd rounded-full border-2 border-gray-800"></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <h4 class="text-lg font-semibold text-white">Jenny</h4>
+                                <span class="role-badge role-admin ml-2">Admin</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">@jenny</p>
+                            <p class="text-gray-300 mt-1 text-sm">Plugin Developer</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Staff Card 5 -->
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
+                        <div class="relative mr-4">
+                            <img src="https://cdn.discordapp.com/avatars/567890123456789012/a_abcdef1234567890abcdef1234567890.webp?size=128" 
+                                 alt="Admin Avatar" 
+                                 class="w-16 h-16 rounded-full border-2 border-red-500">
+                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-offline rounded-full border-2 border-gray-800"></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <h4 class="text-lg font-semibold text-white">David</h4>
+                                <span class="role-badge role-admin ml-2">Admin</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">@david</p>
+                            <p class="text-gray-300 mt-1 text-sm">Event Coordinator</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Moderators -->
+            <div class="mb-12">
+                <div class="flex items-center mb-6">
+                    <div class="w-1 h-8 bg-green-500 mr-4 rounded-full"></div>
+                    <h3 class="text-2xl font-bold text-white">Moderators</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Staff Card 6 -->
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
+                        <div class="relative mr-4">
+                            <img src="https://cdn.discordapp.com/avatars/678901234567890123/a_abcdef1234567890abcdef1234567890.webp?size=128" 
+                                 alt="Mod Avatar" 
+                                 class="w-16 h-16 rounded-full border-2 border-green-500">
+                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-online rounded-full border-2 border-gray-800"></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <h4 class="text-lg font-semibold text-white">Chris</h4>
+                                <span class="role-badge role-moderator ml-2">Mod</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">@chris</p>
+                            <p class="text-gray-300 mt-1 text-sm">Senior Moderator</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Staff Card 7 -->
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
+                        <div class="relative mr-4">
+                            <img src="https://cdn.discordapp.com/avatars/789012345678901234/a_abcdef1234567890abcdef1234567890.webp?size=128" 
+                                 alt="Mod Avatar" 
+                                 class="w-16 h-16 rounded-full border-2 border-green-500">
+                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-idle rounded-full border-2 border-gray-800"></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <h4 class="text-lg font-semibold text-white">Emma</h4>
+                                <span class="role-badge role-moderator ml-2">Mod</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">@emma</p>
+                            <p class="text-gray-300 mt-1 text-sm">Support Team Lead</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Staff Card 8 -->
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
+                        <div class="relative mr-4">
+                            <img src="https://cdn.discordapp.com/avatars/890123456789012345/a_abcdef1234567890abcdef1234567890.webp?size=128" 
+                                 alt="Mod Avatar" 
+                                 class="w-16 h-16 rounded-full border-2 border-green-500">
+                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-online rounded-full border-2 border-gray-800"></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <h4 class="text-lg font-semibold text-white">Ryan</h4>
+                                <span class="role-badge role-moderator ml-2">Mod</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">@ryan</p>
+                            <p class="text-gray-300 mt-1 text-sm">Game Moderator</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Staff Card 9 -->
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
+                        <div class="relative mr-4">
+                            <img src="https://cdn.discordapp.com/avatars/901234567890123456/a_abcdef1234567890abcdef1234567890.webp?size=128" 
+                                 alt="Mod Avatar" 
+                                 class="w-16 h-16 rounded-full border-2 border-green-500">
+                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-dnd rounded-full border-2 border-gray-800"></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <h4 class="text-lg font-semibold text-white">Lisa</h4>
+                                <span class="role-badge role-moderator ml-2">Mod</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">@lisa</p>
+                            <p class="text-gray-300 mt-1 text-sm">Discord Moderator</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contributors -->
+            <div>
+                <div class="flex items-center mb-6">
+                    <div class="w-1 h-8 bg-yellow-500 mr-4 rounded-full"></div>
+                    <h3 class="text-2xl font-bold text-white">Contributors</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Staff Card 10 -->
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
+                        <div class="relative mr-4">
+                            <img src="https://cdn.discordapp.com/avatars/123456789012345678/a_abcdef1234567890abcdef1234567890.webp?size=128" 
+                                 alt="Contributor Avatar" 
+                                 class="w-16 h-16 rounded-full border-2 border-yellow-500">
+                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-online rounded-full border-2 border-gray-800"></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <h4 class="text-lg font-semibold text-white">Tom</h4>
+                                <span class="role-badge role-contributor ml-2">Contributor</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">@tom</p>
+                            <p class="text-gray-300 mt-1 text-sm">Builder & Texture Artist</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Staff Card 11 -->
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
+                        <div class="relative mr-4">
+                            <img src="https://cdn.discordapp.com/avatars/234567890123456789/a_abcdef1234567890abcdef1234567890.webp?size=128" 
+                                 alt="Contributor Avatar" 
+                                 class="w-16 h-16 rounded-full border-2 border-yellow-500">
+                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-offline rounded-full border-2 border-gray-800"></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <h4 class="text-lg font-semibold text-white">Sophia</h4>
+                                <span class="role-badge role-contributor ml-2">Contributor</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">@sophia</p>
+                            <p class="text-gray-300 mt-1 text-sm">Wiki Maintainer</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Staff Card 12 -->
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
+                        <div class="relative mr-4">
+                            <img src="https://cdn.discordapp.com/avatars/345678901234567890/a_abcdef1234567890abcdef1234567890.webp?size=128" 
+                                 alt="Contributor Avatar" 
+                                 class="w-16 h-16 rounded-full border-2 border-yellow-500">
+                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-idle rounded-full border-2 border-gray-800"></div>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <h4 class="text-lg font-semibold text-white">Kevin</h4>
+                                <span class="role-badge role-contributor ml-2">Contributor</span>
+                            </div>
+                            <p class="text-gray-400 text-sm">@kevin</p>
+                            <p class="text-gray-300 mt-1 text-sm">Bug Tester</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Server Info -->
+                <div>
+                    <div class="flex items-center">
+                        <img class="h-8 w-8" src="./assets/logo.png" alt="Acro Network Logo">
+                        <span class="ml-2 text-xl font-bold text-white">Acro Network</span>
+                    </div>
+                    <p class="mt-4 text-gray-300">
+                        A digital community focused on developing projects on online platforms.
+                    </p>
+                </div>
+                
+                <!-- Social Media -->
+                <div>
+                    <h3 class="text-lg font-bold text-white">Connect With Us</h3>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-blue-400 transition-all">
+                            <i class="fab fa-discord text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-blue-400 transition-all">
+                            <i class="fab fa-tiktok text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-blue-400 transition-all">
+                            <i class="fab fa-youtube text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-blue-400 transition-all">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold text-white">Quick Links</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">Home</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">Staff</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">Vote</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">Store</a></li>
+                    </ul>
+                </div>
+                
+                <!-- External Links -->
+                <div>
+                    <h3 class="text-lg font-bold text-white">External Links</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">Github</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">Discord</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all">Server List</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
+                <p>© 2025 Acro Network. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dropdown functionality for desktop
+        const dropdownButton = document.getElementById('dropdown-button');
+        const dropdownMenu = document.getElementById('dropdown-menu');
+        
+        dropdownButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('hidden');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!dropdownButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+        
+        // Mobile menu functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburger = document.querySelector('.hamburger');
+        
+        mobileMenuButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.classList.toggle('open');
+            hamburger.classList.toggle('open');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenu.classList.remove('open');
+                hamburger.classList.remove('open');
+            }
+        });
+        
+        // Mobile dropdown functionality
+        const mobileDropdownButton = document.getElementById('mobile-dropdown-button');
+        const mobileDropdownMenu = document.getElementById('mobile-dropdown-menu');
+        
+        mobileDropdownButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileDropdownMenu.classList.toggle('hidden');
+        });
+    </script>
+
+    <script>
+  function copyIP() {
+        const ip = "play.acronet.work";
+        navigator.clipboard.writeText(ip).then(() => {
+        alert("IP berhasil disalin: " + ip);
+    }).catch(err => {
+        alert("Gagal menyalin IP.");
+        console.error(err);
+    });
+    }
+</script>
+
+<script>
+  async function updatePlayerCount() {
+    try {
+      const response = await fetch('https://api.mcsrvstat.us/3/play.acronet.work');
+      const data = await response.json();
+
+      const online = data.players?.online ?? 0;
+      const max = data.players?.max ?? 0;
+
+      document.getElementById("player-count").textContent = `${online} / ${max}`;
+    } catch (error) {
+      console.error("Gagal mengambil data player:", error);
+      document.getElementById("player-count").textContent = "Status tidak tersedia";
+    }
+  }
+
+  // Panggil saat halaman dibuka
+  updatePlayerCount();
+
+  // Perbarui setiap 30 detik
+  setInterval(updatePlayerCount, 30000);
+</script>
+
+<script>
+  async function fetchServerStatus() {
+    try {
+      const response = await fetch('https://api.mcsrvstat.us/3/play.acronet.work');
+      const data = await response.json();
+
+      const serverDot = document.getElementById('server-status-dot');
+      if (data.online) {
+        serverDot.classList.remove('bg-red-500');
+        serverDot.classList.add('bg-green-500');
+      } else {
+        serverDot.classList.remove('bg-green-500');
+        serverDot.classList.add('bg-red-500');
+      }
+    } catch (error) {
+      const serverDot = document.getElementById('server-status-dot');
+      serverDot.classList.remove('bg-green-500');
+      serverDot.classList.add('bg-red-500');
+    }
+  }
+
+  fetchServerStatus();
+  setInterval(fetchServerStatus, 60000);
+</script>
+
+<script>
+  fetch("https://discord.com/api/guilds/954173179042091028/widget.json")
+    .then(response => response.json())
+    .then(data => {
+      const members = data.presence_count || data.members.length;
+      document.getElementById("discord-members").textContent = `${members} Online`;
+    })
+    .catch(error => {
+      document.getElementById("discord-members").textContent = "Unavailable";
+      console.error("Error fetching Discord members:", error);
+    });
+</script>
+</body>
+</html>

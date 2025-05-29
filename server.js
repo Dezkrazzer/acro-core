@@ -62,9 +62,6 @@ app.get('/team', async (req, res) => {
     const guild = client.guilds.cache.get("954173179042091028");
     if (!guild) return res.status(404).send("Guild not found");
 
-    console.log("client.guilds:", client.guilds);
-    console.log("client.guilds.cache:", client.guilds?.cache);
-
     const rootRole = guild.roles.cache.find(role => role.name.toLowerCase() === "root");
     if (!rootRole) return res.status(404).send("Role 'root' not found");
 
@@ -79,24 +76,29 @@ app.get('/team', async (req, res) => {
         description: "Root Admin of the Server"
       }));
 
-    // Render EJS secara manual
-    const rawHtml = await res.render("views/team.ejs", { bot: client, req, res, rootMembers });
+    // Gunakan app.render, bukan res.render
+    req.app.render("team", { bot: client, req, res, rootMembers }, (err, html) => {
+      if (err) {
+        console.error("Render error:", err);
+        return res.status(500).send("Render Error");
+      }
 
-    // Obfuscate jika kamu punya fungsi seperti ini
-    const obfuscatedHTML = obfuscateInlineScripts(rawHtml); // jika tidak, pakai rawHtml saja
+      // Optional: obfuscate inline <script> jika perlu
+      const obfuscatedHTML = obfuscateInlineScripts(html); // atau langsung pakai `html`
 
-    // Minify HTML
-    const minifiedHtml = minify(obfuscatedHTML, {
-      collapseWhitespace: true,
-      removeComments: true,
-      minifyCSS: true,
-      ignoreCustomFragments: [/<%[\s\S]*?%>/] // jaga kalau masih ada EJS tag (meski seharusnya sudah tidak ada)
+      const minifiedHtml = minify(obfuscatedHTML, {
+        collapseWhitespace: true,
+        removeComments: true,
+        minifyCSS: true,
+        ignoreCustomFragments: [/<%[\s\S]*?%>/]
+      });
+
+      return res.send(minifiedHtml);
     });
 
-    res.send(minifiedHtml);
   } catch (err) {
     console.error("Error in /team route:", err);
-    res.status(500).send("Internal Server Error");
+    return res.status(500).send("Internal Server Error");
   }
 });
 

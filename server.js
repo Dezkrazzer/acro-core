@@ -91,7 +91,7 @@ app.get('/team', async (req, res) => {
       }));
 
 
-    req.app.render("team", { bot: client, req, res, rootMembers }, (err, html) => {
+    req.app.render("team", { bot: client, req, res, rootMembers, adminMembers }, (err, html) => {
       if (err) {
         console.error("Render error:", err);
         return res.status(500).send("Render Error");

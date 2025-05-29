@@ -50,7 +50,7 @@ body::before {
 
 @media (max-width: 768px) {
     .server-name {
-        font-size: 10px;
+        font-size: 40px;
     }
 }
 

@@ -62,6 +62,7 @@ app.get('/team', async (req, res) => {
     const guild = client.guilds.cache.get("954173179042091028");
     if (!guild) return res.status(404).send("Guild not found");
 
+    await guild.members.fetch();
     const rootRole = guild.roles.cache.find(role => role.name.toLowerCase() === "root");
     if (!rootRole) return res.status(404).send("Role 'root' not found");
 
@@ -77,6 +78,8 @@ app.get('/team', async (req, res) => {
       }));
 
     // Gunakan app.render, bukan res.render
+    console.log("rootMembers:", rootMembers);
+
     req.app.render("team", { bot: client, req, res, rootMembers }, (err, html) => {
       if (err) {
         console.error("Render error:", err);

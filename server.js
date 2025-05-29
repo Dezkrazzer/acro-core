@@ -80,7 +80,7 @@ app.get('/team', async (req, res) => {
       }));
 
     // Render EJS secara manual
-    const rawHtml = await ejs.renderFile("views/team.ejs", { bot: client, req, res, rootMembers });
+    const rawHtml = await res.render("views/team.ejs", { bot: client, req, res, rootMembers });
 
     // Obfuscate jika kamu punya fungsi seperti ini
     const obfuscatedHTML = obfuscateInlineScripts(rawHtml); // jika tidak, pakai rawHtml saja

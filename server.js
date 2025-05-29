@@ -70,6 +70,9 @@ app.get('/team', async (req, res) => {
     const adminRole = guild.roles.cache.get("954173497222004836")
     if (!adminRole) return res.status(404).send("Role 'Administrator' not found");
 
+    const modRole = guild.roles.cache.get("1152209810889129984")
+    if (!modRole) return res.status(404).send("Role 'Moderator' not found");
+
     const rootMembers = rootRole.members
       .filter(member => !member.user.bot)
       .map(member => ({
@@ -90,8 +93,18 @@ app.get('/team', async (req, res) => {
         presence: member.presence?.status || 'offline'
       }));
 
+    const modMembers = modRole.members
+      .filter(member => !member.user.bot)
+      .map(member => ({
+        id: member.id,
+        globalName: member.user.globalName,
+        username: member.user.username,
+        avatar: member.user.displayAvatarURL({ format: "webp", size: 128 }),
+        presence: member.presence?.status || 'offline'
+      }));
 
-    req.app.render("team", { bot: client, req, res, rootMembers, adminMembers }, (err, html) => {
+
+    req.app.render("team", { bot: client, req, res, rootMembers, adminMembers, modMembers }, (err, html) => {
       if (err) {
         console.error("Render error:", err);
         return res.status(500).send("Render Error");

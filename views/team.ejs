@@ -354,77 +354,25 @@
                 </div>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <!-- Staff Card 6 -->
+                    <% modMembers.forEach(member => { %>
                     <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
                         <div class="relative mr-4">
-                            <img src="https://cdn.discordapp.com/avatars/678901234567890123/a_abcdef1234567890abcdef1234567890.webp?size=128" 
-                                 alt="Mod Avatar" 
+                            <img src="<%= member.avatar %>" 
+                                 alt="<%= member.username %> Avatar" 
                                  class="w-16 h-16 rounded-full border-2 border-green-500">
-                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-online rounded-full border-2 border-gray-800"></div>
+                            <div class="absolute bottom-0 right-0 w-4 h-4 
+                            <%= member.presence === 'online' ? 'bg-green-500' : member.presence === 'idle' ? 'bg-yellow-500' : member.presence === 'dnd' ? 'bg-red-500' : 'bg-gray-500' %> 
+                            rounded-full border-2 border-gray-800"></div>
                         </div>
                         <div>
                             <div class="flex items-center">
-                                <h4 class="text-lg font-semibold text-white">Chris</h4>
+                                <h4 class="text-lg font-semibold text-white"><%= member.globalName %></h4>
                                 <span class="role-badge role-moderator ml-2">Mod</span>
                             </div>
-                            <p class="text-gray-400 text-sm">@chris</p>
-                            <p class="text-gray-300 mt-1 text-sm">Senior Moderator</p>
+                            <p class="text-gray-400 text-sm">@<%= member.username %></p>
                         </div>
                     </div>
-                    
-                    <!-- Staff Card 7 -->
-                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
-                        <div class="relative mr-4">
-                            <img src="https://cdn.discordapp.com/avatars/789012345678901234/a_abcdef1234567890abcdef1234567890.webp?size=128" 
-                                 alt="Mod Avatar" 
-                                 class="w-16 h-16 rounded-full border-2 border-green-500">
-                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-idle rounded-full border-2 border-gray-800"></div>
-                        </div>
-                        <div>
-                            <div class="flex items-center">
-                                <h4 class="text-lg font-semibold text-white">Emma</h4>
-                                <span class="role-badge role-moderator ml-2">Mod</span>
-                            </div>
-                            <p class="text-gray-400 text-sm">@emma</p>
-                            <p class="text-gray-300 mt-1 text-sm">Support Team Lead</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Staff Card 8 -->
-                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
-                        <div class="relative mr-4">
-                            <img src="https://cdn.discordapp.com/avatars/890123456789012345/a_abcdef1234567890abcdef1234567890.webp?size=128" 
-                                 alt="Mod Avatar" 
-                                 class="w-16 h-16 rounded-full border-2 border-green-500">
-                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-online rounded-full border-2 border-gray-800"></div>
-                        </div>
-                        <div>
-                            <div class="flex items-center">
-                                <h4 class="text-lg font-semibold text-white">Ryan</h4>
-                                <span class="role-badge role-moderator ml-2">Mod</span>
-                            </div>
-                            <p class="text-gray-400 text-sm">@ryan</p>
-                            <p class="text-gray-300 mt-1 text-sm">Game Moderator</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Staff Card 9 -->
-                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
-                        <div class="relative mr-4">
-                            <img src="https://cdn.discordapp.com/avatars/901234567890123456/a_abcdef1234567890abcdef1234567890.webp?size=128" 
-                                 alt="Mod Avatar" 
-                                 class="w-16 h-16 rounded-full border-2 border-green-500">
-                            <div class="absolute bottom-0 right-0 w-4 h-4 presence-dnd rounded-full border-2 border-gray-800"></div>
-                        </div>
-                        <div>
-                            <div class="flex items-center">
-                                <h4 class="text-lg font-semibold text-white">Lisa</h4>
-                                <span class="role-badge role-moderator ml-2">Mod</span>
-                            </div>
-                            <p class="text-gray-400 text-sm">@lisa</p>
-                            <p class="text-gray-300 mt-1 text-sm">Discord Moderator</p>
-                        </div>
-                    </div>
+                    <% }) %>
                 </div>
             </div>
             

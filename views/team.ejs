@@ -164,7 +164,7 @@
                         <div class="relative mr-4">
                             <img src="<%= member.avatar %>" 
                                  alt="<%= member.username %> Avatar" 
-                                 class="w-16 h-16 rounded-full border-2 border-blue-500 object-cover">
+                                 class="w-16 h-16 aspect-square rounded-full border-2 border-blue-500 object-contain bg-white p-0.5">
                             <div class="absolute bottom-0 right-0 w-4 h-4 
                             <%= member.presence === 'online' ? 'bg-green-500' : member.presence === 'idle' ? 'bg-yellow-500' : member.presence === 'dnd' ? 'bg-red-500' : 'bg-gray-500' %> 
                             rounded-full border-2 border-gray-800"></div>

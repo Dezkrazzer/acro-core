@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #0f172a;
+    color: #e2e8f0;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, #7dd3fc, #38bdf8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(29, 78, 216, 0.3);
+}
+
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+/* Staff card styling */
+.staff-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.staff-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: rgba(125, 211, 252, 0.3);
+}
+
+/* Role badges */
+.role-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 9999px;
+    text-transform: uppercase;
+}
+
+.role-owner {
+    background-color: #5865f2;
+}
+
+.role-admin {
+    background-color: #ed4245;
+}
+
+.role-moderator {
+    background-color: #3ba55d;
+}
+
+.role-contributor {
+    background-color: #faa61a;
+}

@@ -1,81 +1,91 @@
-<div class="navbar">
-    <div class="nav-left">
-      <div class="nav-logo">
-        <img src="../assets/logo.png" alt="Logo" />
-        <span>Acro Network</span>
-      </div>
-      <div class="menu-icon" onclick="toggleMenu()">☰</div>
-    </div>
-
-    <div class="nav-items" id="nav-items">
-      <div class="nav-item" onclick="alert('Home clicked!')"><i class="bi bi-house-door-fill"></i>&nbsp;&nbsp;HOME</div>
-      <div class="nav-item" onclick="alert('Staff clicked!')"><i class="bi bi-person-fill"></i>&nbsp;&nbsp;STAFF</div>
-      <div class="nav-item" onclick="alert('Vote clicked!')"><i class="bi bi-hand-thumbs-up-fill"></i>&nbsp;&nbsp;VOTE</div>
-      <div class="nav-item" onclick="alert('Store clicked!')"><i class="bi bi-cart-dash-fill"></i>&nbsp;&nbsp;STORE</div>
-      <div class="nav-item dropdown">
-        <div class="dropdown-toggle">
-          <i class="bi bi-box-arrow-up-right"></i>&nbsp;&nbsp;OTHERS LINK
+<!-- Navbar -->
+    <nav class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo and server name - Always visible even on mobile -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <img class="h-8 w-8" src="../assets/logo.png" alt="Acro Network Logo">
+                    </div>
+                    <div class="ml-3">
+                        <span class="text-xl font-bold text-white">Acro Network</span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#" class="text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
+                        <a href="#" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Vote</a>
+                        <a href="#" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Store</a>
+                        
+                        <!-- Dropdown -->
+                        <div class="relative">
+                            <button id="dropdown-button" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                                Other Links
+                                <svg class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div id="dropdown-menu" class="absolute left-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 z-50 hidden">
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Rules</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Gallery</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Wiki</a>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-all">
+                            <i class="fas fa-play mr-1"></i> Play Now
+                        </a>
+                        
+                        <a href="#" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                            <i class="fas fa-user-circle mr-1"></i> Profile
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="hamburger text-gray-300 hover:text-white focus:outline-none">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
-      
-    </div>
-
-    <div class="dropdown-menu">
-      <a href="/" target="_blank">Coming Soon</a>
-      <a href="/" target="_blank">Coming Soon</a>
-      <a href="/" target="_blank">Coming Soon</a>
-    </div>
-
-    <div class="nav-right" id="nav-right">
-      <div class="play-button" onclick="copyIP()"><i class="bi bi-controller"></i>  Play Now</div>
-      <div class="nav-item" onclick="alert('Profile clicked!')"><i class="bi bi-person-circle"></i></div>
-    </div>
-</div>
-
-<script>
-    function toggleMenu() {
-      document.getElementById("nav-items").classList.toggle("show");
-      document.getElementById("nav-right").classList.toggle("show");
-    }
-
-    document.querySelectorAll('.nav-item').forEach(item => {
-      item.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
-          document.getElementById("nav-items").classList.remove("show");
-          document.getElementById("nav-right").classList.remove("show");
-        }
-      });
-    });
-</script>
-
-<script>
-document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
-  toggle.addEventListener('click', function (e) {
-    e.stopPropagation(); // Prevent bubbling
-
-    const dropdownMenu = document.querySelector('.dropdown-menu');
-    const rect = this.getBoundingClientRect();
-
-    // Adjust position for desktop and mobile
-    if (window.innerWidth <= 768) {
-      // Center the dropdown menu on mobile
-      //dropdownMenu.style.top = `${rect.bottom + window.scrollY}px`;
-      dropdownMenu.style.left = `50%`;
-      dropdownMenu.style.transform = `translateX(-50%)`;
-    } else {
-      // Position the dropdown menu below the toggle on desktop
-      //dropdownMenu.style.top = `${rect.bottom + window.scrollY}px`;
-      dropdownMenu.style.left = `60%`;
-      dropdownMenu.style.transform = `translateX(0)`;
-    }
-
-    // Toggle visibility
-    dropdownMenu.classList.toggle('show');
-  });
-});
-
-// Close dropdown when clicking outside
-document.addEventListener('click', function () {
-  document.querySelector('.dropdown-menu').classList.remove('show');
-});
-</script>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="mobile-menu bg-gray-900 md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-white">Home</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Team</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Vote</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Store</a>
+                
+                <!-- Mobile dropdown -->
+                <div class="relative">
+                    <button id="mobile-dropdown-button" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white flex items-center justify-between">
+                        Other Links
+                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div id="mobile-dropdown-menu" class="pl-4 hidden">
+                        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Rules</a>
+                        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Gallery</a>
+                        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Wiki</a>
+                    </div>
+                </div>
+                
+                <a href="#" class="bg-blue-500 block px-3 py-2 rounded-md text-base font-medium text-white hover:text-white">
+                    <i class="fas fa-play mr-1"></i> Play Now
+                </a>
+                
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">
+                    <i class="fas fa-user-circle mr-1"></i> Profile
+                </a>
+            </div>
+        </div>
+    </nav>

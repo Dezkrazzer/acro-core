@@ -191,11 +191,11 @@
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     <% adminMembers.forEach(member => { %>
-                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
-                        <div class="relative mr-4">
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center min-w-[280px]">
+                        <div class="relative mr-4 flex-shrink-0">
                             <img src="<%= member.avatar %>" 
                                  alt="<%= member.username %> Avatar" 
-                                 class="w-16 h-16 rounded-full border-2 border-red-500">
+                                 class="w-16 h-16 rounded-full border-2 border-red-500 object-cover aspect-square">
                             <div class="absolute bottom-0 right-0 w-4 h-4 
                             <%= member.presence === 'online' ? 'bg-green-500' : member.presence === 'idle' ? 'bg-yellow-500' : member.presence === 'dnd' ? 'bg-red-500' : 'bg-gray-500' %> 
                             rounded-full border-2 border-gray-800"></div>
@@ -221,11 +221,11 @@
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     <% modMembers.forEach(member => { %>
-                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
-                        <div class="relative mr-4">
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center min-w-[280px]">
+                        <div class="relative mr-4 flex-shrink-0">
                             <img src="<%= member.avatar %>" 
                                  alt="<%= member.username %> Avatar" 
-                                 class="w-16 h-16 rounded-full border-2 border-green-500">
+                                 class="w-16 h-16 rounded-full border-2 border-green-500 object-cover aspect-square">
                             <div class="absolute bottom-0 right-0 w-4 h-4 
                             <%= member.presence === 'online' ? 'bg-green-500' : member.presence === 'idle' ? 'bg-yellow-500' : member.presence === 'dnd' ? 'bg-red-500' : 'bg-gray-500' %> 
                             rounded-full border-2 border-gray-800"></div>
@@ -251,11 +251,11 @@
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     <!-- Staff Card 10 
-                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
-                        <div class="relative mr-4">
+                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center min-w-[280px]">
+                        <div class="relative mr-4 flex-shrink-0">
                             <img src="https://cdn.discordapp.com/avatars/123456789012345678/a_abcdef1234567890abcdef1234567890.webp?size=128" 
                                  alt="Contributor Avatar" 
-                                 class="w-16 h-16 rounded-full border-2 border-yellow-500">
+                                 class="w-16 h-16 rounded-full border-2 border-yellow-500 object-cover aspect-square">
                             <div class="absolute bottom-0 right-0 w-4 h-4 presence-online rounded-full border-2 border-gray-800"></div>
                         </div>
                         <div>

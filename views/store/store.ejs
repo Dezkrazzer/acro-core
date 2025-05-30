@@ -7,10 +7,23 @@
     <title>Acro Network - Store</title>
     <link rel="icon" href="../assets/logo.png" type="image/png" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-primary': '#0f172a',
+                        'dark-secondary': '#1e293b',
+                        'accent-blue': '#38BDF8',
+                        'accent-purple': '#818cf8',
+                        'accent-emerald': '#10b981',
+                    }
+                }
+            }
+        }
+    </script>
 
     <link rel="stylesheet" type="text/css" href="../public/storeStyle.css" />
     <link rel="stylesheet" type="text/css" href="../public/navbarStyle.css" />

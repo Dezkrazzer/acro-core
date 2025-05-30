@@ -158,29 +158,27 @@
                     <h3 class="text-2xl font-bold text-white">Owners</h3>
                 </div>
                 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <% rootMembers.forEach(member => { %>
-                    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center">
-                        <div class="relative mr-4">
-                            <img src="<%= member.avatar %>" 
-                                 alt="<%= member.username %> Avatar" 
-                                 class="w-20 h-20 rounded-full border-2 border-blue-500">
-                            <div class="absolute bottom-0 right-0 w-4 h-4 
-                            <%= member.presence === 'online' ? 'bg-green-500' : member.presence === 'idle' ? 'bg-yellow-500' : member.presence === 'dnd' ? 'bg-red-500' : 'bg-gray-500' %> 
-                            rounded-full border-2 border-gray-800"></div>
-                        </div>
-                        <div>
-                            <div class="flex items-center">
-                                <h4 class="text-lg font-semibold text-white"><%= member.globalName %></h4>
-                                <span class="role-badge role-owner ml-2">Owner</span>
-                            </div>
-                            <p class="text-gray-400 text-sm">@<%= member.username %></p>
-                        </div>
-                    </div>
-                
-                  <% }) %>
-                </div>
-            </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+  <% rootMembers.forEach(member => { %>
+    <div class="staff-card bg-gray-800 rounded-lg p-6 flex items-center min-w-[280px]">
+      <div class="relative mr-4 flex-shrink-0">
+        <img src="<%= member.avatar %>" 
+             alt="<%= member.username %> Avatar" 
+             class="w-16 h-16 rounded-full border-2 border-blue-500 object-cover aspect-square bg-gray-900">
+        <div class="absolute bottom-0 right-0 w-4 h-4 
+          <%= member.presence === 'online' ? 'bg-green-500' : member.presence === 'idle' ? 'bg-yellow-500' : member.presence === 'dnd' ? 'bg-red-500' : 'bg-gray-500' %> 
+          rounded-full border-2 border-gray-800"></div>
+      </div>
+      <div>
+        <div class="flex items-center">
+          <h4 class="text-lg font-semibold text-white"><%= member.globalName %></h4>
+          <span class="role-badge role-owner ml-2">Owner</span>
+        </div>
+        <p class="text-gray-400 text-sm">@<%= member.username %></p>
+      </div>
+    </div>
+  <% }) %>
+</div>
             
             <!-- Administrators -->
             <div class="mb-12">

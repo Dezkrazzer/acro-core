@@ -1,108 +1,93 @@
 <!-- Navbar -->
-    <nav class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo and server name - Always visible even on mobile -->
-                <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <img class="h-8 w-8" src="../assets/logo.png" alt="Acro Network Logo">
-                    </div>
-                    <div class="ml-3">
-                        <span class="text-xl font-bold text-white">Acro Network</span>
-                    </div>
+<nav class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <!-- Logo and server name - Always visible even on mobile -->
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <img class="h-8 w-8" src="../assets/logo.png" alt="Acro Network Logo">
                 </div>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-center space-x-4">
-                        <a href="/" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                        <a href="/team" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
-                        <a href="#" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Vote</a>
-                        <a href="#" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Store</a>
-                        
-                        <!-- Dropdown -->
-                        <div class="relative">
-                            <button id="dropdown-button" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center">
-                                Other Links
-                                <svg class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </button>
-                            <div id="dropdown-menu" class="absolute left-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 z-50 hidden">
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Rules</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Gallery</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Wiki</a>
-                            </div>
-                        </div>
-                        
-                        <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-all">
-                            <i class="fas fa-play mr-1"></i> Play Now
-                        </a>
-                        
-                        <a href="<%= req.user ? "/auth/logout" : "/auth/login" %>" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center">
-    <% if (req.user) { %>
-        <% if (req.user.avatar) { %>
-            <img src="https://cdn.discordapp.com/avatars/<%= req.user.id %>/<%= req.user.avatar %>.png?size=32" alt="Avatar" class="h-6 w-6 rounded-full mr-1">
-        <% } else { %>
-            <i class="fas fa-user-circle mr-1 text-base"></i> <% } %>
-        <span class="leading-none">&nbsp;<%= req.user.globalName || req.user.username %></span>
-    <% } else { %>
-        <i class="fas fa-user-circle mr-1 text-base"></i> <span class="leading-none">&nbsp;Login</span>
-    <% } %>
-</a>
-                    </div>
-                </div>
-                
-                <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-button" class="hamburger text-gray-300 hover:text-white focus:outline-none">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
+                <div class="ml-3">
+                    <span class="text-xl font-bold text-white">Acro Network</span>
                 </div>
             </div>
-        </div>
-        
-        <!-- Mobile menu -->
-        <div id="mobile-menu" class="mobile-menu bg-gray-900 md:hidden">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-    <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-white">Home</a>
-    <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Team</a>
-    <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Vote</a>
-    <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Store</a>
-
-    <div class="relative">
-        <button id="mobile-dropdown-button" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white flex items-center justify-between">
-            Other Links
-            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-        </button>
-        <div id="mobile-dropdown-menu" class="pl-4 hidden">
-            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700">Rules</a>
-            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700">Gallery</a>
-            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700">Wiki</a>
+            <!-- Desktop Menu -->
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-center space-x-4">
+                    <a href="/" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                    <a href="/team" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
+                    <a href="#" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Vote</a>
+                    <a href="#" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Store</a>
+                    <!-- Dropdown -->
+                    <div class="relative">
+                        <button id="dropdown-button" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"> Other Links <svg class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div id="dropdown-menu" class="absolute left-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 z-50 hidden">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Rules</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Gallery</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Wiki</a>
+                        </div>
+                    </div>
+                    <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-all">
+                        <i class="fas fa-play mr-1"></i> Play Now </a>
+                    <a href="<%= req.user ? " /auth/logout" : "/auth/login" %>" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"> <% if (req.user) { %>
+                            <% if (req.user.avatar) { %>
+                                <img src="https://cdn.discordapp.com/avatars/<%= req.user.id %>/<%= req.user.avatar %>.png?size=32" alt="Avatar" class="h-6 w-6 rounded-full mr-1">
+                                <% } else { %>
+                                    <i class="fas fa-user-circle mr-1 text-base"></i>
+                                    <% } %>
+                                        <span class="leading-none">&nbsp;<%= req.user.globalName || req.user.username %></span>
+                                        <% } else { %>
+                                            <i class="fas fa-user-circle mr-1 text-base"></i> <span class="leading-none">&nbsp;Login</span>
+                                            <% } %>
+                    </a>
+                </div>
+            </div>
+            <!-- Mobile menu button -->
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="hamburger text-gray-300 hover:text-white focus:outline-none">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
     </div>
-
-    <a href="#" class="bg-blue-500 block px-3 py-2 rounded-md text-base font-medium text-white hover:text-white flex items-center">
-        <i class="fas fa-play mr-1"></i> <span class="leading-none">Play Now</span>
-    </a>
-
-    <a href="<%= req.user ? "/auth/logout" : "/auth/login" %>" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white flex items-center">
-        <% if (req.user) { %>
-            <% if (req.user.avatar) { %>
-                <img src="https://cdn.discordapp.com/avatars/<%= req.user.id %>/<%= req.user.avatar %>.png?size=32" alt="Avatar" class="h-6 w-6 rounded-full mr-2">
-            <% } else { %>
-                <i class="fas fa-user-circle mr-2 text-base"></i>
-            <% } %>
-            <span class="leading-none">&nbsp;<%= req.user.globalName || req.user.username %></span>
-        <% } else { %>
-            <i class="fas fa-user-circle mr-2 text-base"></i>
-            <span class="leading-none">&nbsp;Login</span>
-        <% } %>
-    </a>
-</div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="mobile-menu bg-gray-900 md:hidden">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-white">Home</a>
+            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Team</a>
+            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Vote</a>
+            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Store</a>
+            <div class="relative">
+                <button id="mobile-dropdown-button" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white flex items-center justify-between"> Other Links <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div id="mobile-dropdown-menu" class="pl-4 hidden">
+                    <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700">Rules</a>
+                    <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700">Gallery</a>
+                    <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700">Wiki</a>
+                </div>
+            </div>
+            <a href="#" class="bg-blue-500 block px-3 py-2 rounded-md text-base font-medium text-white hover:text-white flex items-center">
+                <i class="fas fa-play mr-1"></i> <span class="leading-none">Play Now</span>
+            </a>
+            <a href="<%= req.user ? " /auth/logout" : "/auth/login" %>" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white flex items-center"> <% if (req.user) { %>
+                    <% if (req.user.avatar) { %>
+                        <img src="https://cdn.discordapp.com/avatars/<%= req.user.id %>/<%= req.user.avatar %>.png?size=32" alt="Avatar" class="h-6 w-6 rounded-full mr-2">
+                        <% } else { %>
+                            <i class="fas fa-user-circle mr-2 text-base"></i>
+                            <% } %>
+                                <span class="leading-none">&nbsp;<%= req.user.globalName || req.user.username %></span>
+                                <% } else { %>
+                                    <i class="fas fa-user-circle mr-2 text-base"></i>
+                                    <span class="leading-none">&nbsp;Login</span>
+                                    <% } %>
+            </a>
         </div>
-    </nav>
+    </div>
+</nav>

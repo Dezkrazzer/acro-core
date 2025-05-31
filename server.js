@@ -12,6 +12,7 @@ const JavaScriptObfuscator = require('javascript-obfuscator')
 
 const session = require('express-session')
 const { Strategy } = require("passport-discord")
+const passport = require("passport")
 const scopes = ["identify", "guilds", "guilds.join"]
 const checkAuth = (req, res, next) => {
         if (req.isAuthenticated()) return next();

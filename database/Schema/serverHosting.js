@@ -26,9 +26,13 @@ const serverHostingSchema = new mongoose.Schema({
         required: true
     },
     price: {
-        type: String,
+        type: Number,
         required: true
     },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 module.exports = mongoose.model("serverHosting", serverHostingSchema);

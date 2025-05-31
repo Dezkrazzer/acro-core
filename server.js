@@ -1,4 +1,5 @@
 module.exports = function startServer(client) {
+const Discord = require("discord.js");
 const express = require("express");
 const app = express()
 //const client = require("./index.js");
@@ -6,8 +7,55 @@ client.logger = require("./Utils/logger.js");
 const cases = require("./database/Schema/Case")
 const { json, urlencoded } = require("body-parser")
 const { resolve } = require("path")
-const { minify } = require('html-minifier');
-const JavaScriptObfuscator = require('javascript-obfuscator');
+const { minify } = require('html-minifier')
+const JavaScriptObfuscator = require('javascript-obfuscator')
+
+const session = require('express-session')
+const { Strategy } = require("passport-discord")
+const scopes = ["identify", "guilds", "guilds.join"]
+const checkAuth = (req, res, next) => {
+        if (req.isAuthenticated()) return next();
+        else res.redirect("/auth/login");
+      }
+const checkLogout = (req, res, next) => {
+        if (req.isAuthenticated()) return next();
+        else res.redirect("/auth/logout");
+      };
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+passport.use(
+  new Strategy(
+    {
+      clientID: "942383674358366258",
+      clientSecret: "MOhT19cn2Ork5-qd8LEx2aOJjLFRYMSP",
+      callbackURL: "https://acronet.work/auth/callback",
+      scope: scopes
+    },
+    function(accessToken, refreshToken, profile, done) {
+      process.nextTick(function() {
+        return done(null, profile);
+      });
+    }
+  )
+);
+
+app.use(
+  session({
+    secret: "acro-network-secret-key",
+    resave: true,
+    saveUninitialized: true
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.set("view engine", "ejs");
 app.use(json());
@@ -38,6 +86,54 @@ function obfuscateInlineScripts(html) {
 /*app.get("/", (req, res) => {
     res.render("index", { bot: client, req, res });
 });*/
+
+app.get("/auth/login", checkAuth);
+app.get("/auth/logout", checkLogout, (req, res) => {
+  const webhook = new Discord.WebhookClient(
+    "1378316907291344917",
+    "IaH5bgKmxW6H5wpTgy05U_cD2b0Ac-cL9VS8Q92CSyWP10x7imbQXwlwJwUDycdZVmtM"
+  );
+  let embedLogout = new Discord.EmbedBuilder()
+    .setAuthor(
+      `${req.user.username}#${req.user.discriminator} logout`,
+      `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
+    )
+    .setTimestamp()
+    .setColor("#FF0000");
+  webhook.send(embedLogout);
+
+  req.session.destroy();
+  res.redirect("/");
+});
+app.get(
+  "/auth",
+  passport.authenticate("discord", { scope: scopes }),
+  (req, res) => {}
+);
+app.get(
+  "/auth/callback",
+  passport.authenticate("discord", {
+    failureRedirect: "/auth/login"
+  }),
+  (req, res) => {
+    console.log(`[#${req.user.id}]: Logged`);
+  const webhook = new Discord.WebhookClient(
+    "1378316907291344917",
+    "IaH5bgKmxW6H5wpTgy05U_cD2b0Ac-cL9VS8Q92CSyWP10x7imbQXwlwJwUDycdZVmtM"
+  );
+    let embedLogin = new Discord.EmbedBuilder()
+      .setAuthor(
+        `${req.user.username}#${req.user.discriminator} logged`,
+        `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
+      )
+      .setTimestamp()
+      .setColor("#26fa17");
+
+    webhook.send(embedLogin);
+    res.redirect("/");
+  }
+);
+
 
 app.get('/', (req, res) => {
     res.render('index', { bot: client, req, res }, (err, html) => {

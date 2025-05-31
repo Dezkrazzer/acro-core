@@ -1,15 +1,40 @@
-<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acro Network Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1E293B", // Dark gray
+                        secondary: "#7DD3FC", // Light blue
+                    },
+                    boxShadow: {
+                        'custom-light': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'custom-lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                    }
+                },
+            },
+        };
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-gray-100 font-sans antialiased text-gray-800">
     <div class="flex h-screen overflow-hidden">
         <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-primary text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex-shrink-0 p-4 flex flex-col justify-between">
             <div>
                 <div class="text-3xl font-extrabold text-center mb-10 mt-4 tracking-wider">Acro Network</div>
                 <nav class="space-y-3">
-                    <a href="/dashboard/store" class="flex items-center space-x-3 py-3 px-4 rounded-lg hover:bg-secondary hover:text-primary transition duration-200 group <%= title === 'Dashboard Admin' ? 'bg-secondary text-primary' : '' %>">
-                        <i class="fas fa-tachometer-alt text-xl group-hover:text-primary <%= title === 'Dashboard Admin' ? 'text-primary' : '' %>"></i>
+                    <a href="#" class="flex items-center space-x-3 py-3 px-4 rounded-lg hover:bg-secondary hover:text-primary transition duration-200 group">
+                        <i class="fas fa-tachometer-alt text-xl group-hover:text-primary"></i>
                         <span class="text-lg">Dashboard</span>
                     </a>
-                    <a href="/dashboard/products" class="flex items-center space-x-3 py-3 px-4 rounded-lg hover:bg-secondary hover:text-primary transition duration-200 group <%= title.includes('Produk') ? 'bg-secondary text-primary' : '' %>">
-                        <i class="fas fa-box text-xl group-hover:text-primary <%= title.includes('Produk') ? 'text-primary' : '' %>"></i>
+                    <a href="#" class="flex items-center space-x-3 py-3 px-4 rounded-lg hover:bg-secondary hover:text-primary transition duration-200 group">
+                        <i class="fas fa-box text-xl group-hover:text-primary"></i>
                         <span class="text-lg">Produk</span>
                     </a>
                     <a href="#" class="flex items-center space-x-3 py-3 px-4 rounded-lg hover:bg-secondary hover:text-primary transition duration-200 group">
@@ -28,30 +53,29 @@
             </div>
             <div class="p-4 border-t border-gray-700 text-sm">
                 <p>Logged in as: <span class="font-semibold">Admin</span></p>
-                <a href="/auth/logout" class="text-secondary hover:underline">Logout</a>
+                <a href="#" class="text-secondary hover:underline">Logout</a>
             </div>
         </aside>
         <div id="sidebar-overlay" class="fixed inset-0 bg-black opacity-50 z-40 hidden md:hidden"></div>
         <div class="flex-1 flex flex-col overflow-y-auto">
             <header class="bg-gray-900 border-b border-gray-800 p-4 md:px-6 flex justify-between items-center z-30">
-                <button id="sidebar-toggle" class="md:hidden text-white focus:outline-none">
+                <button id="sidebar-toggle" class="md:hidden text-gray-600 focus:outline-none">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
-                <h1 class="text-2xl font-bold text-white flex-grow text-center md:text-left"><%= title %></h1>
+                <h1 class="text-2xl font-bold text-white flex-grow text-center md:text-left">Dashboard</h1>
                 <div class="relative">
                     <button class="flex items-center text-white focus:outline-none space-x-2">
                         <span class="hidden md:block">Halo, Admin!</span>
                         <i class="fas fa-user-circle text-2xl"></i>
                     </button>
-                    </div>
+                </div>
             </header>
             <main class="flex-1 bg-gray-900 p-4 md:p-6">
-                <% if (title === 'Dashboard Admin') { %>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg flex items-center justify-between">
                         <div>
                             <p class="text-gray-500 text-sm uppercase font-semibold">Total Produk</p>
-                            <p class="text-4xl font-extrabold text-white mt-1"><%= totalProducts %></p>
+                            <p class="text-4xl font-extrabold text-white mt-1">120</p>
                         </div>
                         <div class="bg-secondary bg-opacity-20 rounded-full p-3">
                             <i class="fas fa-box text-secondary text-2xl"></i>
@@ -60,7 +84,7 @@
                     <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg flex items-center justify-between">
                         <div>
                             <p class="text-gray-500 text-sm uppercase font-semibold">Total Pembelian</p>
-                            <p class="text-4xl font-extrabold text-white mt-1"><%= totalOrders %></p>
+                            <p class="text-4xl font-extrabold text-white mt-1">500</p>
                         </div>
                         <div class="bg-secondary bg-opacity-20 rounded-full p-3">
                             <i class="fas fa-shopping-cart text-secondary text-2xl"></i>
@@ -69,7 +93,7 @@
                     <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg flex items-center justify-between">
                         <div>
                             <p class="text-gray-500 text-sm uppercase font-semibold">Pelanggan Baru</p>
-                            <p class="text-4xl font-extrabold text-white mt-1"><%= totalCustomers %></p>
+                            <p class="text-4xl font-extrabold text-white mt-1">75</p>
                         </div>
                         <div class="bg-secondary bg-opacity-20 rounded-full p-3">
                             <i class="fas fa-user-plus text-secondary text-2xl"></i>
@@ -78,224 +102,147 @@
                     <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg flex items-center justify-between">
                         <div>
                             <p class="text-gray-500 text-sm uppercase font-semibold">Total Pendapatan</p>
-                            <p class="text-4xl font-extrabold text-white mt-1"><%= totalRevenue %></p>
+                            <p class="text-4xl font-extrabold text-white mt-1">Rp 10.000.000</p>
                         </div>
                         <div class="bg-secondary bg-opacity-20 rounded-full p-3">
                             <i class="fas fa-dollar-sign text-secondary text-2xl"></i>
                         </div>
                     </div>
                 </div>
-
                 <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg mb-8">
-                    <h2 class="text-xl font-bold text-white mb-4">Aktivitas Terbaru</h2>
-                    <ul class="divide-y divide-gray-700">
-                        <% if (recentActivities && recentActivities.length > 0) { %>
-                            <% recentActivities.forEach(activity => { %>
-                                <li class="py-3 flex items-center space-x-3">
-                                    <i class="fas fa-<%= activity.icon %> text-lg <%= activity.color %>"></i>
-                                    <div>
-                                        <p class="font-semibold text-white"><%= activity.type %></p>
-                                        <p class="text-sm text-gray-400"><%= activity.description %> - <%= activity.time %></p>
-                                    </div>
-                                </li>
-                            <% }); %>
-                        <% } else { %>
-                            <li class="py-3 text-gray-500">Belum ada aktivitas terbaru.</li>
-                        <% } %>
+                    <h2 class="text-xl font-bold  text-white mb-4">Aktivitas Terbaru</h2>
+                    <ul class="divide-y divide-gray-200">
+                        <li class="py-3 flex items-center space-x-3">
+                            <i class="fas fa-shopping-basket text-lg text-secondary"></i>
+                            <div>
+                                <p class="font-semibold  text-white">Pembelian baru oleh John Doe</p>
+                                <p class="text-sm text-gray-500">Stars Point (500) - 5 menit lalu</p>
+                            </div>
+                        </li>
+                        <li class="py-3 flex items-center space-x-3">
+                            <i class="fas fa-plus-circle text-lg text-green-500"></i>
+                            <div>
+                                <p class="font-semibold  text-white">Produk baru ditambahkan: Hosting Platinum</p>
+                                <p class="text-sm text-gray-500">1 jam lalu</p>
+                            </div>
+                        </li>
+                        <li class="py-3 flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-lg text-blue-500"></i>
+                            <div>
+                                <p class="font-semibold  text-white">Status pesanan #12345 diperbarui</p>
+                                <p class="text-sm text-gray-500">Menjadi 'Selesai' - 2 jam lalu</p>
+                            </div>
+                        </li>
+                        <li class="py-3 flex items-center space-x-3">
+                            <i class="fas fa-user-plus text-lg text-purple-500"></i>
+                            <div>
+                                <p class="font-semibold  text-white">Pelanggan baru terdaftar: Jane Smith</p>
+                                <p class="text-sm text-gray-500">3 jam lalu</p>
+                            </div>
+                        </li>
+                        <li class="py-3 flex items-center space-x-3">
+                            <i class="fas fa-edit text-lg text-orange-500"></i>
+                            <div>
+                                <p class="font-semibold  text-white">Produk diedit: Stars Point (2000)</p>
+                                <p class="text-sm text-gray-500">Kemarin</p>
+                            </div>
+                        </li>
                     </ul>
                 </div>
-                <% } %>
-                
-                <% if (title.includes('Produk') || title.includes('Tambah Produk Baru') || title.includes('Edit Produk')) { %>
-                <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg mb-8">
-                    <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-xl font-bold text-white"><%= currentProduct ? (action === 'edit' ? 'Edit Produk' : '') : 'Tambah Produk Baru' %></h2>
-                        <% if (!currentProduct) { %>
-                            <button id="showAddProductForm" class="bg-secondary text-primary px-5 py-2 rounded-md font-semibold hover:bg-opacity-80 transition duration-200 flex items-center space-x-2">
-                                <i class="fas fa-plus"></i>
-                                <span>Tambah Produk Baru</span>
-                            </button>
-                        <% } else { %>
-                            <a href="/dashboard/products" class="bg-gray-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-gray-700 transition duration-200 flex items-center space-x-2">
-                                <span>Batal Edit</span>
-                            </a>
-                        <% } %>
-                    </div>
-
-                    <div id="productFormContainer" class="<%= currentProduct || action === 'add' ? '' : 'hidden' %>">
-                        <form id="productForm" action="<%= currentProduct ? '/dashboard/products/edit/' + productType + '/' + currentProduct._id : '/dashboard/products/add' %>" method="POST" class="space-y-4 mb-8">
-                            <input type="hidden" name="redirectFrom" value="<%= title.includes('Dashboard') ? 'dashboard' : 'products' %>">
-
-                            <div>
-                                <label for="productType" class="block text-sm font-medium text-gray-400">Jenis Produk</label>
-                                <select id="productType" name="productType" required class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm">
-                                    <option value="">Pilih Jenis Produk</option>
-                                    <option value="stars" <%= productType === 'stars' ? 'selected' : '' %>>Stars Point</option>
-                                    <option value="hosting" <%= productType === 'hosting' ? 'selected' : '' %>>Server Hosting</option>
-                                </select>
-                            </div>
-
-                            <div id="starsPointFields" class="<%= productType === 'stars' ? '' : 'hidden' %> space-y-4">
-                                <div>
-                                    <label for="starsProductID" class="block text-sm font-medium text-gray-400">Product ID (Stars)</label>
-                                    <input type="text" id="starsProductID" name="productID" value="<%= currentProduct && productType === 'stars' ? currentProduct.productID : '' %>" class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm">
-                                </div>
-                                <div>
-                                    <label for="starsAmount" class="block text-sm font-medium text-gray-400">Jumlah Stars</label>
-                                    <input type="number" id="starsAmount" name="starsAmount" value="<%= currentProduct && productType === 'stars' ? currentProduct.starsAmount : '' %>" min="0" class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm">
-                                </div>
-                                <div>
-                                    <label for="starsBonus" class="block text-sm font-medium text-gray-400">Bonus Stars</label>
-                                    <input type="number" id="starsBonus" name="starsBonus" value="<%= currentProduct && productType === 'stars' ? currentProduct.starsBonus : '' %>" min="0" class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm">
-                                </div>
-                                <div>
-                                    <label for="starsPrice" class="block text-sm font-medium text-gray-400">Harga (Stars)</label>
-                                    <input type="text" id="starsPrice" name="price" value="<%= currentProduct && productType === 'stars' ? currentProduct.price : '' %>" class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm">
-                                </div>
-                            </div>
-
-                            <div id="hostingFields" class="<%= productType === 'hosting' ? '' : 'hidden' %> space-y-4">
-                                <div>
-                                    <label for="hostingProductID" class="block text-sm font-medium text-gray-400">Product ID (Hosting)</label>
-                                    <input type="text" id="hostingProductID" name="productID" value="<%= currentProduct && productType === 'hosting' ? currentProduct.productID : '' %>" class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm">
-                                </div>
-                                <div>
-                                    <label for="productName" class="block text-sm font-medium text-gray-400">Nama Produk (Hosting)</label>
-                                    <input type="text" id="productName" name="productName" value="<%= currentProduct && productType === 'hosting' ? currentProduct.productName : '' %>" class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm">
-                                </div>
-                                <div>
-                                    <label for="location" class="block text-sm font-medium text-gray-400">Lokasi Server</label>
-                                    <input type="text" id="location" name="location" value="<%= currentProduct && productType === 'hosting' ? currentProduct.location : '' %>" class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm">
-                                </div>
-                                <div>
-                                    <label for="amountRAM" class="block text-sm font-medium text-gray-400">Jumlah RAM</label>
-                                    <input type="text" id="amountRAM" name="amountRAM" value="<%= currentProduct && productType === 'hosting' ? currentProduct.amountRAM : '' %>" class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm">
-                                </div>
-                                <div>
-                                    <label for="amountCPU" class="block text-sm font-medium text-gray-400">Jumlah CPU</label>
-                                    <input type="text" id="amountCPU" name="amountCPU" value="<%= currentProduct && productType === 'hosting' ? currentProduct.amountCPU : '' %>" class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm">
-                                </div>
-                                <div>
-                                    <label for="amountStorage" class="block text-sm font-medium text-gray-400">Jumlah Storage</label>
-                                    <input type="text" id="amountStorage" name="amountStorage" value="<%= currentProduct && productType === 'hosting' ? currentProduct.amountStorage : '' %>" class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm">
-                                </div>
-                                <div>
-                                    <label for="hostingPrice" class="block text-sm font-medium text-gray-400">Harga (Hosting)</label>
-                                    <input type="text" id="hostingPrice" name="price" value="<%= currentProduct && productType === 'hosting' ? currentProduct.price : '' %>" class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm">
-                                </div>
-                            </div>
-                            
-                            <div class="flex justify-end space-x-3">
-                                <button type="submit" class="bg-secondary text-primary px-5 py-2 rounded-md font-semibold hover:bg-opacity-80 transition duration-200 flex items-center space-x-2">
-                                    <i class="fas fa-save"></i>
-                                    <span><%= currentProduct ? 'Simpan Perubahan' : 'Tambah Produk' %></span>
-                                </button>
-                                <% if (currentProduct) { %>
-                                    <a href="/dashboard/products" class="bg-gray-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-gray-700 transition duration-200 flex items-center space-x-2">
-                                        <span>Batal</span>
-                                    </a>
-                                <% } %>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg mb-8">
-                    <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-xl font-bold text-white">Stars Point</h2>
-                        <button class="bg-secondary text-primary px-5 py-2 rounded-md font-semibold hover:bg-opacity-80 transition duration-200 flex items-center space-x-2" onclick="showAddForm('stars')">
-                            <i class="fas fa-plus"></i>
-                            <span>Tambah Stars Point</span>
-                        </button>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-700">
-                            <thead class="bg-gray-900">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Product ID</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Jumlah Stars</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Bonus Stars</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Harga</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-gray-800 divide-y divide-gray-700">
-                                <% if (starsPoints && starsPoints.length > 0) { %>
-                                    <% starsPoints.forEach(stars => { %>
-                                        <tr class="hover:bg-gray-700 transition duration-150">
-                                            <td class="px-6 py-4 whitespace-nowrap font-medium text-white"><%= stars.productID %></td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-white"><%= stars.starsAmount.toLocaleString() %></td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-white"><%= stars.starsBonus.toLocaleString() %></td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-white">Rp <%= parseFloat(stars.price).toLocaleString('id-ID') %></td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                <a href="/dashboard/products/edit/stars/<%= stars._id %>" class="text-blue-500 hover:text-blue-400 mr-3">Edit</a>
-                                                <form action="/dashboard/products/delete/stars/<%= stars._id %>?redirectFrom=products" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?');">
-                                                    <button type="submit" class="text-red-500 hover:text-red-400 focus:outline-none">Hapus</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    <% }); %>
-                                <% } else { %>
-                                    <tr>
-                                        <td colspan="5" class="px-6 py-4 text-center text-gray-500">Belum ada produk Stars Point.</td>
-                                    </tr>
-                                <% } %>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
                 <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg">
                     <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-xl font-bold text-white">Server Hosting</h2>
-                        <button class="bg-secondary text-primary px-5 py-2 rounded-md font-semibold hover:bg-opacity-80 transition duration-200 flex items-center space-x-2" onclick="showAddForm('hosting')">
+                        <h2 class="text-xl font-bold text-white">Stars Point</h2>
+                        <button class="bg-secondary text-primary px-5 py-2 rounded-md font-semibold hover:bg-opacity-80 transition duration-200 flex items-center space-x-2">
                             <i class="fas fa-plus"></i>
-                            <span>Tambah Server Hosting</span>
+                            <span>Tambah Produk Baru</span>
                         </button>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-700">
+                        <table class="min-w-full divide-y divide-gray-200 mb-10">
                             <thead class="bg-gray-900">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Product ID</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Nama Produk</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Lokasi</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">RAM</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">CPU</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Storage</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Harga</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Kategori</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Status</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-gray-800 divide-y divide-gray-700">
-                                <% if (serverHostings && serverHostings.length > 0) { %>
-                                    <% serverHostings.forEach(hosting => { %>
-                                        <tr class="hover:bg-gray-700 transition duration-150">
-                                            <td class="px-6 py-4 whitespace-nowrap font-medium text-white"><%= hosting.productID %></td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-white"><%= hosting.productName %></td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-white"><%= hosting.location %></td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-white"><%= hosting.amountRAM %></td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-white"><%= hosting.amountCPU %></td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-white"><%= hosting.amountStorage %></td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-white">Rp <%= parseFloat(hosting.price).toLocaleString('id-ID') %></td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                <a href="/dashboard/products/edit/hosting/<%= hosting._id %>" class="text-blue-500 hover:text-blue-400 mr-3">Edit</a>
-                                                <form action="/dashboard/products/delete/hosting/<%= hosting._id %>?redirectFrom=products" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?');">
-                                                    <button type="submit" class="text-red-500 hover:text-red-400 focus:outline-none">Hapus</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    <% }); %>
-                                <% } else { %>
-                                    <tr>
-                                        <td colspan="8" class="px-6 py-4 text-center text-gray-500">Belum ada produk Server Hosting.</td>
-                                    </tr>
-                                <% } %>
+                            <tbody class="bg-gray-800 divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-700 transition duration-150">
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-white">Stars Point (1000)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-white">Rp 100.000</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-white">Stars Point</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Aktif</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <a href="#" class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
+                                        <a href="#" class="text-red-600 hover:text-red-900">Hapus</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-700 transition duration-150">
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-white">Hosting Bronze</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-white">Rp 50.000/bulan</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-white">Hosting</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Aktif</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <a href="#" class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
+                                        <a href="#" class="text-red-600 hover:text-red-900">Hapus</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold text-white">Stars Point</h2>
+                        <button class="bg-secondary text-primary px-5 py-2 rounded-md font-semibold hover:bg-opacity-80 transition duration-200 flex items-center space-x-2">
+                            <i class="fas fa-plus"></i>
+                            <span>Tambah Produk Baru</span>
+                        </button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-900">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Nama Produk</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Harga</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Kategori</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Status</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-gray-800 divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-700 transition duration-150">
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-white">Stars Point (1000)</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-white">Rp 100.000</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-white">Stars Point</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Aktif</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <a href="#" class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
+                                        <a href="#" class="text-red-600 hover:text-red-900">Hapus</a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-700 transition duration-150">
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-white">Hosting Bronze</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-white">Rp 50.000/bulan</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-white">Hosting</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Aktif</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <a href="#" class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
+                                        <a href="#" class="text-red-600 hover:text-red-900">Hapus</a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <% } %>
             </main>
         </div>
     </div>
@@ -314,53 +261,6 @@
             sidebar.classList.add('-translate-x-full');
             sidebarOverlay.classList.add('hidden');
         });
-
-        // JavaScript for Product Form dynamic fields
-        const productTypeSelect = document.getElementById('productType');
-        const starsPointFields = document.getElementById('starsPointFields');
-        const hostingFields = document.getElementById('hostingFields');
-        const productFormContainer = document.getElementById('productFormContainer');
-        const productForm = document.getElementById('productForm');
-        const showAddProductFormBtn = document.getElementById('showAddProductForm');
-
-        function toggleProductFields() {
-            const selectedType = productTypeSelect.value;
-            if (selectedType === 'stars') {
-                starsPointFields.classList.remove('hidden');
-                hostingFields.classList.add('hidden');
-                // Set required attribute for stars fields
-                starsPointFields.querySelectorAll('input').forEach(input => input.setAttribute('required', 'required'));
-                hostingFields.querySelectorAll('input').forEach(input => input.removeAttribute('required'));
-            } else if (selectedType === 'hosting') {
-                starsPointFields.classList.add('hidden');
-                hostingFields.classList.remove('hidden');
-                // Set required attribute for hosting fields
-                hostingFields.querySelectorAll('input').forEach(input => input.setAttribute('required', 'required'));
-                starsPointFields.querySelectorAll('input').forEach(input => input.removeAttribute('required'));
-            } else {
-                starsPointFields.classList.add('hidden');
-                hostingFields.classList.add('hidden');
-                starsPointFields.querySelectorAll('input').forEach(input => input.removeAttribute('required'));
-                hostingFields.querySelectorAll('input').forEach(input => input.removeAttribute('required'));
-            }
-        }
-
-        // Initial call to set correct fields on page load for edit forms
-        toggleProductFields();
-
-        productTypeSelect.addEventListener('change', toggleProductFields);
-
-        // Show/hide add product form on button click
-        if (showAddProductFormBtn) {
-            showAddProductFormBtn.addEventListener('click', () => {
-                productFormContainer.classList.remove('hidden');
-                productForm.action = '/dashboard/products/add'; // Reset action for add
-                productTypeSelect.value = ''; // Reset select
-                toggleProductFields(); // Hide all fields
-                document.querySelector('h2.text-xl.font-bold.text-white').textContent = 'Tambah Produk Baru'; // Update title
-                showAddProductFormBtn.classList.add('hidden'); // Hide the "Tambah Produk Baru" button
-            });
-        }
     </script>
 </body>
 </html>

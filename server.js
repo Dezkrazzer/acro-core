@@ -90,10 +90,10 @@ function obfuscateInlineScripts(html) {
 
 app.get("/auth/login", checkAuth);
 app.get("/auth/logout", checkLogout, (req, res) => {
-  const webhook = new Discord.WebhookClient(
-    "1378316907291344917",
-    "IaH5bgKmxW6H5wpTgy05U_cD2b0Ac-cL9VS8Q92CSyWP10x7imbQXwlwJwUDycdZVmtM"
-  );
+  const webhook = new Discord.WebhookClient({
+    id: "1378316907291344917",
+    token: "IaH5bgKmxW6H5wpTgy05U_cD2b0Ac-cL9VS8Q92CSyWP10x7imbQXwlwJwUDycdZVmtM"
+  });
   let embedLogout = new Discord.EmbedBuilder()
     .setAuthor(
       `${req.user.username}#${req.user.discriminator} logout`,
@@ -118,10 +118,10 @@ app.get(
   }),
   (req, res) => {
     console.log(`[#${req.user.id}]: Logged`);
-  const webhook = new Discord.WebhookClient(
-    "1378316907291344917",
-    "IaH5bgKmxW6H5wpTgy05U_cD2b0Ac-cL9VS8Q92CSyWP10x7imbQXwlwJwUDycdZVmtM"
-  );
+  const webhook = new Discord.WebhookClient({
+    id: "1378316907291344917",
+    token: "IaH5bgKmxW6H5wpTgy05U_cD2b0Ac-cL9VS8Q92CSyWP10x7imbQXwlwJwUDycdZVmtM"
+  });
     let embedLogin = new Discord.EmbedBuilder()
       .setAuthor(
         `${req.user.username}#${req.user.discriminator} logged`,

@@ -21,7 +21,8 @@
             },
         };
     </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-z7yM5s+g4W1BqL0/Dk7J/P5E2j/dF0J7/j3+L8+B7+6KjD/nF6R+R9k4u+Y9B7+Z8+p7+3Q0" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bg-gray-100 font-sans antialiased text-gray-800">
     <div class="flex h-screen overflow-hidden">
@@ -52,8 +53,8 @@
                 </nav>
             </div>
             <div class="p-4 border-t border-gray-700 text-sm">
-                <p>Logged in as: <span class="font-semibold">Admin</span></p>
-                <a href="#" class="text-secondary hover:underline">Logout</a>
+                <p>Logged in as: <span class="font-semibold"><%= req.user ? req.user.username : 'Guest' %></span></p>
+                <a href="/auth/logout" class="text-secondary hover:underline">Logout</a>
             </div>
         </aside>
         <div id="sidebar-overlay" class="fixed inset-0 bg-black opacity-50 z-40 hidden md:hidden"></div>
@@ -65,7 +66,7 @@
                 <h1 class="text-2xl font-bold text-white flex-grow text-center md:text-left">Dashboard</h1>
                 <div class="relative">
                     <button class="flex items-center text-white focus:outline-none space-x-2">
-                        <span class="hidden md:block">Halo, Admin!</span>
+                        <span class="hidden md:block">Halo, <%= req.user ? req.user.username : 'Guest' %>!</span>
                         <i class="fas fa-user-circle text-2xl"></i>
                     </button>
                 </div>
@@ -75,7 +76,7 @@
                     <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg flex items-center justify-between">
                         <div>
                             <p class="text-gray-500 text-sm uppercase font-semibold">Total Produk</p>
-                            <p class="text-4xl font-extrabold text-white mt-1">120</p>
+                            <p class="text-4xl font-extrabold text-white mt-1"><%= totalProducts %></p>
                         </div>
                         <div class="bg-secondary bg-opacity-20 rounded-full p-3">
                             <i class="fas fa-box text-secondary text-2xl"></i>
@@ -84,7 +85,7 @@
                     <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg flex items-center justify-between">
                         <div>
                             <p class="text-gray-500 text-sm uppercase font-semibold">Total Pembelian</p>
-                            <p class="text-4xl font-extrabold text-white mt-1">500</p>
+                            <p class="text-4xl font-extrabold text-white mt-1"><%= totalPurchases %></p>
                         </div>
                         <div class="bg-secondary bg-opacity-20 rounded-full p-3">
                             <i class="fas fa-shopping-cart text-secondary text-2xl"></i>
@@ -93,7 +94,7 @@
                     <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg flex items-center justify-between">
                         <div>
                             <p class="text-gray-500 text-sm uppercase font-semibold">Pelanggan Baru</p>
-                            <p class="text-4xl font-extrabold text-white mt-1">75</p>
+                            <p class="text-4xl font-extrabold text-white mt-1"><%= newCustomers %></p>
                         </div>
                         <div class="bg-secondary bg-opacity-20 rounded-full p-3">
                             <i class="fas fa-user-plus text-secondary text-2xl"></i>
@@ -102,7 +103,7 @@
                     <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg flex items-center justify-between">
                         <div>
                             <p class="text-gray-500 text-sm uppercase font-semibold">Total Pendapatan</p>
-                            <p class="text-4xl font-extrabold text-white mt-1">Rp 10.000.000</p>
+                            <p class="text-4xl font-extrabold text-white mt-1"><%= totalRevenue %></p>
                         </div>
                         <div class="bg-secondary bg-opacity-20 rounded-full p-3">
                             <i class="fas fa-dollar-sign text-secondary text-2xl"></i>
@@ -110,135 +111,121 @@
                     </div>
                 </div>
                 <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg mb-8">
-                    <h2 class="text-xl font-bold  text-white mb-4">Aktivitas Terbaru</h2>
+                    <h2 class="text-xl font-bold text-white mb-4">Aktivitas Terbaru</h2>
                     <ul class="divide-y divide-gray-200">
                         <li class="py-3 flex items-center space-x-3">
                             <i class="fas fa-shopping-basket text-lg text-secondary"></i>
                             <div>
-                                <p class="font-semibold  text-white">Pembelian baru oleh John Doe</p>
+                                <p class="font-semibold text-white">Pembelian baru oleh John Doe</p>
                                 <p class="text-sm text-gray-500">Stars Point (500) - 5 menit lalu</p>
                             </div>
                         </li>
                         <li class="py-3 flex items-center space-x-3">
                             <i class="fas fa-plus-circle text-lg text-green-500"></i>
                             <div>
-                                <p class="font-semibold  text-white">Produk baru ditambahkan: Hosting Platinum</p>
+                                <p class="font-semibold text-white">Produk baru ditambahkan: Hosting Platinum</p>
                                 <p class="text-sm text-gray-500">1 jam lalu</p>
                             </div>
                         </li>
                         <li class="py-3 flex items-center space-x-3">
                             <i class="fas fa-check-circle text-lg text-blue-500"></i>
                             <div>
-                                <p class="font-semibold  text-white">Status pesanan #12345 diperbarui</p>
+                                <p class="font-semibold text-white">Status pesanan #12345 diperbarui</p>
                                 <p class="text-sm text-gray-500">Menjadi 'Selesai' - 2 jam lalu</p>
                             </div>
                         </li>
                         <li class="py-3 flex items-center space-x-3">
                             <i class="fas fa-user-plus text-lg text-purple-500"></i>
                             <div>
-                                <p class="font-semibold  text-white">Pelanggan baru terdaftar: Jane Smith</p>
+                                <p class="font-semibold text-white">Pelanggan baru terdaftar: Jane Smith</p>
                                 <p class="text-sm text-gray-500">3 jam lalu</p>
                             </div>
                         </li>
                         <li class="py-3 flex items-center space-x-3">
                             <i class="fas fa-edit text-lg text-orange-500"></i>
                             <div>
-                                <p class="font-semibold  text-white">Produk diedit: Stars Point (2000)</p>
+                                <p class="font-semibold text-white">Produk diedit: Stars Point (2000)</p>
                                 <p class="text-sm text-gray-500">Kemarin</p>
                             </div>
                         </li>
                     </ul>
                 </div>
-                <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg">
+
+                <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg mb-8">
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-xl font-bold text-white">Stars Point</h2>
-                        <button class="bg-secondary text-primary px-5 py-2 rounded-md font-semibold hover:bg-opacity-80 transition duration-200 flex items-center space-x-2">
+                        <button id="addStarsPointBtn" class="bg-secondary text-primary px-5 py-2 rounded-md font-semibold hover:bg-opacity-80 transition duration-200 flex items-center space-x-2">
                             <i class="fas fa-plus"></i>
-                            <span>Tambah Produk Baru</span>
+                            <span>Tambah Stars Point Baru</span>
                         </button>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200 mb-10">
+                        <table class="min-w-full divide-y divide-gray-200 mb-10" id="starsPointTable">
                             <thead class="bg-gray-900">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Nama Produk</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Product ID</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Jumlah Stars</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Bonus Stars</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Harga</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Kategori</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Status</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-gray-800 divide-y divide-gray-200">
-                                <tr class="hover:bg-gray-700 transition duration-150">
-                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-white">Stars Point (1000)</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-white">Rp 100.000</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-white">Stars Point</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Aktif</span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="#" class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
-                                        <a href="#" class="text-red-600 hover:text-red-900">Hapus</a>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-700 transition duration-150">
-                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-white">Hosting Bronze</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-white">Rp 50.000/bulan</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-white">Hosting</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Aktif</span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="#" class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
-                                        <a href="#" class="text-red-600 hover:text-red-900">Hapus</a>
-                                    </td>
-                                </tr>
+                                <% starsPoints.forEach(product => { %>
+                                    <tr class="hover:bg-gray-700 transition duration-150">
+                                        <td class="px-6 py-4 whitespace-nowrap font-medium text-white"><%= product.productID %></td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white"><%= product.starsAmount %></td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white"><%= product.starsBonus %></td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white">Rp <%= product.price.toLocaleString('id-ID') %></td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a href="#" class="text-blue-600 hover:text-blue-900 mr-3 edit-stars-point-btn" data-id="<%= product._id %>">Edit</a>
+                                            <a href="#" class="text-red-600 hover:text-red-900 delete-stars-point-btn" data-id="<%= product._id %>">Hapus</a>
+                                        </td>
+                                    </tr>
+                                <% }); %>
                             </tbody>
                         </table>
                     </div>
+                </div>
+
+                <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg">
                     <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-xl font-bold text-white">Stars Point</h2>
-                        <button class="bg-secondary text-primary px-5 py-2 rounded-md font-semibold hover:bg-opacity-80 transition duration-200 flex items-center space-x-2">
+                        <h2 class="text-xl font-bold text-white">Server Hosting</h2>
+                        <button id="addServerHostingBtn" class="bg-secondary text-primary px-5 py-2 rounded-md font-semibold hover:bg-opacity-80 transition duration-200 flex items-center space-x-2">
                             <i class="fas fa-plus"></i>
-                            <span>Tambah Produk Baru</span>
+                            <span>Tambah Hosting Baru</span>
                         </button>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
+                        <table class="min-w-full divide-y divide-gray-200" id="serverHostingTable">
                             <thead class="bg-gray-900">
                                 <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Product ID</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Nama Produk</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Lokasi</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">RAM</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">CPU</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Penyimpanan</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Harga</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Kategori</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Status</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-gray-800 divide-y divide-gray-200">
-                                <tr class="hover:bg-gray-700 transition duration-150">
-                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-white">Stars Point (1000)</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-white">Rp 100.000</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-white">Stars Point</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Aktif</span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="#" class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
-                                        <a href="#" class="text-red-600 hover:text-red-900">Hapus</a>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-700 transition duration-150">
-                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-white">Hosting Bronze</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-white">Rp 50.000/bulan</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-white">Hosting</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Aktif</span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="#" class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
-                                        <a href="#" class="text-red-600 hover:text-red-900">Hapus</a>
-                                    </td>
-                                </tr>
+                                <% serverHostings.forEach(product => { %>
+                                    <tr class="hover:bg-gray-700 transition duration-150">
+                                        <td class="px-6 py-4 whitespace-nowrap font-medium text-white"><%= product.productID %></td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white"><%= product.productName %></td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white"><%= product.location %></td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white"><%= product.amountRAM %></td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white"><%= product.amountCPU %></td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white"><%= product.amountStorage %></td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white">Rp <%= product.price.toLocaleString('id-ID') %></td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a href="#" class="text-blue-600 hover:text-blue-900 mr-3 edit-server-hosting-btn" data-id="<%= product._id %>">Edit</a>
+                                            <a href="#" class="text-red-600 hover:text-red-900 delete-server-hosting-btn" data-id="<%= product._id %>">Hapus</a>
+                                        </td>
+                                    </tr>
+                                <% }); %>
                             </tbody>
                         </table>
                     </div>
@@ -260,6 +247,406 @@
         sidebarOverlay.addEventListener('click', () => {
             sidebar.classList.add('-translate-x-full');
             sidebarOverlay.classList.add('hidden');
+        });
+
+        // --- SweetAlert2 for Stars Point Products ---
+        const starsPointTableBody = document.querySelector('#starsPointTable tbody');
+        const addStarsPointBtn = document.getElementById('addStarsPointBtn');
+
+        // Function to render Stars Point table (call this after CRUD operations)
+        async function renderStarsPoints() {
+            const response = await fetch('/api/stars-points');
+            const products = await response.json();
+            starsPointTableBody.innerHTML = ''; // Clear existing rows
+            products.forEach(product => {
+                const row = `
+                    <tr class="hover:bg-gray-700 transition duration-150">
+                        <td class="px-6 py-4 whitespace-nowrap font-medium text-white">${product.productID}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-white">${product.starsAmount}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-white">${product.starsBonus}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-white">Rp ${product.price.toLocaleString('id-ID')}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <a href="#" class="text-blue-600 hover:text-blue-900 mr-3 edit-stars-point-btn" data-id="${product._id}">Edit</a>
+                            <a href="#" class="text-red-600 hover:text-red-900 delete-stars-point-btn" data-id="${product._id}">Hapus</a>
+                        </td>
+                    </tr>
+                `;
+                starsPointTableBody.insertAdjacentHTML('beforeend', row);
+            });
+            attachStarsPointEventListeners(); // Re-attach event listeners after re-rendering
+        }
+
+        // Add Stars Point
+        addStarsPointBtn.addEventListener('click', async () => {
+            const { value: formValues } = await Swal.fire({
+                title: 'Tambah Stars Point Baru',
+                html:
+                    '<input id="swal-product-id" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Product ID">' +
+                    '<input id="swal-stars-amount" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah Stars">' +
+                    '<input id="swal-stars-bonus" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Bonus Stars (opsional, default 0)">' +
+                    '<input id="swal-price" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Harga (Rp)">',
+                focusConfirm: false,
+                preConfirm: () => {
+                    return {
+                        productID: document.getElementById('swal-product-id').value,
+                        starsAmount: parseInt(document.getElementById('swal-stars-amount').value),
+                        starsBonus: parseInt(document.getElementById('swal-stars-bonus').value || '0'),
+                        price: parseFloat(document.getElementById('swal-price').value),
+                    };
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Simpan',
+                cancelButtonText: 'Batal',
+                customClass: {
+                    popup: 'bg-gray-800 text-white',
+                    title: 'text-white',
+                    confirmButton: 'bg-secondary text-primary',
+                    cancelButton: 'bg-gray-600 text-white',
+                }
+            });
+
+            if (formValues) {
+                try {
+                    const response = await fetch('/api/stars-points', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formValues)
+                    });
+                    const result = await response.json();
+                    if (response.ok) {
+                        Swal.fire('Berhasil!', result.message, 'success');
+                        renderStarsPoints(); // Re-render the table
+                    } else {
+                        Swal.fire('Error!', result.error || 'Gagal menambahkan Stars Point.', 'error');
+                    }
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                    Swal.fire('Error!', 'Terjadi kesalahan jaringan.', 'error');
+                }
+            }
+        });
+
+        // Edit Stars Point and Delete Stars Point logic (using event delegation)
+        function attachStarsPointEventListeners() {
+            starsPointTableBody.querySelectorAll('.edit-stars-point-btn').forEach(button => {
+                button.removeEventListener('click', handleEditStarsPoint); // Prevent duplicate listeners
+                button.addEventListener('click', handleEditStarsPoint);
+            });
+
+            starsPointTableBody.querySelectorAll('.delete-stars-point-btn').forEach(button => {
+                button.removeEventListener('click', handleDeleteStarsPoint); // Prevent duplicate listeners
+                button.addEventListener('click', handleDeleteStarsPoint);
+            });
+        }
+
+        async function handleEditStarsPoint(event) {
+            event.preventDefault();
+            const id = event.target.dataset.id;
+
+            try {
+                const response = await fetch(`/api/stars-points/${id}`);
+                const product = await response.json();
+
+                const { value: formValues } = await Swal.fire({
+                    title: 'Edit Stars Point',
+                    html:
+                        `<input id="swal-product-id" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Product ID" value="${product.productID}">` +
+                        `<input id="swal-stars-amount" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah Stars" value="${product.starsAmount}">` +
+                        `<input id="swal-stars-bonus" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Bonus Stars" value="${product.starsBonus}">` +
+                        `<input id="swal-price" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Harga (Rp)" value="${product.price}">`,
+                    focusConfirm: false,
+                    preConfirm: () => {
+                        return {
+                            productID: document.getElementById('swal-product-id').value,
+                            starsAmount: parseInt(document.getElementById('swal-stars-amount').value),
+                            starsBonus: parseInt(document.getElementById('swal-stars-bonus').value || '0'),
+                            price: parseFloat(document.getElementById('swal-price').value),
+                        };
+                    },
+                    showCancelButton: true,
+                    confirmButtonText: 'Update',
+                    cancelButtonText: 'Batal',
+                    customClass: {
+                        popup: 'bg-gray-800 text-white',
+                        title: 'text-white',
+                        confirmButton: 'bg-secondary text-primary',
+                        cancelButton: 'bg-gray-600 text-white',
+                    }
+                });
+
+                if (formValues) {
+                    const updateResponse = await fetch(`/api/stars-points/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formValues)
+                    });
+                    const updateResult = await updateResponse.json();
+                    if (updateResponse.ok) {
+                        Swal.fire('Berhasil!', updateResult.message, 'success');
+                        renderStarsPoints(); // Re-render the table
+                    } else {
+                        Swal.fire('Error!', updateResult.error || 'Gagal memperbarui Stars Point.', 'error');
+                    }
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                Swal.fire('Error!', 'Terjadi kesalahan saat mengambil atau memperbarui data.', 'error');
+            }
+        }
+
+        async function handleDeleteStarsPoint(event) {
+            event.preventDefault();
+            const id = event.target.dataset.id;
+
+            const { isConfirmed } = await Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Produk ini akan dihapus secara permanen!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#DC2626',
+                cancelButtonColor: '#6B7280',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal',
+                customClass: {
+                    popup: 'bg-gray-800 text-white',
+                    title: 'text-white',
+                    confirmButton: 'bg-red-600 text-white',
+                    cancelButton: 'bg-gray-600 text-white',
+                }
+            });
+
+            if (isConfirmed) {
+                try {
+                    const response = await fetch(`/api/stars-points/${id}`, {
+                        method: 'DELETE'
+                    });
+                    const result = await response.json();
+                    if (response.ok) {
+                        Swal.fire('Terhapus!', result.message, 'success');
+                        renderStarsPoints(); // Re-render the table
+                    } else {
+                        Swal.fire('Error!', result.error || 'Gagal menghapus Stars Point.', 'error');
+                    }
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                    Swal.fire('Error!', 'Terjadi kesalahan jaringan.', 'error');
+                }
+            }
+        }
+
+
+        // --- SweetAlert2 for Server Hosting Products ---
+        const serverHostingTableBody = document.querySelector('#serverHostingTable tbody');
+        const addServerHostingBtn = document.getElementById('addServerHostingBtn');
+
+        // Function to render Server Hosting table (call this after CRUD operations)
+        async function renderServerHostings() {
+            const response = await fetch('/api/server-hosting');
+            const products = await response.json();
+            serverHostingTableBody.innerHTML = ''; // Clear existing rows
+            products.forEach(product => {
+                const row = `
+                    <tr class="hover:bg-gray-700 transition duration-150">
+                        <td class="px-6 py-4 whitespace-nowrap font-medium text-white">${product.productID}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-white">${product.productName}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-white">${product.location}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-white">${product.amountRAM}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-white">${product.amountCPU}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-white">${product.amountStorage}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-white">Rp ${product.price.toLocaleString('id-ID')}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <a href="#" class="text-blue-600 hover:text-blue-900 mr-3 edit-server-hosting-btn" data-id="${product._id}">Edit</a>
+                            <a href="#" class="text-red-600 hover:text-red-900 delete-server-hosting-btn" data-id="${product._id}">Hapus</a>
+                        </td>
+                    </tr>
+                `;
+                serverHostingTableBody.insertAdjacentHTML('beforeend', row);
+            });
+            attachServerHostingEventListeners(); // Re-attach event listeners after re-rendering
+        }
+
+        // Add Server Hosting
+        addServerHostingBtn.addEventListener('click', async () => {
+            const { value: formValues } = await Swal.fire({
+                title: 'Tambah Server Hosting Baru',
+                html:
+                    '<input id="swal-hosting-product-id" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Product ID">' +
+                    '<input id="swal-hosting-product-name" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Nama Produk">' +
+                    '<input id="swal-hosting-location" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Lokasi">' +
+                    '<input id="swal-hosting-ram" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah RAM (e.g., 2GB)">' +
+                    '<input id="swal-hosting-cpu" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah CPU (e.g., 2 Core)">' +
+                    '<input id="swal-hosting-storage" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah Penyimpanan (e.g., 50GB)">' +
+                    '<input id="swal-hosting-price" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Harga (Rp)">',
+                focusConfirm: false,
+                preConfirm: () => {
+                    return {
+                        productID: document.getElementById('swal-hosting-product-id').value,
+                        productName: document.getElementById('swal-hosting-product-name').value,
+                        location: document.getElementById('swal-hosting-location').value,
+                        amountRAM: document.getElementById('swal-hosting-ram').value,
+                        amountCPU: document.getElementById('swal-hosting-cpu').value,
+                        amountStorage: document.getElementById('swal-hosting-storage').value,
+                        price: parseFloat(document.getElementById('swal-hosting-price').value),
+                    };
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Simpan',
+                cancelButtonText: 'Batal',
+                customClass: {
+                    popup: 'bg-gray-800 text-white',
+                    title: 'text-white',
+                    confirmButton: 'bg-secondary text-primary',
+                    cancelButton: 'bg-gray-600 text-white',
+                }
+            });
+
+            if (formValues) {
+                try {
+                    const response = await fetch('/api/server-hosting', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formValues)
+                    });
+                    const result = await response.json();
+                    if (response.ok) {
+                        Swal.fire('Berhasil!', result.message, 'success');
+                        renderServerHostings(); // Re-render the table
+                    } else {
+                        Swal.fire('Error!', result.error || 'Gagal menambahkan Server Hosting.', 'error');
+                    }
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                    Swal.fire('Error!', 'Terjadi kesalahan jaringan.', 'error');
+                }
+            }
+        });
+
+        // Edit Server Hosting and Delete Server Hosting logic (using event delegation)
+        function attachServerHostingEventListeners() {
+            serverHostingTableBody.querySelectorAll('.edit-server-hosting-btn').forEach(button => {
+                button.removeEventListener('click', handleEditServerHosting); // Prevent duplicate listeners
+                button.addEventListener('click', handleEditServerHosting);
+            });
+
+            serverHostingTableBody.querySelectorAll('.delete-server-hosting-btn').forEach(button => {
+                button.removeEventListener('click', handleDeleteServerHosting); // Prevent duplicate listeners
+                button.addEventListener('click', handleDeleteServerHosting);
+            });
+        }
+
+        async function handleEditServerHosting(event) {
+            event.preventDefault();
+            const id = event.target.dataset.id;
+
+            try {
+                const response = await fetch(`/api/server-hosting/${id}`);
+                const product = await response.json();
+
+                const { value: formValues } = await Swal.fire({
+                    title: 'Edit Server Hosting',
+                    html:
+                        `<input id="swal-hosting-product-id" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Product ID" value="${product.productID}">` +
+                        `<input id="swal-hosting-product-name" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Nama Produk" value="${product.productName}">` +
+                        `<input id="swal-hosting-location" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Lokasi" value="${product.location}">` +
+                        `<input id="swal-hosting-ram" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah RAM (e.g., 2GB)" value="${product.amountRAM}">` +
+                        `<input id="swal-hosting-cpu" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah CPU (e.g., 2 Core)" value="${product.amountCPU}">` +
+                        `<input id="swal-hosting-storage" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah Penyimpanan (e.g., 50GB)" value="${product.amountStorage}">` +
+                        `<input id="swal-hosting-price" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Harga (Rp)" value="${product.price}">`,
+                    focusConfirm: false,
+                    preConfirm: () => {
+                        return {
+                            productID: document.getElementById('swal-hosting-product-id').value,
+                            productName: document.getElementById('swal-hosting-product-name').value,
+                            location: document.getElementById('swal-hosting-location').value,
+                            amountRAM: document.getElementById('swal-hosting-ram').value,
+                            amountCPU: document.getElementById('swal-hosting-cpu').value,
+                            amountStorage: document.getElementById('swal-hosting-storage').value,
+                            price: parseFloat(document.getElementById('swal-hosting-price').value),
+                        };
+                    },
+                    showCancelButton: true,
+                    confirmButtonText: 'Update',
+                    cancelButtonText: 'Batal',
+                    customClass: {
+                        popup: 'bg-gray-800 text-white',
+                        title: 'text-white',
+                        confirmButton: 'bg-secondary text-primary',
+                        cancelButton: 'bg-gray-600 text-white',
+                    }
+                });
+
+                if (formValues) {
+                    const updateResponse = await fetch(`/api/server-hosting/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formValues)
+                    });
+                    const updateResult = await updateResponse.json();
+                    if (updateResponse.ok) {
+                        Swal.fire('Berhasil!', updateResult.message, 'success');
+                        renderServerHostings(); // Re-render the table
+                    } else {
+                        Swal.fire('Error!', updateResult.error || 'Gagal memperbarui Server Hosting.', 'error');
+                    }
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                Swal.fire('Error!', 'Terjadi kesalahan saat mengambil atau memperbarui data.', 'error');
+            }
+        }
+
+        async function handleDeleteServerHosting(event) {
+            event.preventDefault();
+            const id = event.target.dataset.id;
+
+            const { isConfirmed } = await Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Produk ini akan dihapus secara permanen!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#DC2626',
+                cancelButtonColor: '#6B7280',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal',
+                customClass: {
+                    popup: 'bg-gray-800 text-white',
+                    title: 'text-white',
+                    confirmButton: 'bg-red-600 text-white',
+                    cancelButton: 'bg-gray-600 text-white',
+                }
+            });
+
+            if (isConfirmed) {
+                try {
+                    const response = await fetch(`/api/server-hosting/${id}`, {
+                        method: 'DELETE'
+                    });
+                    const result = await response.json();
+                    if (response.ok) {
+                        Swal.fire('Terhapus!', result.message, 'success');
+                        renderServerHostings(); // Re-render the table
+                    } else {
+                        Swal.fire('Error!', result.error || 'Gagal menghapus Server Hosting.', 'error');
+                    }
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                    Swal.fire('Error!', 'Terjadi kesalahan jaringan.', 'error');
+                }
+            }
+        }
+
+        // Initial render on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderStarsPoints();
+            renderServerHostings();
         });
     </script>
 </body>

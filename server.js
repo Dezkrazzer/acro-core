@@ -5,6 +5,9 @@ const app = express()
 //const client = require("./index.js");
 client.logger = require("./Utils/logger.js");
 const cases = require("./database/Schema/Case")
+const StarsPoint = require("./database/Schema/starsPoint"); // Import schema StarsPoint
+const ServerHosting = require("./database/Schema/serverHosting");
+
 const { json, urlencoded } = require("body-parser")
 const { resolve } = require("path")
 const { minify } = require('html-minifier')
@@ -244,24 +247,162 @@ app.get('/store', (req, res) => {
     });
 });
 
-app.get('/dashboard/store', (req, res) => {
-    res.render('store/dashboard', { bot: client, req, res }, (err, html) => {
-      if (err) return res.status(500).send(err.message);
+app.get("/dashboard/store", async (req, res) => {
+    try {
+      // Ambil data untuk dashboard
+      const totalProducts = await StarsPoint.countDocuments() + await ServerHosting.countDocuments(); // Contoh, sesuaikan
+      const totalPurchases = 500; // Contoh statis, sesuaikan dengan data aktual
+      const newCustomers = 75; // Contoh statis, sesuaikan dengan data aktual
+      const totalRevenue = "Rp 10.000.000"; // Contoh statis, sesuaikan dengan data aktual
 
-      const obfuscatedHTML = obfuscateInlineScripts(html);
-  
-      const minifiedHtml = minify(obfuscatedHTML, {
-        collapseWhitespace: true,
-        removeComments: true,
-        //minifyJS: true,
-        minifyCSS: true,
-        ignoreCustomFragments: [/<%[\s\S]*?%>/]  // agar tag EJS tidak rusak
-      });
-  
-      res.send(minifiedHtml);
-    });
-});
+      // Ambil data produk Stars Point dan Server Hosting
+      const starsPoints = await StarsPoint.find({});
+      const serverHostings = await ServerHosting.find({});
 
+      res.render(
+        "store/dashboard",
+        {
+          bot: client,
+          req,
+          res,
+          totalProducts,
+          totalPurchases,
+          newCustomers,
+          totalRevenue,
+          starsPoints,
+          serverHostings,
+        },
+        (err, html) => {
+          if (err) return res.status(500).send(err.message);
+
+          const obfuscatedHTML = obfuscateInlineScripts(html);
+          const minifiedHtml = minify(obfuscatedHTML, {
+            collapseWhitespace: true,
+            removeComments: true,
+            minifyCSS: true,
+            ignoreCustomFragments: [/<%[\s\S]*?%>/], // agar tag EJS tidak rusak
+          });
+          res.send(minifiedHtml);
+        }
+      );
+    } catch (error) {
+      console.error("Error fetching dashboard data:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+
+ app.get("/api/stars-points", async (req, res) => {
+    try {
+      const data = await StarsPoint.find({});
+      res.json(data);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "An error occurred while retrieving Stars Point data" });
+    }
+  });
+
+  app.post("/api/stars-points", async (req, res) => {
+    try {
+      const { productID, starsAmount, starsBonus, price } = req.body;
+      const newStarsPoint = new StarsPoint({ productID, starsAmount, starsBonus, price });
+      await newStarsPoint.save();
+      res.status(201).json({ message: "Stars Point added successfully!", product: newStarsPoint });
+    } catch (error) {
+      console.error("Error adding Stars Point:", error);
+      res.status(500).json({ error: "An error occurred while adding Stars Point" });
+    }
+  });
+
+  app.put("/api/stars-points/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { productID, starsAmount, starsBonus, price } = req.body;
+      const updatedStarsPoint = await StarsPoint.findByIdAndUpdate(
+        id,
+        { productID, starsAmount, starsBonus, price },
+        { new: true }
+      );
+      if (!updatedStarsPoint) {
+        return res.status(404).json({ error: "Stars Point not found" });
+      }
+      res.json({ message: "Stars Point updated successfully!", product: updatedStarsPoint });
+    } catch (error) {
+      console.error("Error updating Stars Point:", error);
+      res.status(500).json({ error: "An error occurred while updating Stars Point" });
+    }
+  });
+
+  app.delete("/api/stars-points/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const deletedStarsPoint = await StarsPoint.findByIdAndDelete(id);
+      if (!deletedStarsPoint) {
+        return res.status(404).json({ error: "Stars Point not found" });
+      }
+      res.json({ message: "Stars Point deleted successfully!" });
+    } catch (error) {
+      console.error("Error deleting Stars Point:", error);
+      res.status(500).json({ error: "An error occurred while deleting Stars Point" });
+    }
+  });
+
+  // API untuk Server Hosting
+  app.get("/api/server-hosting", async (req, res) => {
+    try {
+      const data = await ServerHosting.find({});
+      res.json(data);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "An error occurred while retrieving Server Hosting data" });
+    }
+  });
+
+  app.post("/api/server-hosting", async (req, res) => {
+    try {
+      const { productID, productName, location, amountRAM, amountCPU, amountStorage, price } = req.body;
+      const newServerHosting = new ServerHosting({ productID, productName, location, amountRAM, amountCPU, amountStorage, price });
+      await newServerHosting.save();
+      res.status(201).json({ message: "Server Hosting added successfully!", product: newServerHosting });
+    } catch (error) {
+      console.error("Error adding Server Hosting:", error);
+      res.status(500).json({ error: "An error occurred while adding Server Hosting" });
+    }
+  });
+
+  app.put("/api/server-hosting/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { productID, productName, location, amountRAM, amountCPU, amountStorage, price } = req.body;
+      const updatedServerHosting = await ServerHosting.findByIdAndUpdate(
+        id,
+        { productID, productName, location, amountRAM, amountCPU, amountStorage, price },
+        { new: true }
+      );
+      if (!updatedServerHosting) {
+        return res.status(404).json({ error: "Server Hosting not found" });
+      }
+      res.json({ message: "Server Hosting updated successfully!", product: updatedServerHosting });
+    } catch (error) {
+      console.error("Error updating Server Hosting:", error);
+      res.status(500).json({ error: "An error occurred while updating Server Hosting" });
+    }
+  });
+
+  app.delete("/api/server-hosting/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const deletedServerHosting = await ServerHosting.findByIdAndDelete(id);
+      if (!deletedServerHosting) {
+        return res.status(404).json({ error: "Server Hosting not found" });
+      }
+      res.json({ message: "Server Hosting deleted successfully!" });
+    } catch (error) {
+      console.error("Error deleting Server Hosting:", error);
+      res.status(500).json({ error: "An error occurred while deleting Server Hosting" });
+    }
+  });
+
+  
 app.get("/api/case", async (req, res) => {
     try {
         const data = await cases.find({});

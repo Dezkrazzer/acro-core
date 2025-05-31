@@ -88,7 +88,7 @@ function obfuscateInlineScripts(html) {
     res.render("index", { bot: client, req, res });
 });*/
 
-app.get("/auth/login", checkAuth);
+
 app.get("/auth/logout", checkLogout, (req, res) => {
   const webhook = new Discord.WebhookClient({
     id: "1378316907291344917",
@@ -107,7 +107,7 @@ app.get("/auth/logout", checkLogout, (req, res) => {
   res.redirect("/");
 });
 app.get(
-  "/auth",
+  "/auth/login",
   passport.authenticate("discord", { scope: scopes }),
   (req, res) => {}
 );

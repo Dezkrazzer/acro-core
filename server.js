@@ -314,23 +314,33 @@ app.get("/dashboard/store", async (req, res) => {
   });
 
   app.put("/api/stars-points/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const { productID, starsAmount, starsBonus, price } = req.body;
-      const updatedStarsPoint = await StarsPoint.findByIdAndUpdate(
-        id,
-        { productID, starsAmount, starsBonus, price },
-        { new: true }
-      );
-      if (!updatedStarsPoint) {
-        return res.status(404).json({ error: "Stars Point not found" });
-      }
-      res.json({ message: "Stars Point updated successfully!", product: updatedStarsPoint });
-    } catch (error) {
-      console.error("Error updating Stars Point:", error);
-      res.status(500).json({ error: "An error occurred while updating Stars Point" });
+  try {
+    const { id } = req.params;
+    const { productID, starsAmount, starsBonus, price } = req.body;
+
+    // Tambahkan logging untuk melihat data yang diterima
+    console.log(`Attempting to update StarsPoint with ID: ${id}`);
+    console.log(`Received data: productID=${productID}, starsAmount=${starsAmount}, starsBonus=${starsBonus}, price=${price}`);
+
+    const updatedStarsPoint = await StarsPoint.findByIdAndUpdate(
+      id,
+      { productID, starsAmount, starsBonus, price },
+      { new: true, runValidators: true } // Tambahkan runValidators: true untuk menjalankan validasi skema
+    );
+
+    if (!updatedStarsPoint) {
+      console.warn(`StarsPoint with ID ${id} not found.`); // Gunakan warn untuk kasus tidak ditemukan
+      return res.status(404).json({ error: "Stars Point not found" });
     }
-  });
+
+    console.log(`StarsPoint with ID ${id} updated successfully!`);
+    res.json({ message: "Stars Point updated successfully!", product: updatedStarsPoint });
+  } catch (error) {
+    // Logging yang lebih detail di sini sangat membantu
+    console.error("Error updating Stars Point:", error.message, error.stack); // Tambahkan error.stack
+    res.status(500).json({ error: "An error occurred while updating Stars Point", details: error.message }); // Kirim detail error ke klien (opsional, untuk debug)
+  }
+});
 
   app.delete("/api/stars-points/:id", async (req, res) => {
     try {
@@ -402,7 +412,7 @@ app.get("/dashboard/store", async (req, res) => {
     }
   });
 
-  
+
 app.get("/api/case", async (req, res) => {
     try {
         const data = await cases.find({});

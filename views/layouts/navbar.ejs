@@ -14,7 +14,7 @@
                 
                 <!-- Desktop Menu -->
                 <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
+                    <div class="ml-10 flex items-center space-x-4">
                         <a href="/" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
                         <a href="/team" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
                         <a href="#" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Vote</a>
@@ -44,11 +44,10 @@
         <% if (req.user.avatar) { %>
             <img src="https://cdn.discordapp.com/avatars/<%= req.user.id %>/<%= req.user.avatar %>.png?size=32" alt="Avatar" class="h-6 w-6 rounded-full mr-1">
         <% } else { %>
-            <i class="fas fa-user-circle mr-1"></i>
-        <% } %>
-        &nbsp;<%= req.user.globalName || req.user.username %>
+            <i class="fas fa-user-circle mr-1 text-base"></i> <% } %>
+        <span class="leading-none"><%= req.user.globalName || req.user.username %></span>
     <% } else { %>
-        <i class="fas fa-user-circle mr-1"></i>&nbsp;Login
+        <i class="fas fa-user-circle mr-1 text-base"></i> <span class="leading-none">Login</span>
     <% } %>
 </a>
                     </div>

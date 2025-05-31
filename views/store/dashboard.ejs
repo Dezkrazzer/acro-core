@@ -558,67 +558,108 @@ const product = await response.json();
         }
 
         async function handleEditServerHosting(event) {
-            event.preventDefault();
-            const id = event.target.dataset.id;
+    event.preventDefault();
+    const id = event.target.dataset.id;
+    console.log('Attempting to edit Server Hosting with ID:', id);
 
+    try {
+        // --- TAHAP 1: Mengambil data awal ---
+        const response = await fetch(`/api/server-hosting/${id}`);
+        console.log('GET /api/server-hosting/:id response status:', response.status);
+
+        if (!response.ok) {
+            // Coba parse JSON, tapi tangani jika respons bukan JSON (HTML)
+            let errorData;
             try {
-                const response = await fetch(`/api/server-hosting/${id}`);
-                const product = await response.json();
+                errorData = await response.json();
+            } catch (jsonError) {
+                console.error('Failed to parse JSON for GET request. Server might have sent HTML error page.', jsonError);
+                Swal.fire('Error!', 'Terjadi kesalahan saat mengambil data awal. Server mengembalikan respons tidak valid.', 'error');
+                return; // Hentikan eksekusi
+            }
+            throw new Error(errorData.error || `Server responded with status ${response.status}`);
+        }
+        const product = await response.json();
+        console.log('Initial Server Hosting data received:', product);
 
-                const { value: formValues } = await Swal.fire({
-                    title: 'Edit Server Hosting',
-                    html:
-                        `<input id="swal-hosting-product-id" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Product ID" value="${product.productID}">` +
-                        `<input id="swal-hosting-product-name" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Nama Produk" value="${product.productName}">` +
-                        `<input id="swal-hosting-location" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Lokasi" value="${product.location}">` +
-                        `<input id="swal-hosting-ram" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah RAM (e.g., 2GB)" value="${product.amountRAM}">` +
-                        `<input id="swal-hosting-cpu" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah CPU (e.g., 2 Core)" value="${product.amountCPU}">` +
-                        `<input id="swal-hosting-storage" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah Penyimpanan (e.g., 50GB)" value="${product.amountStorage}">` +
-                        `<input id="swal-hosting-price" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Harga (Rp)" value="${product.price}">`,
-                    focusConfirm: false,
-                    preConfirm: () => {
-                        return {
-                            productID: document.getElementById('swal-hosting-product-id').value,
-                            productName: document.getElementById('swal-hosting-product-name').value,
-                            location: document.getElementById('swal-hosting-location').value,
-                            amountRAM: document.getElementById('swal-hosting-ram').value,
-                            amountCPU: document.getElementById('swal-hosting-cpu').value,
-                            amountStorage: document.getElementById('swal-hosting-storage').value,
-                            price: parseFloat(document.getElementById('swal-hosting-price').value),
-                        };
-                    },
-                    showCancelButton: true,
-                    confirmButtonText: 'Update',
-                    cancelButtonText: 'Batal',
-                    customClass: {
-                        popup: 'bg-gray-800 text-white',
-                        title: 'text-white',
-                        confirmButton: 'bg-secondary text-primary',
-                        cancelButton: 'bg-gray-600 text-white',
-                    }
-                });
+        // --- TAHAP 2: Menampilkan SweetAlert dan mengambil input pengguna ---
+        const { value: formValues } = await Swal.fire({
+            title: 'Edit Server Hosting',
+            html:
+                `<input id="swal-hosting-product-id" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Product ID" value="${product.productID || ''}">` +
+                `<input id="swal-hosting-product-name" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Nama Produk" value="${product.productName || ''}">` +
+                `<input id="swal-hosting-location" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Lokasi" value="${product.location || ''}">` +
+                `<input id="swal-hosting-ram" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah RAM (e.g., 2GB)" value="${product.amountRAM || ''}">` +
+                `<input id="swal-hosting-cpu" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah CPU (e.g., 2 Core)" value="${product.amountCPU || ''}">` +
+                `<input id="swal-hosting-storage" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah Penyimpanan (e.g., 50GB)" value="${product.amountStorage || ''}">` +
+                `<input id="swal-hosting-price" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Harga (Rp)" value="${product.price || ''}">`,
+            focusConfirm: false,
+            preConfirm: () => {
+                const priceValue = parseFloat(document.getElementById('swal-hosting-price').value);
 
-                if (formValues) {
-                    const updateResponse = await fetch(`/api/server-hosting/${id}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(formValues)
-                    });
-                    const updateResult = await updateResponse.json();
-                    if (updateResponse.ok) {
-                        Swal.fire('Berhasil!', updateResult.message, 'success');
-                        renderServerHostings(); // Re-render the table
-                    } else {
-                        Swal.fire('Error!', updateResult.error || 'Gagal memperbarui Server Hosting.', 'error');
-                    }
+                // Tambahkan validasi frontend dasar
+                if (isNaN(priceValue)) {
+                    Swal.showValidationMessage('Harga harus berupa angka.');
+                    return false; // Mencegah dialog tertutup
                 }
-            } catch (error) {
-                console.error('Fetch error:', error);
-                Swal.fire('Error!', 'Terjadi kesalahan saat mengambil atau memperbarui data.', 'error');
+
+                return {
+                    productID: document.getElementById('swal-hosting-product-id').value,
+                    productName: document.getElementById('swal-hosting-product-name').value,
+                    location: document.getElementById('swal-hosting-location').value,
+                    amountRAM: document.getElementById('swal-hosting-ram').value,
+                    amountCPU: document.getElementById('swal-hosting-cpu').value,
+                    amountStorage: document.getElementById('swal-hosting-storage').value,
+                    price: priceValue,
+                };
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Update',
+            cancelButtonText: 'Batal',
+            customClass: {
+                popup: 'bg-gray-800 text-white',
+                title: 'text-white',
+                confirmButton: 'bg-secondary text-primary',
+                cancelButton: 'bg-gray-600 text-white',
+            }
+        });
+
+        // --- TAHAP 3: Mengirim data pembaruan (jika formValues ada) ---
+        if (formValues) {
+            console.log('Sending update data:', formValues);
+            const updateResponse = await fetch(`/api/server-hosting/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formValues)
+            });
+            console.log('PUT /api/server-hosting/:id response status:', updateResponse.status);
+
+            // Selalu coba parse JSON, bahkan jika response.ok adalah false
+            let updateResult;
+            try {
+                updateResult = await updateResponse.json();
+            } catch (jsonError) {
+                console.error('Failed to parse JSON response from PUT request. Server might have sent HTML error page.', jsonError);
+                Swal.fire('Error!', 'Server mengembalikan respons yang tidak valid (HTML). Silakan periksa log server.', 'error');
+                return; // Hentikan eksekusi
+            }
+
+            if (updateResponse.ok) {
+                Swal.fire('Berhasil!', updateResult.message, 'success');
+                renderServerHostings(); // Re-render the table
+            } else {
+                // Gunakan updateResult.error atau updateResult.details jika tersedia
+                const errorMessage = updateResult.error || updateResult.details || 'Gagal memperbarui Server Hosting.';
+                Swal.fire('Error!', errorMessage, 'error');
             }
         }
+    } catch (error) {
+        console.error('Caught unexpected error in handleEditServerHosting:', error);
+        Swal.fire('Error!', 'Terjadi kesalahan saat mengambil atau memperbarui data. ' + error.message, 'error');
+    }
+}
 
         async function handleDeleteServerHosting(event) {
             event.preventDefault();

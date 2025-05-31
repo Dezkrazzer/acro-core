@@ -397,24 +397,59 @@ app.get("/dashboard/store", async (req, res) => {
     }
   });
 
+  app.get("/api/server-hosting/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const serverHosting = await ServerHosting.findById(id);
+        if (!serverHosting) {
+            return res.status(404).json({ error: "Server Hosting not found." });
+        }
+        res.json(serverHosting);
+    } catch (error) {
+        console.error("Error fetching Server Hosting:", error);
+        // Penting: Pastikan ini juga mengembalikan JSON
+        res.status(500).json({ error: "An error occurred while fetching Server Hosting.", details: error.message });
+    }
+});
+
   app.put("/api/server-hosting/:id", async (req, res) => {
     try {
-      const { id } = req.params;
-      const { productID, productName, location, amountRAM, amountCPU, amountStorage, price } = req.body;
-      const updatedServerHosting = await ServerHosting.findByIdAndUpdate(
-        id,
-        { productID, productName, location, amountRAM, amountCPU, amountStorage, price },
-        { new: true }
-      );
-      if (!updatedServerHosting) {
-        return res.status(404).json({ error: "Server Hosting not found" });
-      }
-      res.json({ message: "Server Hosting updated successfully!", product: updatedServerHosting });
+        const { id } = req.params;
+        const { productID, productName, location, amountRAM, amountCPU, amountStorage, price } = req.body;
+
+        // Logging untuk debugging di server
+        console.log(`Attempting to update Server Hosting with ID: ${id}`);
+        console.log(`Received data for Server Hosting:`, req.body);
+
+        const updatedServerHosting = await ServerHosting.findByIdAndUpdate(
+            id,
+            { productID, productName, location, amountRAM, amountCPU, amountStorage, price },
+            { new: true, runValidators: true } // <<< PENTING: Tambahkan ini!
+        );
+
+        if (!updatedServerHosting) {
+            console.warn(`Server Hosting with ID ${id} not found.`);
+            return res.status(404).json({ error: "Server Hosting not found" });
+        }
+
+        console.log(`Server Hosting with ID ${id} updated successfully!`);
+        res.json({ message: "Server Hosting updated successfully!", product: updatedServerHosting });
     } catch (error) {
-      console.error("Error updating Server Hosting:", error);
-      res.status(500).json({ error: "An error occurred while updating Server Hosting" });
+        console.error("Error updating Server Hosting:", error.message, error.stack); // Logging detail error
+
+        // Penanganan error Mongoose Validation
+        if (error.name === 'ValidationError') {
+            const errors = Object.keys(error.errors).map(key => error.errors[key].message);
+            return res.status(400).json({ error: "Validation failed", details: errors });
+        }
+        // Penanganan error Cast (misalnya ID tidak valid formatnya)
+        if (error.name === 'CastError') {
+            return res.status(400).json({ error: "Invalid ID format or data type.", details: error.message });
+        }
+        // Penanganan error umum lainnya
+        res.status(500).json({ error: "An error occurred while updating Server Hosting", details: error.message });
     }
-  });
+});
 
   app.delete("/api/server-hosting/:id", async (req, res) => {
     try {

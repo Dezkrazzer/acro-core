@@ -45,9 +45,9 @@
             <img src="https://cdn.discordapp.com/avatars/<%= req.user.id %>/<%= req.user.avatar %>.png?size=32" alt="Avatar" class="h-6 w-6 rounded-full mr-1">
         <% } else { %>
             <i class="fas fa-user-circle mr-1 text-base"></i> <% } %>
-        <span class="leading-none"><%= req.user.globalName || req.user.username %></span>
+        <span class="leading-none">&nbsp;<%= req.user.globalName || req.user.username %></span>
     <% } else { %>
-        <i class="fas fa-user-circle mr-1 text-base"></i> <span class="leading-none">Login</span>
+        <i class="fas fa-user-circle mr-1 text-base"></i> <span class="leading-none">&nbsp;Login</span>
     <% } %>
 </a>
                     </div>
@@ -67,33 +67,42 @@
         <!-- Mobile menu -->
         <div id="mobile-menu" class="mobile-menu bg-gray-900 md:hidden">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-white">Home</a>
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Team</a>
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Vote</a>
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Store</a>
-                
-                <!-- Mobile dropdown -->
-                <div class="relative">
-                    <button id="mobile-dropdown-button" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white flex items-center justify-between">
-                        Other Links
-                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div id="mobile-dropdown-menu" class="pl-4 hidden">
-                        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Rules</a>
-                        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Gallery</a>
-                        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Wiki</a>
-                    </div>
-                </div>
-                
-                <a href="#" class="bg-blue-500 block px-3 py-2 rounded-md text-base font-medium text-white hover:text-white">
-                    <i class="fas fa-play mr-1"></i> Play Now
-                </a>
-                
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">
-                    <i class="fas fa-user-circle mr-1"></i> Profile
-                </a>
-            </div>
+    <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-white">Home</a>
+    <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Team</a>
+    <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Vote</a>
+    <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white">Store</a>
+
+    <div class="relative">
+        <button id="mobile-dropdown-button" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white flex items-center justify-between">
+            Other Links
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
+        <div id="mobile-dropdown-menu" class="pl-4 hidden">
+            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700">Rules</a>
+            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700">Gallery</a>
+            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700">Wiki</a>
+        </div>
+    </div>
+
+    <a href="#" class="bg-blue-500 block px-3 py-2 rounded-md text-base font-medium text-white hover:text-white flex items-center">
+        <i class="fas fa-play mr-1"></i> <span class="leading-none">Play Now</span>
+    </a>
+
+    <a href="<%= req.user ? "/auth/logout" : "/auth/login" %>" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white flex items-center">
+        <% if (req.user) { %>
+            <% if (req.user.avatar) { %>
+                <img src="https://cdn.discordapp.com/avatars/<%= req.user.id %>/<%= req.user.avatar %>.png?size=32" alt="Avatar" class="h-6 w-6 rounded-full mr-2">
+            <% } else { %>
+                <i class="fas fa-user-circle mr-2 text-base"></i>
+            <% } %>
+            <span class="leading-none">&nbsp;<%= req.user.globalName || req.user.username %></span>
+        <% } else { %>
+            <i class="fas fa-user-circle mr-2 text-base"></i>
+            <span class="leading-none">&nbsp;Login</span>
+        <% } %>
+    </a>
+</div>
         </div>
     </nav>

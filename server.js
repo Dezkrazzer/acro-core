@@ -95,10 +95,10 @@ app.get("/auth/logout", checkLogout, (req, res) => {
     token: "IaH5bgKmxW6H5wpTgy05U_cD2b0Ac-cL9VS8Q92CSyWP10x7imbQXwlwJwUDycdZVmtM"
   });
   let embedLogout = new Discord.EmbedBuilder()
-    .setAuthor(
-      `${req.user.username}#${req.user.discriminator} logout`,
-      `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
-    )
+    .setAuthor({
+      name: `${req.user.username}#${req.user.discriminator} logout`,
+      iconURL: `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
+    })
     .setTimestamp()
     .setColor("#FF0000");
   webhook.send(embedLogout);
@@ -123,10 +123,10 @@ app.get(
     token: "IaH5bgKmxW6H5wpTgy05U_cD2b0Ac-cL9VS8Q92CSyWP10x7imbQXwlwJwUDycdZVmtM"
   });
     let embedLogin = new Discord.EmbedBuilder()
-      .setAuthor(
-        `${req.user.username}#${req.user.discriminator} logged`,
-        `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
-      )
+      .setAuthor({
+        name: `${req.user.username}#${req.user.discriminator} logout`,
+        iconURL: `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
+      })
       .setTimestamp()
       .setColor("#26fa17");
 

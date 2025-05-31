@@ -313,33 +313,51 @@ app.get("/dashboard/store", async (req, res) => {
     }
   });
 
-  app.put("/api/stars-points/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { productID, starsAmount, starsBonus, price } = req.body;
-
-    // Tambahkan logging untuk melihat data yang diterima
-    console.log(`Attempting to update StarsPoint with ID: ${id}`);
-    console.log(`Received data: productID=${productID}, starsAmount=${starsAmount}, starsBonus=${starsBonus}, price=${price}`);
-
-    const updatedStarsPoint = await StarsPoint.findByIdAndUpdate(
-      id,
-      { productID, starsAmount, starsBonus, price },
-      { new: true, runValidators: true } // Tambahkan runValidators: true untuk menjalankan validasi skema
-    );
-
-    if (!updatedStarsPoint) {
-      console.warn(`StarsPoint with ID ${id} not found.`); // Gunakan warn untuk kasus tidak ditemukan
-      return res.status(404).json({ error: "Stars Point not found" });
+  app.get("/api/stars-points/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const starsPoint = await StarsPoint.findById(id);
+        if (!starsPoint) {
+            return res.status(404).json({ error: "Stars Point not found." }); // Pastikan ini mengembalikan JSON
+        }
+        res.json(starsPoint);
+    } catch (error) {
+        console.error("Error fetching Stars Point:", error);
+        // Penting: Pastikan ini juga mengembalikan JSON, bukan HTML
+        res.status(500).json({ error: "An error occurred while fetching Stars Point.", details: error.message });
     }
+});
 
-    console.log(`StarsPoint with ID ${id} updated successfully!`);
-    res.json({ message: "Stars Point updated successfully!", product: updatedStarsPoint });
-  } catch (error) {
-    // Logging yang lebih detail di sini sangat membantu
-    console.error("Error updating Stars Point:", error.message, error.stack); // Tambahkan error.stack
-    res.status(500).json({ error: "An error occurred while updating Stars Point", details: error.message }); // Kirim detail error ke klien (opsional, untuk debug)
-  }
+  app.put("/api/stars-points/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { productID, starsAmount, starsBonus, price } = req.body;
+
+        // Pastikan Anda menambahkan { runValidators: true } di findByIdAndUpdate
+        const updatedStarsPoint = await StarsPoint.findByIdAndUpdate(
+            id,
+            { productID, starsAmount, starsBonus, price },
+            { new: true, runValidators: true } // Sangat Penting ini!
+        );
+
+        if (!updatedStarsPoint) {
+            return res.status(404).json({ error: "Stars Point not found" });
+        }
+        res.json({ message: "Stars Point updated successfully!", product: updatedStarsPoint });
+    } catch (error) {
+        console.error("Error updating Stars Point:", error);
+        // Penanganan error Mongoose validation
+        if (error.name === 'ValidationError') {
+            const errors = Object.keys(error.errors).map(key => error.errors[key].message);
+            return res.status(400).json({ error: "Validation failed", details: errors });
+        }
+        // Penanganan error cast (misal ID tidak valid)
+        if (error.name === 'CastError') {
+            return res.status(400).json({ error: "Invalid ID format or data type.", details: error.message });
+        }
+        // Error umum lainnya
+        res.status(500).json({ error: "An error occurred while updating Stars Point", details: error.message });
+    }
 });
 
   app.delete("/api/stars-points/:id", async (req, res) => {

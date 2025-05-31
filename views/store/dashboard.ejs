@@ -342,47 +342,78 @@
         }
 
         async function handleEditStarsPoint(event) {
-    event.preventDefault();
-    const id = event.target.dataset.id;
-    console.log('Editing StarsPoint with ID:', id); // Log the ID
+            event.preventDefault();
+            const id = event.target.dataset.id;
 
+            try {
+                const response = await fetch(`/api/stars-points/${id}`);
+if (!response.ok) { // Jika respons bukan OK (misal 404, 500)
+    const errorData = await response.json().catch(() => ({ error: 'Unknown error fetching data.' })); // Coba parse JSON, kalau gagal berarti HTML
+    throw new Error(errorData.error || `Server responded with status ${response.status}`);
+}
+const product = await response.json();
+
+                const { value: formValues } = await Swal.fire({
+                    title: 'Edit Stars Point',
+                    html:
+                        `<input id="swal-product-id" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Product ID" value="${product.productID}">` +
+                        `<input id="swal-stars-amount" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah Stars" value="${product.starsAmount}">` +
+                        `<input id="swal-stars-bonus" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Bonus Stars" value="${product.starsBonus}">` +
+                        `<input id="swal-price" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Harga (Rp)" value="${product.price}">`,
+                    focusConfirm: false,
+                    preConfirm: () => {
+                        return {
+                            productID: document.getElementById('swal-product-id').value,
+                            starsAmount: parseInt(document.getElementById('swal-stars-amount').value),
+                            starsBonus: parseInt(document.getElementById('swal-stars-bonus').value || '0'),
+                            price: parseFloat(document.getElementById('swal-price').value),
+                        };
+                    },
+                    showCancelButton: true,
+                    confirmButtonText: 'Update',
+                    cancelButtonText: 'Batal',
+                    customClass: {
+                        popup: 'bg-gray-800 text-white',
+                        title: 'text-white',
+                        confirmButton: 'bg-secondary text-primary',
+                        cancelButton: 'bg-gray-600 text-white',
+                    }
+                });
+
+                if (formValues) {
+    const updateResponse = await fetch(`/api/stars-points/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formValues)
+    });
+
+    // Selalu coba parse JSON, bahkan jika response.ok adalah false
+    let updateResult;
     try {
-        const response = await fetch(`/api/stars-points/${id}`);
-        console.log('GET response status:', response.status); // Log GET status
-        if (!response.ok) {
-            const errorData = await response.json();
-            console.error('Error fetching initial product data:', errorData); // Log error from GET
-            throw new Error(errorData.error || `Failed to fetch Stars Point with ID: ${id}`);
-        }
-        const product = await response.json();
-        console.log('Initial product data:', product); // Log the product data received
+        updateResult = await updateResponse.json();
+    } catch (jsonError) {
+        // Jika gagal parse JSON, berarti responsnya HTML
+        console.error('Failed to parse JSON response from PUT request. Server might have sent HTML error page.', jsonError);
+        Swal.fire('Error!', 'Server mengembalikan respons yang tidak valid (HTML). Silakan periksa log server.', 'error');
+        return; // Hentikan eksekusi
+    }
 
-        // ... (rest of your Swal.fire code)
-
-        if (formValues) {
-            console.log('Sending update data:', formValues); // Log data being sent
-            const updateResponse = await fetch(`/api/stars-points/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formValues)
-            });
-            console.log('PUT response status:', updateResponse.status); // Log PUT status
-            const updateResult = await updateResponse.json();
-            console.log('PUT response result:', updateResult); // Log PUT result (success or error)
-            if (updateResponse.ok) {
-                Swal.fire('Berhasil!', updateResult.message, 'success');
-                renderStarsPoints();
-            } else {
-                Swal.fire('Error!', updateResult.error || 'Gagal memperbarui Stars Point.', 'error');
+    if (updateResponse.ok) {
+        Swal.fire('Berhasil!', updateResult.message, 'success');
+        renderStarsPoints();
+    } else {
+        // Gunakan updateResult.error atau updateResult.details jika tersedia
+        const errorMessage = updateResult.error || updateResult.details || 'Gagal memperbarui Stars Point.';
+        Swal.fire('Error!', errorMessage, 'error');
+    }
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                Swal.fire('Error!', 'Terjadi kesalahan saat mengambil atau memperbarui data.', 'error');
             }
         }
-    } catch (error) {
-        console.error('Caught unexpected error in handleEditStarsPoint:', error); // Log the full error object
-        Swal.fire('Error!', 'Terjadi kesalahan saat mengambil atau memperbarui data.', 'error');
-    }
-}
 
         async function handleDeleteStarsPoint(event) {
             event.preventDefault();

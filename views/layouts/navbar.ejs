@@ -40,7 +40,12 @@
                         </a>
                         
                         <a href="<%= req.user ? "/auth/logout" : "/auth/login" %>" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center">
-                            <i class="fas fa-user-circle mr-1"></i>&nbsp;<%= req.user ? "Logout" : "Login" %>
+                            <% if (req.user) { %>
+                                <img src="<%= req.user.avatar %>" alt="avatar" class="w-6 h-6 rounded-full mr-2 inline-block" />
+                                    <%= req.user.globalName %>
+                            <% } else { %>
+                                <i class="fas fa-user mr-1"></i> Login
+                            <% } %>
                         </a>
                     </div>
                 </div>

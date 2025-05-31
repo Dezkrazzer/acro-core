@@ -244,6 +244,24 @@ app.get('/store', (req, res) => {
     });
 });
 
+app.get('/dashboard/store', (req, res) => {
+    res.render('store/dashboard', { bot: client, req, res }, (err, html) => {
+      if (err) return res.status(500).send(err.message);
+
+      const obfuscatedHTML = obfuscateInlineScripts(html);
+  
+      const minifiedHtml = minify(obfuscatedHTML, {
+        collapseWhitespace: true,
+        removeComments: true,
+        //minifyJS: true,
+        minifyCSS: true,
+        ignoreCustomFragments: [/<%[\s\S]*?%>/]  // agar tag EJS tidak rusak
+      });
+  
+      res.send(minifiedHtml);
+    });
+});
+
 app.get("/api/case", async (req, res) => {
     try {
         const data = await cases.find({});

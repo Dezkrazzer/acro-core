@@ -40,13 +40,17 @@
                         </a>
                         
                         <a href="<%= req.user ? "/auth/logout" : "/auth/login" %>" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center">
-                            <% if (req.user) { %>
-                                <img src="<%= req.user.avatar %>" alt="avatar" class="w-6 h-6 rounded-full mr-2 inline-block" />
-                                    <%= req.user.globalName %>
-                            <% } else { %>
-                                <i class="fas fa-user mr-1"></i> Login
-                            <% } %>
-                        </a>
+    <% if (req.user) { %>
+        <% if (req.user.avatar) { %>
+            <img src="https://cdn.discordapp.com/avatars/<%= req.user.id %>/<%= req.user.avatar %>.png?size=32" alt="Avatar" class="h-6 w-6 rounded-full mr-1">
+        <% } else { %>
+            <i class="fas fa-user-circle mr-1"></i>
+        <% } %>
+        &nbsp;<%= req.user.globalName || req.user.username %>
+    <% } else { %>
+        <i class="fas fa-user-circle mr-1"></i>&nbsp;Login
+    <% } %>
+</a>
                     </div>
                 </div>
                 

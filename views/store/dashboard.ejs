@@ -53,7 +53,9 @@
                 </nav>
             </div>
             <div class="p-4 border-t border-gray-700 text-sm">
-                <p>Logged in as: <span class="font-semibold"><%= req.user ? req.user.username : 'Guest' %></span></p>
+                <p>Logged in as: <span class="font-semibold">
+                        <%= req.user ? req.user.username : 'Login' %>
+                    </span></p>
                 <a href="/auth/logout" class="text-secondary hover:underline">Logout</a>
             </div>
         </aside>
@@ -66,7 +68,7 @@
                 <h1 class="text-2xl font-bold text-white flex-grow text-center md:text-left">Dashboard</h1>
                 <div class="relative">
                     <button class="flex items-center text-white focus:outline-none space-x-2">
-                        <span class="hidden md:block">Halo, <%= req.user ? req.user.username : 'Guest' %>!</span>
+                        <span class="hidden md:block">Halo, <%= req.user ? req.user.username : 'Please login' %>!</span>
                         <i class="fas fa-user-circle text-2xl"></i>
                     </button>
                 </div>
@@ -111,46 +113,45 @@
                     </div>
                 </div>
                 <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg mb-8">
-                    <h2 class="text-xl font-bold text-white mb-4">Aktivitas Terbaru</h2>
+                    <h2 class="text-xl font-bold  text-white mb-4">Aktivitas Terbaru</h2>
                     <ul class="divide-y divide-gray-200">
                         <li class="py-3 flex items-center space-x-3">
                             <i class="fas fa-shopping-basket text-lg text-secondary"></i>
                             <div>
-                                <p class="font-semibold text-white">Pembelian baru oleh John Doe</p>
+                                <p class="font-semibold  text-white">Pembelian baru oleh John Doe</p>
                                 <p class="text-sm text-gray-500">Stars Point (500) - 5 menit lalu</p>
                             </div>
                         </li>
                         <li class="py-3 flex items-center space-x-3">
                             <i class="fas fa-plus-circle text-lg text-green-500"></i>
                             <div>
-                                <p class="font-semibold text-white">Produk baru ditambahkan: Hosting Platinum</p>
+                                <p class="font-semibold  text-white">Produk baru ditambahkan: Hosting Platinum</p>
                                 <p class="text-sm text-gray-500">1 jam lalu</p>
                             </div>
                         </li>
                         <li class="py-3 flex items-center space-x-3">
                             <i class="fas fa-check-circle text-lg text-blue-500"></i>
                             <div>
-                                <p class="font-semibold text-white">Status pesanan #12345 diperbarui</p>
+                                <p class="font-semibold  text-white">Status pesanan #12345 diperbarui</p>
                                 <p class="text-sm text-gray-500">Menjadi 'Selesai' - 2 jam lalu</p>
                             </div>
                         </li>
                         <li class="py-3 flex items-center space-x-3">
                             <i class="fas fa-user-plus text-lg text-purple-500"></i>
                             <div>
-                                <p class="font-semibold text-white">Pelanggan baru terdaftar: Jane Smith</p>
+                                <p class="font-semibold  text-white">Pelanggan baru terdaftar: Jane Smith</p>
                                 <p class="text-sm text-gray-500">3 jam lalu</p>
                             </div>
                         </li>
                         <li class="py-3 flex items-center space-x-3">
                             <i class="fas fa-edit text-lg text-orange-500"></i>
                             <div>
-                                <p class="font-semibold text-white">Produk diedit: Stars Point (2000)</p>
+                                <p class="font-semibold  text-white">Produk diedit: Stars Point (2000)</p>
                                 <p class="text-sm text-gray-500">Kemarin</p>
                             </div>
                         </li>
                     </ul>
                 </div>
-
                 <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg mb-8">
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-xl font-bold text-white">Stars Point</h2>
@@ -171,23 +172,28 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-gray-800 divide-y divide-gray-200">
-                                <% starsPoints.forEach(product => { %>
-                                    <tr class="hover:bg-gray-700 transition duration-150">
-                                        <td class="px-6 py-4 whitespace-nowrap font-medium text-white"><%= product.productID %></td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-white"><%= product.starsAmount %></td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-white"><%= product.starsBonus %></td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-white">Rp <%= product.price.toLocaleString('id-ID') %></td>
+                                <% starsPoints.forEach(product=> { %> <tr class="hover:bg-gray-700 transition duration-150">
+                                        <td class="px-6 py-4 whitespace-nowrap font-medium text-white">
+                                            <%= product.productID %>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white">
+                                            <%= product.starsAmount %>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white">
+                                            <%= product.starsBonus %>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white">Rp <%= product.price.toLocaleString('id-ID') %>
+                                        </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <a href="#" class="text-blue-600 hover:text-blue-900 mr-3 edit-stars-point-btn" data-id="<%= product._id %>">Edit</a>
                                             <a href="#" class="text-red-600 hover:text-red-900 delete-stars-point-btn" data-id="<%= product._id %>">Hapus</a>
                                         </td>
                                     </tr>
-                                <% }); %>
+                                    <% }); %>
                             </tbody>
                         </table>
                     </div>
                 </div>
-
                 <div class="bg-gray-800 p-6 rounded-xl shadow-custom-lg">
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-xl font-bold text-white">Server Hosting</h2>
@@ -211,21 +217,33 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-gray-800 divide-y divide-gray-200">
-                                <% serverHostings.forEach(product => { %>
-                                    <tr class="hover:bg-gray-700 transition duration-150">
-                                        <td class="px-6 py-4 whitespace-nowrap font-medium text-white"><%= product.productID %></td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-white"><%= product.productName %></td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-white"><%= product.location %></td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-white"><%= product.amountRAM %></td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-white"><%= product.amountCPU %></td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-white"><%= product.amountStorage %></td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-white">Rp <%= product.price.toLocaleString('id-ID') %></td>
+                                <% serverHostings.forEach(product=> { %> <tr class="hover:bg-gray-700 transition duration-150">
+                                        <td class="px-6 py-4 whitespace-nowrap font-medium text-white">
+                                            <%= product.productID %>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white">
+                                            <%= product.productName %>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white">
+                                            <%= product.location %>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white">
+                                            <%= product.amountRAM %>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white">
+                                            <%= product.amountCPU %>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white">
+                                            <%= product.amountStorage %>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white">Rp <%= product.price.toLocaleString('id-ID') %>
+                                        </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <a href="#" class="text-blue-600 hover:text-blue-900 mr-3 edit-server-hosting-btn" data-id="<%= product._id %>">Edit</a>
                                             <a href="#" class="text-red-600 hover:text-red-900 delete-server-hosting-btn" data-id="<%= product._id %>">Hapus</a>
                                         </td>
                                     </tr>
-                                <% }); %>
+                                    <% }); %>
                             </tbody>
                         </table>
                     </div>
@@ -347,11 +365,11 @@
 
             try {
                 const response = await fetch(`/api/stars-points/${id}`);
-if (!response.ok) { // Jika respons bukan OK (misal 404, 500)
-    const errorData = await response.json().catch(() => ({ error: 'Unknown error fetching data.' })); // Coba parse JSON, kalau gagal berarti HTML
-    throw new Error(errorData.error || `Server responded with status ${response.status}`);
-}
-const product = await response.json();
+                if (!response.ok) { // Jika respons bukan OK (misal 404, 500)
+                    const errorData = await response.json().catch(() => ({ error: 'Unknown error fetching data.' })); // Coba parse JSON, kalau gagal berarti HTML
+                    throw new Error(errorData.error || `Server responded with status ${response.status}`);
+                }
+                const product = await response.json();
 
                 const { value: formValues } = await Swal.fire({
                     title: 'Edit Stars Point',
@@ -381,33 +399,33 @@ const product = await response.json();
                 });
 
                 if (formValues) {
-    const updateResponse = await fetch(`/api/stars-points/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formValues)
-    });
+                    const updateResponse = await fetch(`/api/stars-points/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formValues)
+                    });
 
-    // Selalu coba parse JSON, bahkan jika response.ok adalah false
-    let updateResult;
-    try {
-        updateResult = await updateResponse.json();
-    } catch (jsonError) {
-        // Jika gagal parse JSON, berarti responsnya HTML
-        console.error('Failed to parse JSON response from PUT request. Server might have sent HTML error page.', jsonError);
-        Swal.fire('Error!', 'Server mengembalikan respons yang tidak valid (HTML). Silakan periksa log server.', 'error');
-        return; // Hentikan eksekusi
-    }
+                    // Selalu coba parse JSON, bahkan jika response.ok adalah false
+                    let updateResult;
+                    try {
+                        updateResult = await updateResponse.json();
+                    } catch (jsonError) {
+                        // Jika gagal parse JSON, berarti responsnya HTML
+                        console.error('Failed to parse JSON response from PUT request. Server might have sent HTML error page.', jsonError);
+                        Swal.fire('Error!', 'Server mengembalikan respons yang tidak valid (HTML). Silakan periksa log server.', 'error');
+                        return; // Hentikan eksekusi
+                    }
 
-    if (updateResponse.ok) {
-        Swal.fire('Berhasil!', updateResult.message, 'success');
-        renderStarsPoints();
-    } else {
-        // Gunakan updateResult.error atau updateResult.details jika tersedia
-        const errorMessage = updateResult.error || updateResult.details || 'Gagal memperbarui Stars Point.';
-        Swal.fire('Error!', errorMessage, 'error');
-    }
+                    if (updateResponse.ok) {
+                        Swal.fire('Berhasil!', updateResult.message, 'success');
+                        renderStarsPoints();
+                    } else {
+                        // Gunakan updateResult.error atau updateResult.details jika tersedia
+                        const errorMessage = updateResult.error || updateResult.details || 'Gagal memperbarui Stars Point.';
+                        Swal.fire('Error!', errorMessage, 'error');
+                    }
                 }
             } catch (error) {
                 console.error('Fetch error:', error);
@@ -558,108 +576,108 @@ const product = await response.json();
         }
 
         async function handleEditServerHosting(event) {
-    event.preventDefault();
-    const id = event.target.dataset.id;
-    console.log('Attempting to edit Server Hosting with ID:', id);
+            event.preventDefault();
+            const id = event.target.dataset.id;
+            console.log('Attempting to edit Server Hosting with ID:', id);
 
-    try {
-        // --- TAHAP 1: Mengambil data awal ---
-        const response = await fetch(`/api/server-hosting/${id}`);
-        console.log('GET /api/server-hosting/:id response status:', response.status);
-
-        if (!response.ok) {
-            // Coba parse JSON, tapi tangani jika respons bukan JSON (HTML)
-            let errorData;
             try {
-                errorData = await response.json();
-            } catch (jsonError) {
-                console.error('Failed to parse JSON for GET request. Server might have sent HTML error page.', jsonError);
-                Swal.fire('Error!', 'Terjadi kesalahan saat mengambil data awal. Server mengembalikan respons tidak valid.', 'error');
-                return; // Hentikan eksekusi
-            }
-            throw new Error(errorData.error || `Server responded with status ${response.status}`);
-        }
-        const product = await response.json();
-        console.log('Initial Server Hosting data received:', product);
+                // --- TAHAP 1: Mengambil data awal ---
+                const response = await fetch(`/api/server-hosting/${id}`);
+                console.log('GET /api/server-hosting/:id response status:', response.status);
 
-        // --- TAHAP 2: Menampilkan SweetAlert dan mengambil input pengguna ---
-        const { value: formValues } = await Swal.fire({
-            title: 'Edit Server Hosting',
-            html:
-                `<input id="swal-hosting-product-id" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Product ID" value="${product.productID || ''}">` +
-                `<input id="swal-hosting-product-name" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Nama Produk" value="${product.productName || ''}">` +
-                `<input id="swal-hosting-location" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Lokasi" value="${product.location || ''}">` +
-                `<input id="swal-hosting-ram" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah RAM (e.g., 2GB)" value="${product.amountRAM || ''}">` +
-                `<input id="swal-hosting-cpu" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah CPU (e.g., 2 Core)" value="${product.amountCPU || ''}">` +
-                `<input id="swal-hosting-storage" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah Penyimpanan (e.g., 50GB)" value="${product.amountStorage || ''}">` +
-                `<input id="swal-hosting-price" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Harga (Rp)" value="${product.price || ''}">`,
-            focusConfirm: false,
-            preConfirm: () => {
-                const priceValue = parseFloat(document.getElementById('swal-hosting-price').value);
-
-                // Tambahkan validasi frontend dasar
-                if (isNaN(priceValue)) {
-                    Swal.showValidationMessage('Harga harus berupa angka.');
-                    return false; // Mencegah dialog tertutup
+                if (!response.ok) {
+                    // Coba parse JSON, tapi tangani jika respons bukan JSON (HTML)
+                    let errorData;
+                    try {
+                        errorData = await response.json();
+                    } catch (jsonError) {
+                        console.error('Failed to parse JSON for GET request. Server might have sent HTML error page.', jsonError);
+                        Swal.fire('Error!', 'Terjadi kesalahan saat mengambil data awal. Server mengembalikan respons tidak valid.', 'error');
+                        return; // Hentikan eksekusi
+                    }
+                    throw new Error(errorData.error || `Server responded with status ${response.status}`);
                 }
+                const product = await response.json();
+                console.log('Initial Server Hosting data received:', product);
 
-                return {
-                    productID: document.getElementById('swal-hosting-product-id').value,
-                    productName: document.getElementById('swal-hosting-product-name').value,
-                    location: document.getElementById('swal-hosting-location').value,
-                    amountRAM: document.getElementById('swal-hosting-ram').value,
-                    amountCPU: document.getElementById('swal-hosting-cpu').value,
-                    amountStorage: document.getElementById('swal-hosting-storage').value,
-                    price: priceValue,
-                };
-            },
-            showCancelButton: true,
-            confirmButtonText: 'Update',
-            cancelButtonText: 'Batal',
-            customClass: {
-                popup: 'bg-gray-800 text-white',
-                title: 'text-white',
-                confirmButton: 'bg-secondary text-primary',
-                cancelButton: 'bg-gray-600 text-white',
-            }
-        });
+                // --- TAHAP 2: Menampilkan SweetAlert dan mengambil input pengguna ---
+                const { value: formValues } = await Swal.fire({
+                    title: 'Edit Server Hosting',
+                    html:
+                        `<input id="swal-hosting-product-id" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Product ID" value="${product.productID || ''}">` +
+                        `<input id="swal-hosting-product-name" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Nama Produk" value="${product.productName || ''}">` +
+                        `<input id="swal-hosting-location" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Lokasi" value="${product.location || ''}">` +
+                        `<input id="swal-hosting-ram" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah RAM (e.g., 2GB)" value="${product.amountRAM || ''}">` +
+                        `<input id="swal-hosting-cpu" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah CPU (e.g., 2 Core)" value="${product.amountCPU || ''}">` +
+                        `<input id="swal-hosting-storage" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah Penyimpanan (e.g., 50GB)" value="${product.amountStorage || ''}">` +
+                        `<input id="swal-hosting-price" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Harga (Rp)" value="${product.price || ''}">`,
+                    focusConfirm: false,
+                    preConfirm: () => {
+                        const priceValue = parseFloat(document.getElementById('swal-hosting-price').value);
 
-        // --- TAHAP 3: Mengirim data pembaruan (jika formValues ada) ---
-        if (formValues) {
-            console.log('Sending update data:', formValues);
-            const updateResponse = await fetch(`/api/server-hosting/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formValues)
-            });
-            console.log('PUT /api/server-hosting/:id response status:', updateResponse.status);
+                        // Tambahkan validasi frontend dasar
+                        if (isNaN(priceValue)) {
+                            Swal.showValidationMessage('Harga harus berupa angka.');
+                            return false; // Mencegah dialog tertutup
+                        }
 
-            // Selalu coba parse JSON, bahkan jika response.ok adalah false
-            let updateResult;
-            try {
-                updateResult = await updateResponse.json();
-            } catch (jsonError) {
-                console.error('Failed to parse JSON response from PUT request. Server might have sent HTML error page.', jsonError);
-                Swal.fire('Error!', 'Server mengembalikan respons yang tidak valid (HTML). Silakan periksa log server.', 'error');
-                return; // Hentikan eksekusi
-            }
+                        return {
+                            productID: document.getElementById('swal-hosting-product-id').value,
+                            productName: document.getElementById('swal-hosting-product-name').value,
+                            location: document.getElementById('swal-hosting-location').value,
+                            amountRAM: document.getElementById('swal-hosting-ram').value,
+                            amountCPU: document.getElementById('swal-hosting-cpu').value,
+                            amountStorage: document.getElementById('swal-hosting-storage').value,
+                            price: priceValue,
+                        };
+                    },
+                    showCancelButton: true,
+                    confirmButtonText: 'Update',
+                    cancelButtonText: 'Batal',
+                    customClass: {
+                        popup: 'bg-gray-800 text-white',
+                        title: 'text-white',
+                        confirmButton: 'bg-secondary text-primary',
+                        cancelButton: 'bg-gray-600 text-white',
+                    }
+                });
 
-            if (updateResponse.ok) {
-                Swal.fire('Berhasil!', updateResult.message, 'success');
-                renderServerHostings(); // Re-render the table
-            } else {
-                // Gunakan updateResult.error atau updateResult.details jika tersedia
-                const errorMessage = updateResult.error || updateResult.details || 'Gagal memperbarui Server Hosting.';
-                Swal.fire('Error!', errorMessage, 'error');
+                // --- TAHAP 3: Mengirim data pembaruan (jika formValues ada) ---
+                if (formValues) {
+                    console.log('Sending update data:', formValues);
+                    const updateResponse = await fetch(`/api/server-hosting/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formValues)
+                    });
+                    console.log('PUT /api/server-hosting/:id response status:', updateResponse.status);
+
+                    // Selalu coba parse JSON, bahkan jika response.ok adalah false
+                    let updateResult;
+                    try {
+                        updateResult = await updateResponse.json();
+                    } catch (jsonError) {
+                        console.error('Failed to parse JSON response from PUT request. Server might have sent HTML error page.', jsonError);
+                        Swal.fire('Error!', 'Server mengembalikan respons yang tidak valid (HTML). Silakan periksa log server.', 'error');
+                        return; // Hentikan eksekusi
+                    }
+
+                    if (updateResponse.ok) {
+                        Swal.fire('Berhasil!', updateResult.message, 'success');
+                        renderServerHostings(); // Re-render the table
+                    } else {
+                        // Gunakan updateResult.error atau updateResult.details jika tersedia
+                        const errorMessage = updateResult.error || updateResult.details || 'Gagal memperbarui Server Hosting.';
+                        Swal.fire('Error!', errorMessage, 'error');
+                    }
+                }
+            } catch (error) {
+                console.error('Caught unexpected error in handleEditServerHosting:', error);
+                Swal.fire('Error!', 'Terjadi kesalahan saat mengambil atau memperbarui data. ' + error.message, 'error');
             }
         }
-    } catch (error) {
-        console.error('Caught unexpected error in handleEditServerHosting:', error);
-        Swal.fire('Error!', 'Terjadi kesalahan saat mengambil atau memperbarui data. ' + error.message, 'error');
-    }
-}
 
         async function handleDeleteServerHosting(event) {
             event.preventDefault();

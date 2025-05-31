@@ -107,7 +107,7 @@ app.get("/auth/logout", checkLogout, (req, res) => {
   res.redirect("/");
 });
 app.get(
-  "/auth/login",
+  "/auth",
   passport.authenticate("discord", { scope: scopes }),
   (req, res) => {}
 );

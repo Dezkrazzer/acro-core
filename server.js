@@ -101,7 +101,7 @@ app.get("/auth/logout", checkLogout, (req, res) => {
     })
     .setTimestamp()
     .setColor("#FF0000");
-  webhook.send(embedLogout);
+  webhook.send({ embeds: [embedLogout] });
 
   req.session.destroy();
   res.redirect("/");
@@ -130,7 +130,7 @@ app.get(
       .setTimestamp()
       .setColor("#26fa17");
 
-    webhook.send(embedLogin);
+    webhook.send({ embeds: [embedLogin] });
     res.redirect("/");
   }
 );

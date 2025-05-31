@@ -96,7 +96,7 @@ app.get("/auth/logout", checkLogout, (req, res) => {
   });
   let embedLogout = new Discord.EmbedBuilder()
     .setAuthor({
-      name: `${req.user.username}#${req.user.discriminator} logout`,
+      name: `${req.user.username}#${req.user.discriminator} logged out`,
       iconURL: `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
     })
     .setTimestamp()
@@ -107,7 +107,7 @@ app.get("/auth/logout", checkLogout, (req, res) => {
   res.redirect("/");
 });
 app.get(
-  "/auth",
+  "/auth/login",
   passport.authenticate("discord", { scope: scopes }),
   (req, res) => {}
 );
@@ -124,7 +124,7 @@ app.get(
   });
     let embedLogin = new Discord.EmbedBuilder()
       .setAuthor({
-        name: `${req.user.username}#${req.user.discriminator} logout`,
+        name: `${req.user.username}#${req.user.discriminator} logged in`,
         iconURL: `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
       })
       .setTimestamp()

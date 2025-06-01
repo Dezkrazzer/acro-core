@@ -4,5 +4,8 @@
   "token": " ",
   "clientId": "942383674358366258",
   "prefix": "-",
-  "serverIP": "play.acronet.work"
+  "serverIP": "play.acronet.work",
+  "adminList": [
+    "1064925550373777422"
+  ]
 }

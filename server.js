@@ -25,6 +25,24 @@ module.exports = function startServer(client) {
     if (req.isAuthenticated()) return next();
     else res.redirect("/auth/logout");
   };
+const checkAdminRole = (req, res, next) => {
+  // Pastikan `req.user` tersedia dan memiliki properti `id` (ID Discord)
+  if (!req.user || !req.user.id) {
+    console.warn("Unauthorized access attempt: req.user or req.user.id is missing.");
+    // Jika tidak ada data pengguna, kirim respons 401 Unauthorized
+    return res.status(401).send("Unauthorized: User data not found.");
+  }
+
+  // Periksa apakah ID Discord pengguna ada dalam daftar ID yang diizinkan
+  if (client.config.adminList.includes(req.user.id)) {
+    // Jika ID diizinkan, lanjutkan ke middleware atau handler rute berikutnya
+    next();
+  } else {
+    // Jika ID tidak diizinkan, kirim respons 403 Forbidden
+    console.warn(`Forbidden access attempt by Discord ID: ${req.user.id}`);
+    return res.status(403).send("Forbidden: You do not have permission to access this page.");
+  }
+};
 
   passport.serializeUser(function (user, done) {
     done(null, user);
@@ -247,7 +265,7 @@ module.exports = function startServer(client) {
     });
   });
 
-  app.get("/admin/store", checkAuth, async (req, res) => {
+  app.get("/admin/store", checkAuth, checkAdminRole, async (req, res) => {
     try {
       // Ambil data untuk dashboard
       const totalProducts = await StarsPoint.countDocuments() + await ServerHosting.countDocuments(); // Contoh, sesuaikan
@@ -286,7 +304,7 @@ module.exports = function startServer(client) {
     }
   });
 
-  app.get("/admin/store/product", checkAuth, async (req, res) => {
+  app.get("/admin/store/product", checkAuth, checkAdminRole, async (req, res) => {
     try {
 
       // Ambil data produk Stars Point dan Server Hosting

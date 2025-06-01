@@ -255,9 +255,6 @@ module.exports = function startServer(client) {
       const newCustomers = 75; // Contoh statis, sesuaikan dengan data aktual
       const totalRevenue = "Rp 10.000.000"; // Contoh statis, sesuaikan dengan data aktual
 
-      // Ambil data produk Stars Point dan Server Hosting
-      const starsPoints = await StarsPoint.find({});
-      const serverHostings = await ServerHosting.find({});
 
       res.render(
         "store/dashboard/index",
@@ -268,9 +265,7 @@ module.exports = function startServer(client) {
           totalProducts,
           totalPurchases,
           newCustomers,
-          totalRevenue,
-          starsPoints,
-          serverHostings,
+          totalRevenue
         },
         (err, html) => {
           if (err) return res.status(500).send(err.message);

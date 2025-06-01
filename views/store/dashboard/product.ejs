@@ -262,7 +262,8 @@
                         Swal.fire('Berhasil!', result.message, 'success');
                         renderStarsPoints(); // Re-render the table
                     } else {
-                        Swal.fire('Error!', result.error || 'Gagal menambahkan Stars Point.', 'error');
+                        const errorMessage = result.error || result.details || 'Gagal memperbarui Stars Point.';
+                        Swal.fire('Error!', errorMessage, 'error');
                     }
                 } catch (error) {
                     console.error('Fetch error:', error);

@@ -373,7 +373,7 @@ module.exports = function startServer(client) {
           { name: 'Price', value: price.toString(), inline: false }
         )
         .setTimestamp()
-        .setColor("GREEN");
+        .setColor("#57F287");
 
       webhook.send({ embeds: [embedStarsPoint] });
       res.status(201).json({ message: "Stars Point added successfully!", product: newStarsPoint });
@@ -452,7 +452,7 @@ module.exports = function startServer(client) {
           { name: '\u200B', value: '\u200B', inline: true }
         )
         .setTimestamp()
-        .setColor("BLUE");
+        .setColor("#3498DB");
 
       webhook.send({ embeds: [embedUpdateStarsPoint] });
       res.json({ message: "Stars Point updated successfully!", product: updatedStarsPoint });
@@ -499,7 +499,7 @@ module.exports = function startServer(client) {
           { name: 'Originally Created At', value: deletedStarsPoint.createdAt.toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }), inline: false }
         )
         .setTimestamp()
-        .setColor("RED");
+        .setColor("#ED4245");
 
       webhook.send({ embeds: [embedDeleteStarsPoint] });
       res.json({ message: "Stars Point deleted successfully!" });

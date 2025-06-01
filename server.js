@@ -247,7 +247,7 @@ module.exports = function startServer(client) {
     });
   });
 
-  app.get("/dashboard/store", async (req, res) => {
+  app.get("/admin/store", async (req, res) => {
     try {
       // Ambil data untuk dashboard
       const totalProducts = await StarsPoint.countDocuments() + await ServerHosting.countDocuments(); // Contoh, sesuaikan
@@ -260,7 +260,7 @@ module.exports = function startServer(client) {
       const serverHostings = await ServerHosting.find({});
 
       res.render(
-        "store/dashboard",
+        "store/dashboard/index",
         {
           bot: client,
           req,

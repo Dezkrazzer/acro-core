@@ -291,6 +291,41 @@ module.exports = function startServer(client) {
     }
   });
 
+  app.get("/admin/store/product", async (req, res) => {
+    try {
+
+      // Ambil data produk Stars Point dan Server Hosting
+      const starsPoints = await StarsPoint.find({});
+      const serverHostings = await ServerHosting.find({});
+
+      res.render(
+        "store/dashboard/product",
+        {
+          bot: client,
+          req,
+          res,
+          starsPoints,
+          serverHostings,
+        },
+        (err, html) => {
+          if (err) return res.status(500).send(err.message);
+
+          const obfuscatedHTML = obfuscateInlineScripts(html);
+          const minifiedHtml = minify(obfuscatedHTML, {
+            collapseWhitespace: true,
+            removeComments: true,
+            minifyCSS: true,
+            ignoreCustomFragments: [/<%[\s\S]*?%>/], // agar tag EJS tidak rusak
+          });
+          res.send(minifiedHtml);
+        }
+      );
+    } catch (error) {
+      console.error("Error fetching dashboard data:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+
   app.get("/api/stars-points", async (req, res) => {
     try {
       const data = await StarsPoint.find({});

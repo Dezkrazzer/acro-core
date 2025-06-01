@@ -117,7 +117,7 @@ module.exports = function startServer(client) {
     });
     let embedLogout = new Discord.EmbedBuilder()
       .setAuthor({
-        name: `${req.user.globalName} logged out`,
+        name: `${req.user.username} logged out`,
         iconURL: `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
       })
       .setTimestamp()
@@ -145,7 +145,7 @@ module.exports = function startServer(client) {
       });
       let embedLogin = new Discord.EmbedBuilder()
         .setAuthor({
-          name: `${req.user.globalName} logged in`,
+          name: `${req.user.username} logged in`,
           iconURL: `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
         })
         .setTimestamp()
@@ -195,7 +195,7 @@ module.exports = function startServer(client) {
         .filter(member => !member.user.bot)
         .map(member => ({
           id: member.id,
-          globalName: member.user.globalName,
+          username: member.user.username,
           username: member.user.username,
           avatar: member.user.displayAvatarURL({ format: "webp", size: 128 }),
           presence: member.presence?.status || 'offline'
@@ -205,7 +205,7 @@ module.exports = function startServer(client) {
         .filter(member => !member.user.bot)
         .map(member => ({
           id: member.id,
-          globalName: member.user.globalName,
+          username: member.user.username,
           username: member.user.username,
           avatar: member.user.displayAvatarURL({ format: "webp", size: 128 }),
           presence: member.presence?.status || 'offline'
@@ -215,7 +215,7 @@ module.exports = function startServer(client) {
         .filter(member => !member.user.bot)
         .map(member => ({
           id: member.id,
-          globalName: member.user.globalName,
+          username: member.user.username,
           username: member.user.username,
           avatar: member.user.displayAvatarURL({ format: "webp", size: 128 }),
           presence: member.presence?.status || 'offline'
@@ -361,7 +361,7 @@ module.exports = function startServer(client) {
       });
       let embedStarsPoint = new Discord.EmbedBuilder()
         .setAuthor({
-          name: `${req.user.globalName} Added Product`,
+          name: `${req.user.username} Added Product`,
           iconURL: `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
         })
         .setThumbnail(`https://cdn.discordapp.com/emojis/569348105720561674.webp?size=128`)
@@ -425,7 +425,7 @@ module.exports = function startServer(client) {
       });
       let embedUpdateStarsPoint = new Discord.EmbedBuilder()
         .setAuthor({
-          name: `${req.user.globalName} Updated Product`,
+          name: `${req.user.username} Updated Product`,
           iconURL: `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
         })
         .setThumbnail(`https://cdn.discordapp.com/emojis/569348158254088222.webp?size=128`)
@@ -486,7 +486,7 @@ module.exports = function startServer(client) {
       });
       let embedDeleteStarsPoint = new Discord.EmbedBuilder()
         .setAuthor({
-          name: `${req.user.globalName} Deleted Product`,
+          name: `${req.user.username} Deleted Product`,
           iconURL: `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
         })
         .setThumbnail(`https://cdn.discordapp.com/emojis/569348287157764107.webp?size=128`)

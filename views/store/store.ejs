@@ -51,35 +51,27 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     <!-- 40 Stars Card -->
-                    <% if (typeof starProducts !=='undefined' && starProducts.length> 0) { %> <h2 class="text-3xl font-bold text-center my-8 text-white">Produk Star Kami</h2>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
-                            <% starProducts.forEach(product=> { %> <div class="bg-gray-800 rounded-xl p-6 shadow-lg transition duration-300 card-hover">
-                                    <div class="flex justify-between items-start mb-4">
-                                        <div>
-                                            <h3 class="text-xl font-bold text-white">
-                                                <%= product.starsAmount %> Stars
-                                            </h3>
-                                            <p class="text-gray-400 text-sm">+<%= product.starsBonus %> Bonus</p>
-                                        </div>
-                                        <div class="bg-primary rounded-full p-2">
-                                            <i class="fas fa-star text-secondary text-xl"></i>
-                                        </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                        <% starProducts.forEach(product=> { %> <div class="bg-gray-800 rounded-xl p-6 shadow-lg transition duration-300 card-hover">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div>
+                                        <h3 class="text-xl font-bold">
+                                            <%= product.starsAmount %> Stars
+                                        </h3>
+                                        <p class="text-gray-400 text-sm">+<%= product.starsBonus %> Bonus</p>
                                     </div>
-                                    <div class="mb-6">
-                                        <span class="text-3xl font-bold text-white">
-                                            <%= product.price %>
-                                        </span>
+                                    <div class="bg-primary rounded-full p-2">
+                                        <i class="fas fa-star text-secondary text-xl"></i>
                                     </div>
-                                    <form action="/buy-product/<%= product.productID %>" method="POST">
-                                        <button type="submit" class="w-full bg-secondary hover:bg-blue-400 text-primary font-semibold py-2 px-4 rounded-lg transition"> Buy Now </button>
-                                    </form>
                                 </div>
-                                <% }); %>
-                        </div>
-                        <% } else { %>
-                            <p class="text-center text-gray-500">Tidak ada produk star yang tersedia saat ini.</p>
-                            <% } %>
-                                <!-- 
+                                <div class="mb-6">
+                                    <span class="text-3xl font-bold">Rp<%= product.price %>K</span>
+                                </div>
+                                <button class="w-full bg-secondary hover:bg-blue-400 text-primary font-semibold py-2 px-4 rounded-lg transition"> Buy Now </button>
+                            </div>
+                            <% }); %>
+                    </div>
+                    <!-- 
                                 <div class="bg-gray-800 rounded-xl p-6 shadow-lg transition duration-300 card-hover">
                                     <div class="flex justify-between items-start mb-4">
                                         <div>
@@ -96,7 +88,7 @@
                                     </div>
                                     <button class="w-full bg-secondary hover:bg-blue-400 text-primary font-semibold py-2 px-4 rounded-lg transition"> Buy Now </button>
                                 </div> -->
-                                <!-- 120 Stars Card
+                    <!-- 120 Stars Card
                                 <div class="bg-gray-800 rounded-xl p-6 shadow-lg transition duration-300 card-hover border-2 border-secondary relative overflow-hidden">
                                     <div class="absolute top-0 right-0 bg-secondary text-primary px-3 py-1 text-xs font-bold rounded-bl-lg"> BEST VALUE </div>
                                     <div class="flex justify-between items-start mb-4">
@@ -114,7 +106,7 @@
                                     </div>
                                     <button class="w-full bg-secondary hover:bg-blue-400 text-primary font-semibold py-2 px-4 rounded-lg transition pulse-animation"> Buy Now </button>
                                 </div> -->
-                                <!-- 240 Stars Card 
+                    <!-- 240 Stars Card 
                                 <div class="bg-gray-800 rounded-xl p-6 shadow-lg transition duration-300 card-hover">
                                     <div class="flex justify-between items-start mb-4">
                                         <div>
@@ -131,7 +123,7 @@
                                     </div>
                                     <button class="w-full bg-secondary hover:bg-blue-400 text-primary font-semibold py-2 px-4 rounded-lg transition"> Buy Now </button>
                                 </div> -->
-                                <!-- 480 Stars Card 
+                    <!-- 480 Stars Card 
                                 <div class="bg-gray-800 rounded-xl p-6 shadow-lg transition duration-300 card-hover">
                                     <div class="flex justify-between items-start mb-4">
                                         <div>

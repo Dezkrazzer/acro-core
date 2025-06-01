@@ -249,56 +249,29 @@ module.exports = function startServer(client) {
     }
   });
 
-  app.get('/store', async (req, res) => { // Tambahkan 'async' di sini
-    try {
-      // 1. Ambil semua data StarsPoint dari database
-      const allStarPoints = await StarsPoint.find({});
+ app.get('/store', async (req, res) => {
+  try {
+    const starProducts = await StarsPoint.find();
 
-      // 2. (Opsional) Format data agar sesuai dengan yang dibutuhkan EJS
-      //    Ini mirip dengan yang kita lakukan sebelumnya. Sesuaikan nama field
-      //    berdasarkan skema StarsPoint Anda dan apa yang diharapkan oleh EJS.
-      const formattedStarProducts = allStarPoints.map(p => {
-        return {
-          id: p.productID, // atau p.id jika Anda memiliki field id kustom
-          stars: p.starsAmount, // Sesuaikan field dari model StarsPoint
-          bonus: p.starsBonus,   // Sesuaikan field
-          priceText: `Rp${(p.price / 1000).toFixed(0)}K`, // Format harga jika perlu
-        };
+    res.render('store/store', { bot: client, req, res, starProducts }, (err, html) => {
+      if (err) return res.status(500).send(err.message);
+
+      const obfuscatedHTML = obfuscateInlineScripts(html);
+
+      const minifiedHtml = minify(obfuscatedHTML, {
+        collapseWhitespace: true,
+        removeComments: true,
+        minifyCSS: true,
+        ignoreCustomFragments: [/<%[\s\S]*?%>/]  // agar tag EJS tidak rusak
       });
 
-      // 3. Render template EJS dan kirim data
-      //    Tambahkan 'formattedStarProducts' ke objek yang dikirim ke res.render
-      res.render('store/store', {
-        bot: client, // 'client' harus sudah didefinisikan di scope ini
-        req,
-        res, // Mengirim 'res' ke template EJS biasanya tidak umum, kecuali ada alasan khusus
-        starProducts: formattedStarProducts, // Kirim data produk ke EJS
-        // Anda bisa menambahkan variabel lain yang dibutuhkan 'store/store.ejs' di sini
-      }, (err, html) => {
-        if (err) {
-          console.error("EJS rendering error:", err);
-          return res.status(500).send(err.message);
-        }
-
-        // Proses obfuscation dan minification tetap sama
-        const obfuscatedHTML = obfuscateInlineScripts(html);
-        const minifiedHtml = minify(obfuscatedHTML, {
-          collapseWhitespace: true,
-          removeComments: true,
-          minifyCSS: true,
-          ignoreCustomFragments: [/<%[\s\S]*?%>/]
-        });
-
-        res.send(minifiedHtml);
-      });
-
-    } catch (dbError) {
-      // Tangani error jika gagal mengambil data dari database
-      console.error("Database error in /store route:", dbError);
-      // Kirim halaman error atau pesan error yang sesuai
-      res.status(500).send("Terjadi kesalahan saat memuat data toko. Silakan coba lagi nanti.");
-    }
-  });
+      res.send(minifiedHtml);
+    });
+  } catch (error) {
+    console.error("Failed to load store:", error);
+    res.status(500).send("Server Error");
+  }
+});
 
   app.get("/admin/store", checkAuth, checkAdminRole, async (req, res) => {
     try {

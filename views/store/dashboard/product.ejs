@@ -218,17 +218,23 @@
 
         // Add Stars Point
         addStarsPointBtn.addEventListener('click', async () => {
+            const sekarang = new Date();
+
+            // Dapatkan jam, menit, dan detik
+            const jam = String(sekarang.getHours()).padStart(2, '0');
+            const menit = String(sekarang.getMinutes()).padStart(2, '0');
+            const detik = String(sekarang.getSeconds()).padStart(2, '0');
+
             const { value: formValues } = await Swal.fire({
                 title: 'Tambah Stars Point Baru',
                 html:
-                    '<input id="swal-product-id" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Product ID">' +
                     '<input id="swal-stars-amount" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah Stars">' +
                     '<input id="swal-stars-bonus" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Bonus Stars (opsional, default 0)">' +
                     '<input id="swal-price" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Harga (Rp)">',
                 focusConfirm: false,
                 preConfirm: () => {
                     return {
-                        productID: document.getElementById('swal-product-id').value,
+                        productID: `SP-${jam}${menit}${detik}`, // Generate unique ID
                         starsAmount: parseInt(document.getElementById('swal-stars-amount').value),
                         starsBonus: parseInt(document.getElementById('swal-stars-bonus').value || '0'),
                         price: parseFloat(document.getElementById('swal-price').value),
@@ -297,7 +303,7 @@
                 const { value: formValues } = await Swal.fire({
                     title: 'Edit Stars Point',
                     html:
-                        `<input id="swal-product-id" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Product ID" value="${product.productID}">` +
+                        `<input id="swal-product-id" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Product ID" value="${product.productID}" readonly>` +
                         `<input id="swal-stars-amount" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah Stars" value="${product.starsAmount}">` +
                         `<input id="swal-stars-bonus" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Bonus Stars" value="${product.starsBonus}">` +
                         `<input id="swal-price" type="number" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Harga (Rp)" value="${product.price}">`,
@@ -429,16 +435,18 @@
 
         // Add Server Hosting
         addServerHostingBtn.addEventListener('click', async () => {
+            const sekarang = new Date();
+
+            // Dapatkan jam, menit, dan detik
+            const jam = String(sekarang.getHours()).padStart(2, '0');
+            const menit = String(sekarang.getMinutes()).padStart(2, '0');
+            const detik = String(sekarang.getSeconds()).padStart(2, '0');
+
             const { value: formValues } = await Swal.fire({
                 title: 'Tambah Server Hosting Baru',
                 html:
-                    '<input id="swal-hosting-product-id" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Product ID">' +
                     '<input id="swal-hosting-product-name" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Nama Produk">' +
-                    '<input id="swal-hosting-location" class="swal2-input bg-gray-700 text-white border-gray-600 mt-2">' +
-                    '<option value="" disabled selected>Pilih Lokasi</option>' +
-                    '<option value="Singapore">Singapore</option>' +
-                    '<option value="Indonesia">Indonesia</option>' +
-                    '</input>' +
+                    '<input id="swal-hosting-location" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Lokasi (Singapore/Indonesia)">' +
                     '<input id="swal-hosting-ram" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah RAM (e.g., 2GB)">' +
                     '<input id="swal-hosting-cpu" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah CPU (e.g., 2 Core)">' +
                     '<input id="swal-hosting-storage" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah Penyimpanan (e.g., 50GB)">' +
@@ -446,7 +454,7 @@
                 focusConfirm: false,
                 preConfirm: () => {
                     return {
-                        productID: document.getElementById('swal-hosting-product-id').value,
+                        productID: `SH-${jam}${menit}${detik}`,
                         productName: document.getElementById('swal-hosting-product-name').value,
                         location: document.getElementById('swal-hosting-location').value,
                         amountRAM: document.getElementById('swal-hosting-ram').value,
@@ -531,7 +539,7 @@
                 const { value: formValues } = await Swal.fire({
                     title: 'Edit Server Hosting',
                     html:
-                        `<input id="swal-hosting-product-id" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Product ID" value="${product.productID || ''}">` +
+                        `<input id="swal-hosting-product-id" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Product ID" value="${product.productID || ''}" readonly>` +
                         `<input id="swal-hosting-product-name" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Nama Produk" value="${product.productName || ''}">` +
                         `<input id="swal-hosting-location" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Lokasi" value="${product.location || ''}">` +
                         `<input id="swal-hosting-ram" class="swal2-input bg-gray-700 text-white border-gray-600" placeholder="Jumlah RAM (e.g., 2GB)" value="${product.amountRAM || ''}">` +

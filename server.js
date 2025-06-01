@@ -525,6 +525,31 @@ module.exports = function startServer(client) {
       const { productID, productName, location, amountRAM, amountCPU, amountStorage, price } = req.body;
       const newServerHosting = new ServerHosting({ productID, productName, location, amountRAM, amountCPU, amountStorage, price });
       await newServerHosting.save();
+
+      const webhook = new Discord.WebhookClient({
+        id: "1378540561283153990",
+        token: "QWerUKYIx62b-AZ4kPuZigVJxC0H6F8h3x6k-lGXmV5CTbK4nJLMiiv9TfNu737r8mhy"
+      });
+      let embedHosting = new Discord.EmbedBuilder()
+        .setAuthor({
+          name: `${req.user.username} Added Product`,
+          iconURL: `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
+        })
+        .setThumbnail(`https://cdn.discordapp.com/emojis/569348105720561674.webp?size=128`)
+        .setDescription(`🖥️ New Server Hosting Added! 🖥️`)
+        .addFields(
+          { name: 'Product ID', value: productID, inline: false },
+          { name: 'Product Name', value: productName, inline: false },
+          { name: 'Location', value: location, inline: false },
+          { name: 'Amount RAM', value: amountRAM.toString(), inline: false },
+          { name: 'Amount CPU', value: amountCPU.toString(), inline: false },
+          { name: 'Amount Storage', value: amountStorage.toString(), inline: false },
+          { name: 'Price', value: price.toString(), inline: false }
+        )
+        .setTimestamp()
+        .setColor("#57F287");
+
+      webhook.send({ embeds: [embedHosting] });
       res.status(201).json({ message: "Server Hosting added successfully!", product: newServerHosting });
     } catch (error) {
       console.error("Error adding Server Hosting:", error);
@@ -552,6 +577,11 @@ module.exports = function startServer(client) {
       const { id } = req.params;
       const { productID, productName, location, amountRAM, amountCPU, amountStorage, price } = req.body;
 
+      const oldHosting = await ServerHosting.findById(id).lean(); // .lean() untuk plain JS object
+      if (!oldHosting) {
+        return res.status(404).json({ error: "Server Hosting not found for update" });
+      }
+
       // Logging untuk debugging di server
       console.log(`Attempting to update Server Hosting with ID: ${id}`);
       console.log(`Received data for Server Hosting:`, req.body);
@@ -567,6 +597,46 @@ module.exports = function startServer(client) {
         return res.status(404).json({ error: "Server Hosting not found" });
       }
 
+      const webhook = new Discord.WebhookClient({
+        id: "1378540561283153990",
+        token: "QWerUKYIx62b-AZ4kPuZigVJxC0H6F8h3x6k-lGXmV5CTbK4nJLMiiv9TfNu737r8mhy"
+      });
+      let embedUpdateServerHosting = new Discord.EmbedBuilder()
+        .setAuthor({
+          name: `${req.user.username} Updated Product`,
+          iconURL: `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
+        })
+        .setThumbnail(`https://cdn.discordapp.com/emojis/569348158254088222.webp?size=128`)
+        .setDescription(`🖥️ Server Hosting Updated! 🖥️`)
+        .addFields(
+          { name: 'Field', value: '**Old Value**', inline: true },
+          { name: '➡️', value: '**New Value**', inline: true },
+          { name: '\u200B', value: '\u200B', inline: true }, // Spacer
+
+          { name: 'Product ID', value: oldHosting.productID, inline: true },
+          { name: '➡️', value: updatedServerHosting.productID, inline: true },
+          { name: '\u200B', value: '\u200B', inline: true },
+
+          { name: 'RAM', value: oldHosting.amountRAM.toString(), inline: true },
+          { name: '➡️', value: updatedServerHosting.amountRAM.toString(), inline: true },
+          { name: '\u200B', value: '\u200B', inline: true },
+
+          { name: 'CPU', value: oldHosting.amountCPU.toString(), inline: true },
+          { name: '➡️', value: updatedServerHosting.amountCPU.toString(), inline: true },
+          { name: '\u200B', value: '\u200B', inline: true },
+
+          { name: 'Storage', value: oldHosting.amountStorage.toString(), inline: true },
+          { name: '➡️', value: updatedServerHosting.amountStorage.toString(), inline: true },
+          { name: '\u200B', value: '\u200B', inline: true },
+
+          { name: 'Price', value: `Rp ${oldHosting.price.toLocaleString('id-ID')}`, inline: true },
+          { name: '➡️', value: `Rp ${updatedServerHosting.price.toLocaleString('id-ID')}`, inline: true },
+          { name: '\u200B', value: '\u200B', inline: true }
+        )
+        .setTimestamp()
+        .setColor("#3498DB");
+
+      webhook.send({ embeds: [embedUpdateServerHosting] });
       console.log(`Server Hosting with ID ${id} updated successfully!`);
       res.json({ message: "Server Hosting updated successfully!", product: updatedServerHosting });
     } catch (error) {
@@ -593,6 +663,31 @@ module.exports = function startServer(client) {
       if (!deletedServerHosting) {
         return res.status(404).json({ error: "Server Hosting not found" });
       }
+
+      const webhook = new Discord.WebhookClient({
+        id: "1378540561283153990",
+        token: "QWerUKYIx62b-AZ4kPuZigVJxC0H6F8h3x6k-lGXmV5CTbK4nJLMiiv9TfNu737r8mhy"
+      });
+      let embedDeleteServerHosting = new Discord.EmbedBuilder()
+        .setAuthor({
+          name: `${req.user.username} Deleted Product`,
+          iconURL: `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
+        })
+        .setThumbnail(`https://cdn.discordapp.com/emojis/569348287157764107.webp?size=128`)
+        .setDescription(`🖥️ Server Hosting Deleted! 🖥️`)
+        .addFields(
+          { name: 'Product ID', value: deletedServerHosting.productID, inline: true },
+          { name: 'RAM', value: deletedServerHosting.amountRAM.toString(), inline: true },
+          { name: 'CPU', value: deletedServerHosting.amountCPU.toString(), inline: true },
+          { name: 'Storage', value: deletedServerHosting.amountStorage.toString(), inline: true },
+          { name: 'Price', value: `Rp ${deletedServerHosting.price.toLocaleString('id-ID')}`, inline: true },
+          { name: 'Originally Created At', value: deletedServerHosting.createdAt.toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }), inline: false }
+        )
+        .setTimestamp()
+        .setColor("#ED4245");
+
+      webhook.send({ embeds: [embedDeleteServerHosting] });
+
       res.json({ message: "Server Hosting deleted successfully!" });
     } catch (error) {
       console.error("Error deleting Server Hosting:", error);

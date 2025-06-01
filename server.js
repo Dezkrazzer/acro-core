@@ -247,7 +247,7 @@ module.exports = function startServer(client) {
     });
   });
 
-  app.get("/admin/store", async (req, res) => {
+  app.get("/admin/store", checkAuth, async (req, res) => {
     try {
       // Ambil data untuk dashboard
       const totalProducts = await StarsPoint.countDocuments() + await ServerHosting.countDocuments(); // Contoh, sesuaikan
@@ -286,7 +286,7 @@ module.exports = function startServer(client) {
     }
   });
 
-  app.get("/admin/store/product", async (req, res) => {
+  app.get("/admin/store/product", checkAuth, async (req, res) => {
     try {
 
       // Ambil data produk Stars Point dan Server Hosting

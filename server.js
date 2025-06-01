@@ -252,8 +252,10 @@ module.exports = function startServer(client) {
  app.get('/store', async (req, res) => {
   try {
     const starProducts = await StarsPoint.find();
+    const serverHostingID = await ServerHosting.find({ location: "Indonesia" });
+    const serverHostingSG = await ServerHosting.find({ location: "Singapore" });
 
-    res.render('store/store', { bot: client, req, res, starProducts }, (err, html) => {
+    res.render('store/store', { bot: client, req, res, starProducts, serverHostingID, serverHostingSG }, (err, html) => {
       if (err) return res.status(500).send(err.message);
 
       const obfuscatedHTML = obfuscateInlineScripts(html);

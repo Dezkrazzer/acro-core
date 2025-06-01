@@ -51,8 +51,9 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     <!-- 40 Stars Card -->
-                    <% if (products && products.length> 0) { %> <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                            <% products.forEach(product=> { %> <div class="bg-gray-800 rounded-xl p-6 shadow-lg transition duration-300 card-hover">
+                    <% if (typeof starProducts !=='undefined' && starProducts.length> 0) { %> <h2 class="text-3xl font-bold text-center my-8 text-white">Produk Star Kami</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+                            <% starProducts.forEach(product=> { %> <div class="bg-gray-800 rounded-xl p-6 shadow-lg transition duration-300 card-hover">
                                     <div class="flex justify-between items-start mb-4">
                                         <div>
                                             <h3 class="text-xl font-bold text-white">

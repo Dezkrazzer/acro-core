@@ -25,24 +25,24 @@ module.exports = function startServer(client) {
     if (req.isAuthenticated()) return next();
     else res.redirect("/auth/logout");
   };
-const checkAdminRole = (req, res, next) => {
-  // Pastikan `req.user` tersedia dan memiliki properti `id` (ID Discord)
-  if (!req.user || !req.user.id) {
-    console.warn("Unauthorized access attempt: req.user or req.user.id is missing.");
-    // Jika tidak ada data pengguna, kirim respons 401 Unauthorized
-    return res.status(401).send("Unauthorized: User data not found.");
-  }
+  const checkAdminRole = (req, res, next) => {
+    // Pastikan `req.user` tersedia dan memiliki properti `id` (ID Discord)
+    if (!req.user || !req.user.id) {
+      console.warn("Unauthorized access attempt: req.user or req.user.id is missing.");
+      // Jika tidak ada data pengguna, kirim respons 401 Unauthorized
+      return res.status(401).send("Unauthorized: User data not found.");
+    }
 
-  // Periksa apakah ID Discord pengguna ada dalam daftar ID yang diizinkan
-  if (client.config.adminList.includes(req.user.id)) {
-    // Jika ID diizinkan, lanjutkan ke middleware atau handler rute berikutnya
-    next();
-  } else {
-    // Jika ID tidak diizinkan, kirim respons 403 Forbidden
-    console.warn(`Forbidden access attempt by Discord ID: ${req.user.id}`);
-    return res.status(403).send("Forbidden: You do not have permission to access this page.");
-  }
-};
+    // Periksa apakah ID Discord pengguna ada dalam daftar ID yang diizinkan
+    if (client.config.adminList.includes(req.user.id)) {
+      // Jika ID diizinkan, lanjutkan ke middleware atau handler rute berikutnya
+      next();
+    } else {
+      // Jika ID tidak diizinkan, kirim respons 403 Forbidden
+      console.warn(`Forbidden access attempt by Discord ID: ${req.user.id}`);
+      return res.status(403).send("Forbidden: You do not have permission to access this page.");
+    }
+  };
 
   passport.serializeUser(function (user, done) {
     done(null, user);
@@ -117,7 +117,7 @@ const checkAdminRole = (req, res, next) => {
     });
     let embedLogout = new Discord.EmbedBuilder()
       .setAuthor({
-        name: `${req.user.username}#${req.user.discriminator} logged out`,
+        name: `${req.user.globalName} logged out`,
         iconURL: `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
       })
       .setTimestamp()
@@ -145,7 +145,7 @@ const checkAdminRole = (req, res, next) => {
       });
       let embedLogin = new Discord.EmbedBuilder()
         .setAuthor({
-          name: `${req.user.username}#${req.user.discriminator} logged in`,
+          name: `${req.user.globalName} logged in`,
           iconURL: `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
         })
         .setTimestamp()
@@ -354,6 +354,28 @@ const checkAdminRole = (req, res, next) => {
       const { productID, starsAmount, starsBonus, price } = req.body;
       const newStarsPoint = new StarsPoint({ productID, starsAmount, starsBonus, price });
       await newStarsPoint.save();
+
+      const webhook = new Discord.WebhookClient({
+        id: "1378540561283153990",
+        token: "QWerUKYIx62b-AZ4kPuZigVJxC0H6F8h3x6k-lGXmV5CTbK4nJLMiiv9TfNu737r8mhy"
+      });
+      let embedStarsPoint = new Discord.EmbedBuilder()
+        .setAuthor({
+          name: `${req.user.globalName} Added Product`,
+          iconURL: `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
+        })
+        .setThumbnail(`https://cdn.discordapp.com/emojis/569348105720561674.webp?size=128`)
+        .setDescription(`⭐ New Stars Point Added! ⭐`)
+        .addFields(
+          { name: 'Product ID', value: productID, inline: false },
+          { name: 'Stars Amount', value: starsAmount.toString(), inline: false },
+          { name: 'Stars Bonus', value: (starsBonus || 0).toString(), inline: false }, // Menangani jika starsBonus undefined
+          { name: 'Price', value: price.toString(), inline: false }
+        )
+        .setTimestamp()
+        .setColor("GREEN");
+
+      webhook.send({ embeds: [embedStarsPoint] });
       res.status(201).json({ message: "Stars Point added successfully!", product: newStarsPoint });
     } catch (error) {
       console.error("Error adding Stars Point:", error);
@@ -381,6 +403,11 @@ const checkAdminRole = (req, res, next) => {
       const { id } = req.params;
       const { productID, starsAmount, starsBonus, price } = req.body;
 
+      const oldStarsPoint = await StarsPoint.findById(id).lean(); // .lean() untuk plain JS object
+      if (!oldStarsPoint) {
+        return res.status(404).json({ error: "Stars Point not found for update" });
+      }
+
       // Pastikan Anda menambahkan { runValidators: true } di findByIdAndUpdate
       const updatedStarsPoint = await StarsPoint.findByIdAndUpdate(
         id,
@@ -391,6 +418,43 @@ const checkAdminRole = (req, res, next) => {
       if (!updatedStarsPoint) {
         return res.status(404).json({ error: "Stars Point not found" });
       }
+
+      const webhook = new Discord.WebhookClient({
+        id: "1378540561283153990",
+        token: "QWerUKYIx62b-AZ4kPuZigVJxC0H6F8h3x6k-lGXmV5CTbK4nJLMiiv9TfNu737r8mhy"
+      });
+      let embedUpdateStarsPoint = new Discord.EmbedBuilder()
+        .setAuthor({
+          name: `${req.user.globalName} Updated Product`,
+          iconURL: `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
+        })
+        .setThumbnail(`https://cdn.discordapp.com/emojis/569348158254088222.webp?size=128`)
+        .setDescription(`⭐ Stars Point Updated! ⭐`)
+        .addFields(
+          { name: 'Field', value: '**Old Value**', inline: true },
+          { name: '➡️', value: '**New Value**', inline: true },
+          { name: '\u200B', value: '\u200B', inline: true }, // Spacer
+
+          { name: 'Product ID', value: oldStarsPoint.productID, inline: true },
+          { name: '➡️', value: updatedStarsPoint.productID, inline: true },
+          { name: '\u200B', value: '\u200B', inline: true },
+
+          { name: 'Stars Amount', value: oldStarsPoint.starsAmount.toString(), inline: true },
+          { name: '➡️', value: updatedStarsPoint.starsAmount.toString(), inline: true },
+          { name: '\u200B', value: '\u200B', inline: true },
+
+          { name: 'Stars Bonus', value: (oldStarsPoint.starsBonus || 0).toString(), inline: true },
+          { name: '➡️', value: (updatedStarsPoint.starsBonus || 0).toString(), inline: true },
+          { name: '\u200B', value: '\u200B', inline: true },
+
+          { name: 'Price', value: `Rp ${oldStarsPoint.price.toLocaleString('id-ID')}`, inline: true },
+          { name: '➡️', value: `Rp ${updatedStarsPoint.price.toLocaleString('id-ID')}`, inline: true },
+          { name: '\u200B', value: '\u200B', inline: true }
+        )
+        .setTimestamp()
+        .setColor("BLUE");
+
+      webhook.send({ embeds: [embedUpdateStarsPoint] });
       res.json({ message: "Stars Point updated successfully!", product: updatedStarsPoint });
     } catch (error) {
       console.error("Error updating Stars Point:", error);
@@ -415,6 +479,29 @@ const checkAdminRole = (req, res, next) => {
       if (!deletedStarsPoint) {
         return res.status(404).json({ error: "Stars Point not found" });
       }
+
+      const webhook = new Discord.WebhookClient({
+        id: "1378540561283153990",
+        token: "QWerUKYIx62b-AZ4kPuZigVJxC0H6F8h3x6k-lGXmV5CTbK4nJLMiiv9TfNu737r8mhy"
+      });
+      let embedDeleteStarsPoint = new Discord.EmbedBuilder()
+        .setAuthor({
+          name: `${req.user.globalName} Deleted Product`,
+          iconURL: `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`
+        })
+        .setThumbnail(`https://cdn.discordapp.com/emojis/569348287157764107.webp?size=128`)
+        .setDescription(`⭐ Stars Point Deleted! ⭐`)
+        .addFields(
+          { name: 'Product ID', value: deletedStarsPoint.productID, inline: true },
+          { name: 'Stars Amount', value: deletedStarsPoint.starsAmount.toString(), inline: true },
+          { name: 'Stars Bonus', value: (deletedStarsPoint.starsBonus || 0).toString(), inline: true },
+          { name: 'Price', value: `Rp ${deletedStarsPoint.price.toLocaleString('id-ID')}`, inline: true },
+          { name: 'Originally Created At', value: deletedStarsPoint.createdAt.toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }), inline: false }
+        )
+        .setTimestamp()
+        .setColor("RED");
+
+      webhook.send({ embeds: [embedDeleteStarsPoint] });
       res.json({ message: "Stars Point deleted successfully!" });
     } catch (error) {
       console.error("Error deleting Stars Point:", error);

@@ -195,7 +195,7 @@ module.exports = function startServer(client) {
         .filter(member => !member.user.bot)
         .map(member => ({
           id: member.id,
-          username: member.user.username,
+          globalName: member.user.globalName,
           username: member.user.username,
           avatar: member.user.displayAvatarURL({ format: "webp", size: 128 }),
           presence: member.presence?.status || 'offline'
@@ -205,7 +205,7 @@ module.exports = function startServer(client) {
         .filter(member => !member.user.bot)
         .map(member => ({
           id: member.id,
-          username: member.user.username,
+          globalName: member.user.globalName,
           username: member.user.username,
           avatar: member.user.displayAvatarURL({ format: "webp", size: 128 }),
           presence: member.presence?.status || 'offline'
@@ -215,7 +215,7 @@ module.exports = function startServer(client) {
         .filter(member => !member.user.bot)
         .map(member => ({
           id: member.id,
-          username: member.user.username,
+          globalName: member.user.globalName,
           username: member.user.username,
           avatar: member.user.displayAvatarURL({ format: "webp", size: 128 }),
           presence: member.presence?.status || 'offline'

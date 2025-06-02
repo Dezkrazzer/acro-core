@@ -109,6 +109,10 @@ module.exports = function startServer(client) {
       res.render("index", { bot: client, req, res });
   });*/
 
+  app.get("/loginmanual", (req, res) => {
+      res.render("auth/login", { bot: client, req, res });
+  });
+
 
 
 

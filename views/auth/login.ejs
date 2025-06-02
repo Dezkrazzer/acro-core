@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login / Register - CGO</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#1E293B",
+            secondary: "#7DD3FC",
+            warning: "#FACC15",
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-primary text-white min-h-screen flex items-center justify-center">
+
+  <!-- Container -->
+  <div class="bg-[#1F2937] p-8 rounded-2xl w-full max-w-md shadow-lg">
+    <!-- Logo -->
+    <div class="flex justify-center mb-6">
+      <h1 class="text-3xl font-bold">CG<span class="text-secondary">⚫</span></h1>
+    </div>
+
+    <!-- Text -->
+    <h2 class="text-warning text-center font-semibold mb-2" id="form-title">
+      Setiap kisah dimulai dengan satu langkah<br/>Daftar Sekarang!
+    </h2>
+
+    <!-- Form -->
+    <form id="form">
+      <!-- Username -->
+      <input
+        type="text"
+        placeholder="Username"
+        class="w-full p-3 rounded bg-gray-700 text-white mb-3 focus:outline-none focus:ring-2 focus:ring-secondary"
+      />
+
+      <!-- Password -->
+      <input
+        type="password"
+        placeholder="Kata Sandi"
+        class="w-full p-3 rounded bg-gray-700 text-white mb-3 focus:outline-none focus:ring-2 focus:ring-secondary"
+      />
+
+      <!-- Konfirmasi Password -->
+      <input
+        type="password"
+        placeholder="Konfirmasi Kata Sandi"
+        class="w-full p-3 rounded bg-gray-700 text-white mb-3 hidden"
+        id="confirm-password"
+      />
+
+      <!-- Tampilkan sandi -->
+      <label class="text-sm text-warning cursor-pointer">
+        <input type="checkbox" onclick="togglePassword()" class="mr-2" /> Tampilkan Sandi
+      </label>
+
+      <!-- Submit button -->
+      <button
+        type="submit"
+        class="w-full bg-yellow-400 text-black font-bold py-2 mt-4 rounded hover:bg-yellow-300"
+        id="submit-button"
+      >
+        Daftar
+      </button>
+    </form>
+
+    <!-- Switch form -->
+    <p class="text-center text-sm mt-4">
+      <span id="switch-text">Sudah punya akun?</span>
+      <button onclick="toggleForm()" class="text-secondary font-semibold underline ml-1">
+        Login di sini
+      </button>
+    </p>
+  </div>
+
+  <script>
+    const formTitle = document.getElementById("form-title");
+    const confirmPassword = document.getElementById("confirm-password");
+    const submitButton = document.getElementById("submit-button");
+    const switchText = document.getElementById("switch-text");
+
+    let isRegister = true;
+
+    function toggleForm() {
+      isRegister = !isRegister;
+
+      formTitle.innerHTML = isRegister
+        ? "Setiap kisah dimulai dengan satu langkah<br/>Daftar Sekarang!"
+        : "Halo, Selamat Datang Kembali!";
+
+      confirmPassword.classList.toggle("hidden", !isRegister);
+      submitButton.textContent = isRegister ? "Daftar" : "Login";
+      switchText.textContent = isRegister
+        ? "Sudah punya akun?"
+        : "Belum punya akun?";
+      document.querySelector("button[onclick='toggleForm()']").textContent = isRegister
+        ? "Login di sini"
+        : "Daftar di sini";
+    }
+
+    function togglePassword() {
+      const inputs = document.querySelectorAll("input[type='password']");
+      inputs.forEach((input) => {
+        input.type = input.type === "password" ? "text" : "password";
+      });
+    }
+  </script>
+</body>
+</html>

@@ -110,7 +110,7 @@ module.exports = function startServer(client) {
   });*/
 
   app.get("/loginmanual", (req, res) => {
-      res.render("auth/login", { bot: client, req, res });
+      res.render("auth/auth", { bot: client, req, res });
   });
 
 
